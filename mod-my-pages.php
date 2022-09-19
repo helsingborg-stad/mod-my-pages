@@ -36,7 +36,7 @@ add_action('acf/init', function () {
     $acfExportManager->setTextdomain('mod-my-pages');
     $acfExportManager->setExportFolder(MOD_MY_PAGES_PATH . 'source/php/AcfFields/');
     $acfExportManager->autoExport(array(
-        'mod-my-pages-settings' => 'group_61ea7a87e8aaa' //Update with acf id here, settings view
+        'mod-my-pages-settings' => 'group_6328267265e02'
     ));
     $acfExportManager->import();
 });
