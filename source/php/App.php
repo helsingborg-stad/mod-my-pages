@@ -6,39 +6,14 @@ class App
 {
     public function __construct()
     {
-        add_action('admin_enqueue_scripts', array($this, 'enqueueStyles'));
-        add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
-
-        $this->cacheBust = new \ModMyPages\Helper\CacheBust();
-    }
-
-    /**
-     * Enqueue required style
-     * @return void
-     */
-    public function enqueueStyles()
-    {
-        wp_register_style(
-            'mod-my-pages-css',
-            MOD_MY_PAGES_URL . '/dist/' .
-            $this->cacheBust->name('css/mod-my-pages.css')
-        );
-
-        wp_enqueue_style('mod-my-pages-css');
-    }
-
-    /**
-     * Enqueue required scripts
-     * @return void
-     */
-    public function enqueueScripts()
-    {
-        wp_register_script(
-            'mod-my-pages-js',
-            MOD_MY_PAGES_URL . '/dist/' .
-            $this->cacheBust->name('js/mod-my-pages.js')
-        );
-
-        wp_enqueue_script('mod-my-pages-js');
+        if (function_exists('acf_add_options_sub_page')) {
+            acf_add_options_sub_page(array(
+                'page_title' => __('My Pages settings', MOD_MY_PAGES_TEXT_DOMAIN),
+                'menu_title' => __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN),
+                'menu_slug' => 'my-pages-settings',
+                'parent_slug' => 'options-general.php',
+                'capability' => 'manage_options'
+            ));
+        }
     }
 }
