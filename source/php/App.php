@@ -1,6 +1,6 @@
 <?php
 
-namespace {{BPREPLACENAMESPACE}};
+namespace ModMyPages;
 
 class App
 {
@@ -9,7 +9,7 @@ class App
         add_action('admin_enqueue_scripts', array($this, 'enqueueStyles'));
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
 
-        $this->cacheBust = new \{{BPREPLACENAMESPACE}}\Helper\CacheBust();
+        $this->cacheBust = new \ModMyPages\Helper\CacheBust();
     }
 
     /**
@@ -19,12 +19,12 @@ class App
     public function enqueueStyles()
     {
         wp_register_style(
-            '{{BPREPLACESLUG}}-css',
-            {{BPREPLACECAPSCONSTANT}}_URL . '/dist/' .
-            $this->cacheBust->name('css/{{BPREPLACESLUG}}.css')
+            'mod-my-pages-css',
+            MOD_MY_PAGES_URL . '/dist/' .
+            $this->cacheBust->name('css/mod-my-pages.css')
         );
 
-        wp_enqueue_style('{{BPREPLACESLUG}}-css');
+        wp_enqueue_style('mod-my-pages-css');
     }
 
     /**
@@ -34,11 +34,11 @@ class App
     public function enqueueScripts()
     {
         wp_register_script(
-            '{{BPREPLACESLUG}}-js',
-            {{BPREPLACECAPSCONSTANT}}_URL . '/dist/' .
-            $this->cacheBust->name('js/{{BPREPLACESLUG}}.js')
+            'mod-my-pages-js',
+            MOD_MY_PAGES_URL . '/dist/' .
+            $this->cacheBust->name('js/mod-my-pages.js')
         );
 
-        wp_enqueue_script('{{BPREPLACESLUG}}-js');
+        wp_enqueue_script('mod-my-pages-js');
     }
 }
