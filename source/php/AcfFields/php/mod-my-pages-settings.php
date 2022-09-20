@@ -8,6 +8,7 @@
         0 => array(
             'key' => 'field_63282ab922787',
             'label' => __('API URL', 'mod-my-pages'),
+<<<<<<< HEAD
             'name' => 'api_url',
             'type' => 'url',
             'instructions' => '',
@@ -41,6 +42,9 @@
             'key' => 'field_63282af122789',
             'label' => __('Logout Redirect URL', 'mod-my-pages'),
             'name' => 'logout_redirect_url',
+=======
+            'name' => 'mod_my_pages_api_url',
+>>>>>>> 695677b (export field groups)
             'type' => 'url',
             'instructions' => '',
             'required' => 0,
