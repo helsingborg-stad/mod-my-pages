@@ -2,6 +2,8 @@
 
 namespace ModMyPages\Session;
 
+use ModMyPages\Admin\Settings;
+
 class Cookie
 {
     private static $key = 'mypages_token';
@@ -11,7 +13,7 @@ class Cookie
         if (empty($value)) {
             setcookie(self::$key, '', time() - 3600);
         }
-        setcookie(self::$key, $value, ['httpOnly' => true, 'secure' => true]);
+        setcookie(self::$key, $value, time() + Settings::sessionLength(), '/', $_SERVER['SERVER_NAME'], true, true);
     }
 
     public static function get(): string
@@ -19,4 +21,3 @@ class Cookie
         return $_COOKIE[self::$key] ?? '';
     }
 }
-
