@@ -15,7 +15,6 @@ class SignOut implements \ModMyPages\Redirect\IRedirectHandler
 
     public function validate(array $args): bool
     {
-        var_dump(\ModMyPages\Session\Cookie::get());
         return !empty(\ModMyPages\Session\Cookie::get());
     }
 
