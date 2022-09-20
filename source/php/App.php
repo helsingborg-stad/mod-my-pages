@@ -20,11 +20,11 @@ class App
     public function redirect()
     {
         new UseRedirect([
-            '/auth' => new Authentication([
-                'successUrl' => home_url('/my-pages'),
-                'errorUrl' => home_url('/404'),
-            ]),
-        ]);
+                '/auth' => new Authentication([
+                    'successUrl' => home_url('/my-pages'),
+                    'errorUrl' => home_url('/404'),
+                ]),
+            ]);
     }
 
     public function optionsPage()

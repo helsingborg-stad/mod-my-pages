@@ -2,12 +2,14 @@
 
 namespace ModMyPages\Service;
 
+use ModMyPages\Admin\Settings;
+
 class AuthService
 {
     public static function token($args)
     {
         $queryArgs  = ['ts_session_id' => $args['ts_session_id']];
-        $requestUrl = add_query_arg($queryArgs, \ModMyPages\Admin\Settings::apiUrl() . '/auth/token');
+        $requestUrl = add_query_arg($queryArgs, Settings::apiUrl() . '/auth/token');
         $request = curl_init($requestUrl);
         curl_setopt($request, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
