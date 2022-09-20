@@ -24,6 +24,10 @@ class App
                     'successUrl' => home_url('/my-pages'),
                     'errorUrl' => home_url('/404'),
                 ]),
+                '/signout' => new SignOut([
+                    'successUrl' => home_url(),
+                    'errorUrl' => home_url('/404'),
+                ]),
             ]);
     }
 
