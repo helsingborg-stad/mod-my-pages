@@ -5,43 +5,7 @@
         {
             "key": "field_63282ab922787",
             "label": "API URL",
-<<<<<<< HEAD
-            "name": "api_url",
-            "type": "url",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": ""
-        },
-        {
-            "key": "field_63282ad122788",
-            "label": "Login Redirect URL",
-            "name": "login_redirect_url",
-            "type": "url",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": ""
-        },
-        {
-            "key": "field_63282af122789",
-            "label": "Logout Redirect URL",
-            "name": "logout_redirect_url",
-=======
             "name": "mod_my_pages_api_url",
->>>>>>> 695677b (export field groups)
             "type": "url",
             "instructions": "",
             "required": 0,
