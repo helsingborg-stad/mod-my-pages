@@ -10,7 +10,6 @@ class SignOut implements \ModMyPages\Redirect\IRedirectHandler
     public function __construct(array $args)
     {
         $this->successUrl = $args['successUrl'];
-        $this->errorUrl = $args['errorUrl'];
     }
 
     public function validate(array $args): bool

@@ -2,8 +2,6 @@
 
 namespace ModMyPages\Admin;
 
-use ModMyPages\Redirect\UseRedirect;
-
 class Settings
 {
     public static function apiUrl(): string
