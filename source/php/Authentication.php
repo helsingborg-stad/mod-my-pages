@@ -23,9 +23,10 @@ class Authentication implements \ModMyPages\Redirect\IRedirectHandler
         $token = \ModMyPages\Service\AuthService::token([
             'ts_session_id' => $args['ts_session_id']
         ]);
+
         if ($token && \ModMyPages\Session\Token::isValid($token)) {
             \ModMyPages\Session\Cookie::set($token);
-            return $this->successUrl;
+            return $args['callbackUrl'] ?? $this->successUrl;
         }
 
         return $this->errorUrl;
