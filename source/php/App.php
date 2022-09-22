@@ -59,10 +59,9 @@ class App
 
     public function replaceMenuLabels($item)
     {
-        if (!Cookie::get() || !Token::isValid(Cookie::get())) {
-            return $item;
+        if (Cookie::get() && Token::isValid(Cookie::get())) {
+            $item['label'] = Frontend\TemplateStrings::replace($item['label']);
         }
-        $item['label'] = Frontend\TemplateStrings::replace($item['label']);
         return $item;
     }
 }
