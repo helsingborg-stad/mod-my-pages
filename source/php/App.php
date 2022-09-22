@@ -28,6 +28,19 @@ class App
                 'successUrl' => home_url(),
                 'errorUrl' => home_url('/404'),
             ]),
+            '*' => new ProtectedPage(
+                array_map(
+                    fn ($p) => $p->ID,
+                    get_posts(
+                        [
+                            'post_type' => 'page',
+                            'posts_per_page' => -1,
+                            'meta_key' => 'mod_my_pages_protected_page',
+                            'meta_value' => 1
+                        ]
+                    )
+                )
+            ),
         ]);
     }
 
