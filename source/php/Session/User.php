@@ -6,7 +6,7 @@ class User
 {
     public static function ssn()
     {
-        return Token::decode(Cookie::get())['payload']['ssn'];
+        return Token::decode(Cookie::get())['payload']['id'];
     }
 
     public static function name()

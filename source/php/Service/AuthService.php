@@ -18,6 +18,6 @@ class AuthService
             'Content-Type: application/json'
         ]);
         $response = json_decode(curl_exec($request), true);
-        return $response['jwt'];
+        return $response['accessToken'];
     }
 }

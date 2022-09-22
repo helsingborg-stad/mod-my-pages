@@ -26,7 +26,7 @@ class Token
 
     public function validatePayload(array $payload): bool
     {
-        $payloadKeys = ['ssn', 'name', 'exp', 'aud', 'iss', 'sub'];
+        $payloadKeys = ['id', 'name', 'exp', 'aud', 'iss', 'sub'];
         foreach ($payloadKeys as $key) {
             if (!in_array($key, array_keys($payload))) {
                 return false;
