@@ -15,6 +15,7 @@ class App
         add_action('acf/init', array($this, 'optionsPage'), 5);
         add_action('template_redirect', array($this, 'redirect'), 5);
         add_filter('body_class', array($this, 'bodyClassNames'), 5);
+        add_filter('Municipio/Navigation/Item', array($this, 'replaceMenuLabels'));
     }
 
     public function redirect()
@@ -55,5 +56,14 @@ class App
             $classNames,
             Cookie::get() && Token::isValid(Cookie::get()) ? ['is-authenticated'] : []
         );
+    }
+
+    public function replaceMenuLabels($item)
+    {
+        if (!Cookie::get() || !Token::isValid(Cookie::get())) {
+            return $item;
+        }
+        $item['label'] = \Frontend\TemplateStrings::replace($item['label']);
+        return $item;
     }
 }
