@@ -5,11 +5,10 @@ namespace ModMyPages;
 use ModMyPages\Redirect\UseRedirect;
 use ModMyPages\Session\Cookie;
 use ModMyPages\Session\Token;
+use ModPages\Admin\Settings;
 
 class App
 {
-    private $settings;
-
     public function __construct()
     {
         add_action('acf/init', array($this, 'optionsPage'), 5);
