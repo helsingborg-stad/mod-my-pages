@@ -21,10 +21,14 @@ class UseRedirect
 
     public function attachHandler(string $route, IRedirectHandler $handler): void
     {
-        if ($_SERVER['PHP_SELF'] === $route && $handler->validate($_GET)) {
+        if ($this->matchRoute($route) && $handler->validate($_GET)) {
             wp_redirect($handler->redirect($_GET));
             exit;
         }
     }
-}
 
+    public function matchRoute(string $route)
+    {
+        return $route === '*' || $route === $_SERVER['PHP_SELF'];
+    }
+}
