@@ -18,11 +18,21 @@ class Token
     {
         try {
             $decoded = self::decode($token);
-            return true;
+            return self::validatePayload($decoded['payload']);
         } catch (Exception $ex) {
             return false;
         }
     }
+
+    public function validatePayload(array $payload): bool
+    {
+        $payloadKeys = ['ssn', 'name', 'exp', 'aud', 'iss', 'sub'];
+        foreach ($payloadKeys as $key) {
+            if (!in_array($key, array_keys($payload))) {
+                return false;
+            }
+        }
+
+        return $payload['exp'] > time();
+    }
 }
-
-
