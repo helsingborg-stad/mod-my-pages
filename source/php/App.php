@@ -62,7 +62,7 @@ class App
         if (!Cookie::get() || !Token::isValid(Cookie::get())) {
             return $item;
         }
-        $item['label'] = \Frontend\TemplateStrings::replace($item['label']);
+        $item['label'] = Frontend\TemplateStrings::replace($item['label']);
         return $item;
     }
 }
