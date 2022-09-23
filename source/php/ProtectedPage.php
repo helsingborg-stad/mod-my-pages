@@ -18,6 +18,6 @@ class ProtectedPage implements \ModMyPages\Redirect\IRedirectHandler
 
     public function redirect(array $args): string
     {
-        return home_url('404');
+        return home_url('not-authorized');
     }
 }
