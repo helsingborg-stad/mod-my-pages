@@ -16,6 +16,7 @@ class App
         add_filter('body_class', array($this, 'bodyClassNames'), 5);
         add_filter('Municipio/Navigation/Item', array($this, 'replaceMenuLabels'));
         add_filter('Municipio/blade/view_paths', array($this, 'addSearchableBladeTemplatePaths'), 1, 1);
+        add_action('init', array($this, 'registerMyPagesMenu'), 5, 2);
     }
 
     public function redirect()
@@ -73,5 +74,10 @@ class App
             : array_unshift($array, MOD_MY_PAGES_PATH . 'views/');
 
         return $array;
+    }
+
+    public function registerMyPagesMenu()
+    {
+        register_nav_menu('my-pages-menu', __('My Pages Menu', MOD_MY_PAGES_TEXT_DOMAIN));
     }
 }
