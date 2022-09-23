@@ -7,8 +7,7 @@ class TemplateStrings
     private static function strings()
     {
         return [
-            '{name}' => \ModMyPages\Session\User::name(),
-            '{ssn}'  => \ModMyPages\Session\User::ssn(),
+            '{name}' => \ModMyPages\Session\Profile::name(),
         ];
     }
 
