@@ -15,6 +15,7 @@ class App
         add_action('template_redirect', array($this, 'redirect'), 5);
         add_filter('body_class', array($this, 'bodyClassNames'), 5);
         add_filter('Municipio/Navigation/Item', array($this, 'replaceMenuLabels'));
+        add_filter('Municipio/blade/view_paths', array($this, 'addSearchableBladeTemplatePaths'), 1, 1);
     }
 
     public function redirect()
@@ -63,5 +64,14 @@ class App
             $item['label'] = Frontend\TemplateStrings::replace($item['label']);
         }
         return $item;
+    }
+
+    public function addSearchableBladeTemplatePaths(array $array): array
+    {
+        is_child_theme()
+            ? array_splice($array, 2, 0, array(MOD_MY_PAGES_PATH . 'views/'))
+            : array_unshift($array, MOD_MY_PAGES_PATH . 'views/');
+
+        return $array;
     }
 }
