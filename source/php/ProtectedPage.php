@@ -13,7 +13,7 @@ class ProtectedPage implements \ModMyPages\Redirect\IRedirectHandler
 
     public function validate(array $args): bool
     {
-        return in_array(get_queried_object_id(), $this->postIds) && empty(\ModMyPages\Session\Cookie::get());
+        return in_array(get_queried_object_id(), $this->postIds) && !\ModMyPages\Session\Profile::isAuthenticated();
     }
 
     public function redirect(array $args): string
