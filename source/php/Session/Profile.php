@@ -6,7 +6,7 @@ class Profile
 {
     public static function isAuthenticated(): bool
     {
-        return Cookie::get() && Token::isValid(Cookie::get());
+        return !empty(Cookie::get()) && Token::isValid(Cookie::get());
     }
 
     public static function name(): string
