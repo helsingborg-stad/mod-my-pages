@@ -20,4 +20,9 @@ class Cookie
     {
         return $_COOKIE[self::$key] ?? '';
     }
+
+    public static function name(): string
+    {
+        return self::$key;
+    }
 }
