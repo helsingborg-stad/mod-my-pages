@@ -23,7 +23,7 @@ class UseRedirect
     {
         if ($this->matchRoute($route) && $handler->validate($_GET)) {
             wp_redirect($handler->redirect($_GET));
-            exit;
+            // exit;
         }
     }
 
