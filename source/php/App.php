@@ -17,6 +17,7 @@ class App extends Application
         add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
         add_action('acf/init', array($this, 'optionsPage'), 5);
         add_action('init', array($this, 'registerMenus'), 5, 2);
+        
         return $this;
     }
 

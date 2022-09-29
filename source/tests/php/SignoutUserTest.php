@@ -21,7 +21,9 @@ class SignoutUserTest extends \ModMyPages\Test\PluginTestCase
             'serverPath'            => '/signout',
             'cookieRepository'      => $cookieRepository,
             'redirectCallback'      => $redirectSpy,
-        ])->redirect();
+        ])
+            ->run()
+            ->redirect();
 
         $this->assertTrue($cookieExistsBeforeInit);
         $this->assertTrue($cookieRepository->get(AccessToken::$cookieName) === '');

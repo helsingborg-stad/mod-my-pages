@@ -17,7 +17,9 @@ class ProtectedPageTest extends \ModMyPages\Test\PluginTestCase
             'getQueriedObjectId'    => new MockGetQueriedObjectId(1337),
             'isAuthenticated'       => false,
             'redirectCallback'      => $redirectSpy,
-        ])->redirect();
+        ])
+            ->run()
+            ->redirect();
         
         $this->assertTrue(count($redirectSpy::$redirects) === 1 && !empty($redirectSpy::$redirects[0]));
     }
@@ -30,7 +32,9 @@ class ProtectedPageTest extends \ModMyPages\Test\PluginTestCase
             'getQueriedObjectId'    => new MockGetQueriedObjectId(1337),
             'isAuthenticated'       => false,
             'redirectCallback'      => $redirectSpy,
-        ])->redirect();
+        ])
+            ->run()
+            ->redirect();
         
         $this->assertTrue(count($redirectSpy::$redirects) === 1 && !empty($redirectSpy::$redirects[0]));
     }
@@ -43,7 +47,9 @@ class ProtectedPageTest extends \ModMyPages\Test\PluginTestCase
             'getQueriedObjectId'    => new MockGetQueriedObjectId(1),
             'isAuthenticated'       => false,
             'redirectCallback'      => $redirectSpy,
-        ])->redirect();
+        ])
+            ->run()
+            ->redirect();
         
         $this->assertTrue(count($redirectSpy::$redirects) === 0);
     }
@@ -56,7 +62,9 @@ class ProtectedPageTest extends \ModMyPages\Test\PluginTestCase
             'getQueriedObjectId'    => new MockGetQueriedObjectId(1337),
             'isAuthenticated'       => true,
             'redirectCallback'      => $redirectSpy,
-        ])->redirect();
+        ])
+            ->run()
+            ->redirect();
         
         $this->assertTrue(count($redirectSpy::$redirects) === 0);
     }

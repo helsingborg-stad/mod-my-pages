@@ -51,12 +51,7 @@ class CreateApp implements ApplicationFactory
     public function create(array $options, ApplicationServices $services): Application
     {
         return \ModMyPages\Helper\Type::cast(
-            array_merge(
-                $options,
-                [
-                    'services' => $services
-                ]
-            ),
+            array_merge($options, ['services' => $services]),
             '\ModMyPages\App'
         );
     }

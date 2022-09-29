@@ -23,10 +23,11 @@ class AuthenticateUserTest extends \ModMyPages\Test\PluginTestCase
             'serverPath'            => '/auth',
             'cookieRepository'      => $cookieRepository,
             'redirectCallback'      => $redirectSpy,
-        ])->redirect();
+        ])
+            ->run()
+            ->redirect();
 
         $this->assertTrue($cookieDoesNotExistBeforeInit);
-        $this->assertTrue(!empty($cookieRepository->get(AccessToken::$cookieName)));
         $this->assertTrue(!empty($cookieRepository->get(AccessToken::$cookieName)));
         $this->assertTrue(count($redirectSpy::$redirects) === 1);
     }
@@ -45,7 +46,9 @@ class AuthenticateUserTest extends \ModMyPages\Test\PluginTestCase
             'cookieRepository'      => $cookieRepository,
             'redirectCallback'      => $redirectSpy,
             'tokenService'          => new \ModMyPages\Services\MockTokenService('')
-        ])->redirect();
+        ])
+            ->run()
+            ->redirect();
 
 
         $cookiesDoesNotExistAfterInit = empty($cookieRepository->get(AccessToken::$cookieName));
