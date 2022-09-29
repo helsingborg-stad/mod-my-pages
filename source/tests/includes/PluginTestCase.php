@@ -70,6 +70,7 @@ class PluginTestCase extends \PHPUnit\Framework\TestCase
                         'cookieRepository'      => new \ModMyPages\Cookie\MemoryCookieRepository(),
                         'redirectCallback'      => new \ModMyPages\Redirects\NullRedirectCallback(),
                         'getQueriedObjectId'    => new \ModMyPages\Services\MockGetQueriedObjectId(),
+                        'tokenService'          => new \ModMyPages\Services\MockTokenService($this->createFakeToken())
                     ],
                     $overrides
                 ))

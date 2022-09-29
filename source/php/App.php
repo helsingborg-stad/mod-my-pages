@@ -5,6 +5,7 @@ namespace ModMyPages;
 use ModMyPages\Redirects\UseRedirect;
 use ModMyPages\Redirects\Handlers\ProtectedPage;
 use ModMyPages\Redirects\Handlers\Signout;
+use ModMyPages\Redirects\Handlers\AuthenticateUser;
 
 
 class App extends Types\Application
@@ -32,12 +33,12 @@ class App extends Types\Application
                     home_url(),
                     $this->services->cookieRepository
                 ),
-                // '/auth' => new Authentication([
-                //     'successUrl'    => home_url('/my-pages'),
-                //     'errorUrl'      => home_url('/404'),
-                //     'authService'   => $this->services->tokenService,
-                //     'cookieService' => $this->services->cookieService,
-                // ]),
+                '/auth' => new AuthenticateUser([
+                    'successUrl'    => home_url('/my-pages'),
+                    'errorUrl'      => home_url('/404'),
+                    'tokenService'  => $this->services->tokenService,
+                    'cookies'       => $this->services->cookieRepository,
+                ]),
             ],
             $this->serverPath,
             $this->services->redirectCallback
