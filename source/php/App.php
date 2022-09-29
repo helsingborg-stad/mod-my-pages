@@ -4,6 +4,7 @@ namespace ModMyPages;
 
 use ModMyPages\Redirects\UseRedirect;
 use ModMyPages\Redirects\Handlers\ProtectedPage;
+use ModMyPages\Redirects\Handlers\Signout;
 
 
 class App extends Types\Application
@@ -27,16 +28,15 @@ class App extends Types\Application
                     ($this->services->getQueriedObjectId)(),
                     !$this->isAuthenticated,
                 ),
+                '/signout' => new Signout(
+                    home_url(),
+                    $this->services->cookieRepository
+                ),
                 // '/auth' => new Authentication([
                 //     'successUrl'    => home_url('/my-pages'),
                 //     'errorUrl'      => home_url('/404'),
                 //     'authService'   => $this->services->tokenService,
                 //     'cookieService' => $this->services->cookieService,
-                // ]),
-                // '/signout' => new SignOut([
-                //     'successUrl' => home_url(),
-                //     'errorUrl' => home_url('/404'),
-                //     'accessToken'   => $this->services->cookieService,
                 // ]),
             ],
             $this->serverPath,

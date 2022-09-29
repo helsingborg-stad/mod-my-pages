@@ -32,26 +32,23 @@ class PluginTestCase extends \PHPUnit\Framework\TestCase
             ->alias(fn ($v = '') => 'http://example.test' . $v);
     }
 
-    // public function createExpiredFakeToken(): \ModMyPages\Repository\Types\Cookie
-    // {
-    //     return $this->createFakeToken(true);
-    // }
+    public function createExpiredFakeToken(): string
+    {
+        return $this->createFakeToken(true);
+    }
 
-    // public function createFakeToken(bool $isExpired = false): \ModMyPages\Repository\Types\Cookie
-    // {
-    //     $jwt = JWT::encode(
-    //         [
-    //             'id' => '201111223333',
-    //             'name' => 'Example Person',
-    //             'exp' => $isExpired ? time() - 600 : time() + 1200
-    //         ],
-    //         'key',
-    //         'HS256'
-    //     );
-    //     $token = new \ModMyPages\Test\FakeToken();
-    //     $token->set($jwt);
-    //     return $token;
-    // }
+    public function createFakeToken(bool $isExpired = false): string
+    {
+        return JWT::encode(
+            [
+                'id' => '201111223333',
+                'name' => 'Example Person',
+                'exp' => $isExpired ? time() - 600 : time() + 1200
+            ],
+            'key',
+            'HS256'
+        );
+    }
 
     public function createFakeServices(array $overrides = [])
     {
@@ -65,7 +62,7 @@ class PluginTestCase extends \PHPUnit\Framework\TestCase
     {
         return \ModMyPages\Helper\Type::cast(
             array_merge([
-                'proctedPages' => [],
+                'protectedPages' => [],
                 'serverPath' => '/',
                 'isAuthenticated' => true,
                 'services' => $this->createFakeServices(array_merge(

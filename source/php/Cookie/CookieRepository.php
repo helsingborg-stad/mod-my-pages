@@ -11,8 +11,10 @@ class CookieRepository implements Types\ICookieRepository
 
     public function set(string $key, string $value, int $cookieLength = 1200, string $cookieDomain = '', string $cookiePath = '')
     {
-        $expiryDate = empty($value) ? $this->expiredDate() : $this->cookieLength($cookieLength);
-        setcookie($key, $value, $expiryDate, $cookiePath, $cookieDomain, true, true);
+        if (!headers_sent()) {
+            $expiryDate = empty($value) ? $this->expiredDate() : $this->cookieLength($cookieLength);
+            setcookie($key, $value, $expiryDate, $cookiePath, $cookieDomain, true, true);
+        }
     }
 
     public function cookieLength(int $lengthInSeconds): int

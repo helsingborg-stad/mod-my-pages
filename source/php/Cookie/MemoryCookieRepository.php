@@ -4,19 +4,19 @@ namespace ModMyPages\Cookie;
 
 class MemoryCookieRepository extends CookieRepository implements Types\ICookieRepository
 {
-    public array $cookies = [];
+    public static array $cookies = [];
 
     public function get(string $key): string
     {
-        return !empty($this->cookies[$key]) ? $this->cookies[$key]['value'] : '';
+        return !empty(self::$cookies[$key]) ? self::$cookies[$key]['value'] : '';
     }
 
     public function set(string $key, string $value, int $cookieLength = 1200, string $cookieDomain = '', string $cookiePath = '/')
     {
         if (!empty($value)) {
-            $this->cookies[$key] = [
+            self::$cookies[$key] = [
                 'value' => $value,
-                'cookieLength' => empty($cookieLength) ? $this->expiredDate() : $this->coookieLength($cookieLength),
+                'cookieLength' => empty($cookieLength) ? $this->expiredDate() : $this->cookieLength($cookieLength),
                 'cookieDomain' => $cookieDomain,
                 'cookiePath'   => $cookiePath
             ];
@@ -24,8 +24,8 @@ class MemoryCookieRepository extends CookieRepository implements Types\ICookieRe
             return;
         }
 
-        if (empty($value) && !empty($this->cookies[$key])) {
-            unset($this->cookies[$key]);
+        if (empty($value) && !empty(self::$cookies[$key])) {
+            unset(self::$cookies[$key]);
         }
     }
 }
