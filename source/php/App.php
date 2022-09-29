@@ -4,18 +4,13 @@ namespace ModMyPages;
 
 use ModMyPages\Redirects\UseRedirect;
 use ModMyPages\Redirects\Handlers\ProtectedPage;
-use ModMyPages\Redirects\Handlers\Signout;
+use ModMyPages\Redirects\Handlers\SignoutUser;
 use ModMyPages\Redirects\Handlers\AuthenticateUser;
 
 
 class App extends Types\Application
 {
-    public function __construct()
-    {
-        $this->hooks();
-    }
-
-    public function hooks()
+    public function run()
     {
         add_action('template_redirect', array($this, 'redirect'), 5);
     }
@@ -29,7 +24,7 @@ class App extends Types\Application
                     ($this->services->getQueriedObjectId)(),
                     !$this->isAuthenticated,
                 ),
-                '/signout' => new Signout(
+                '/signout' => new SignoutUser(
                     home_url(),
                     $this->services->cookieRepository
                 ),

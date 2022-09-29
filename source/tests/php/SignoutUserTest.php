@@ -8,7 +8,7 @@ use ModMyPages\Services\MockGetQueriedObjectId;
 use ModMyPages\Redirects\SpyRedirectCallback;
 use ModMyPages\Cookie\Constants\AccessToken;
 
-class SignoutTest extends \ModMyPages\Test\PluginTestCase
+class SignoutUserTest extends \ModMyPages\Test\PluginTestCase
 {
     public function testRemoveCookieAndRedirect()
     {

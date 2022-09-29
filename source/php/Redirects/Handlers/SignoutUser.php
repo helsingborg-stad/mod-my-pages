@@ -6,7 +6,7 @@ use ModMyPages\Redirects\Types\IRedirectHandler;
 use ModMyPages\Cookie\Types\ICookieRepository;
 use ModMyPages\Cookie\Constants\AccessToken;
 
-class Signout implements IRedirectHandler
+class SignoutUser implements IRedirectHandler
 {
     private ICookieRepository $cookies;
     

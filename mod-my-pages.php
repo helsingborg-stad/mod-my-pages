@@ -43,4 +43,4 @@ add_action('acf/init', function () {
 });
 
 // Start application
-new ModMyPages\App();
+(new ModMyPages\CreateApp())()->run();

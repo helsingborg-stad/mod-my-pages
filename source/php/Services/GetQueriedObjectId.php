@@ -3,7 +3,7 @@ namespace ModMyPages\Services;
 
 use ModMyPages\Services\Types\IGetQueriredObjectIdCallback;
 
-class GetQueriredObjectId implements IGetQueriredObjectIdCallback
+class GetQueriedObjectId implements IGetQueriredObjectIdCallback
 {
     public function __invoke(): int
     {
