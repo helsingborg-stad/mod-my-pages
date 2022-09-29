@@ -6,13 +6,15 @@ use ModMyPages\Redirects\UseRedirect;
 use ModMyPages\Redirects\Handlers\ProtectedPage;
 use ModMyPages\Redirects\Handlers\SignoutUser;
 use ModMyPages\Redirects\Handlers\AuthenticateUser;
+use ModMyPages\Types\Application;
 
-
-class App extends Types\Application
+class App extends Application
 {
-    public function run()
+    public function run() : Application
     {
         add_action('template_redirect', array($this, 'redirect'), 5);
+        add_filter('body_class', array($this, 'bodyClassNames'), 5);
+        return $this;
     }
 
     public function redirect()
@@ -37,6 +39,14 @@ class App extends Types\Application
             ],
             $this->serverPath,
             $this->services->redirectCallback
+        );
+    }
+
+    public function bodyClassNames(array $classNames)
+    {
+        return array_merge(
+            $classNames,
+            $this->isAuthenticated ? ['is-authenticated'] : []
         );
     }
 }

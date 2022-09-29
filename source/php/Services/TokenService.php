@@ -18,6 +18,6 @@ class TokenService implements ITokenService
             'Content-Type: application/json'
         ]);
         $response = json_decode(curl_exec($request), true);
-        return $response['accessToken'];
+        return $response['accessToken'] ?? '';
     }
 }

@@ -19,7 +19,7 @@ class CookieRepository implements Types\ICookieRepository
 
     public function cookieLength(int $lengthInSeconds): int
     {
-        return time() + $lengthInSeconds;
+        return $this->time() + $lengthInSeconds;
     }
 
     public function expiredDate(): int
