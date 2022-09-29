@@ -2,23 +2,21 @@
 
 namespace ModMyPages\Test;
 
-use Brain\Monkey\Functions;
-use Mockery;
-use ModMyPages\Services\MockGetQueriedObjectId;
-use ModMyPages\Redirects\SpyRedirectCallback;
-use ModMyPages\Cookie\Constants\AccessToken;
-use ModMyPages\Services\MockTokenService;
+use ModMyPages\Token\AccessToken;
+use ModMyPages\Services\Mock\MockTokenService;
+use ModMyPages\Services\Mock\SpyRedirectCallback;
+use ModMyPages\Services\Mock\MemoryCookieRepository;
 
-class AuthenticateUserTest extends \ModMyPages\Test\PluginTestCase
+class AuthenticateUserTest extends PluginTestCase
 {
     public function testRemoveCookieAndRedirectToSuccessUrl()
     {
         $_GET['ts_session_id'] = 'fakeSession';
 
         $redirectSpy = new SpyRedirectCallback();
-        $cookieRepository = new \ModMyPages\Cookie\MemoryCookieRepository();
+        $cookieRepository = new MemoryCookieRepository();
         $cookieDoesNotExistBeforeInit = empty($cookieRepository->get(AccessToken::$cookieName));
-        
+
         $this->createFakeApp([
             'serverPath'            => '/auth',
             'cookieRepository'      => $cookieRepository,
@@ -37,7 +35,7 @@ class AuthenticateUserTest extends \ModMyPages\Test\PluginTestCase
         $_GET['ts_session_id'] = 'fakeSession';
 
         $redirectSpy = new SpyRedirectCallback();
-        $cookieRepository = new \ModMyPages\Cookie\MemoryCookieRepository();
+        $cookieRepository = new MemoryCookieRepository();
         $cookieRepository->set(AccessToken::$cookieName, '');
         $cookieDoesNotExistBeforeInit = empty($cookieRepository->get(AccessToken::$cookieName));
 
@@ -45,7 +43,7 @@ class AuthenticateUserTest extends \ModMyPages\Test\PluginTestCase
             'serverPath'            => '/auth',
             'cookieRepository'      => $cookieRepository,
             'redirectCallback'      => $redirectSpy,
-            'tokenService'          => new \ModMyPages\Services\MockTokenService('')
+            'tokenService'          => new MockTokenService('')
         ])
             ->run()
             ->redirect();
@@ -54,11 +52,10 @@ class AuthenticateUserTest extends \ModMyPages\Test\PluginTestCase
         $cookiesDoesNotExistAfterInit = empty($cookieRepository->get(AccessToken::$cookieName));
         $redirectedOnce = count($redirectSpy::$redirects) === 1;
         $redirectedToErrorUrl = strpos($redirectSpy::$redirects[0], '/404') !== false;
-        
+
         $this->assertTrue($cookieDoesNotExistBeforeInit);
         $this->assertTrue($cookiesDoesNotExistAfterInit);
         $this->assertTrue($redirectedOnce);
         $this->assertTrue($redirectedToErrorUrl);
     }
 }
-

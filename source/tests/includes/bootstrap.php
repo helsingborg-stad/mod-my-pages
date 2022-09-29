@@ -16,8 +16,3 @@ $loader = require __DIR__ . '/../../../vendor/autoload.php';
 $loader->addPsr4('ModMyPages\\Test\\', __DIR__ . '/../php/');
 
 require_once __DIR__ . '/PluginTestCase.php';
-// require_once __DIR__ . '/Repository/FakeAuthService.php';
-// require_once __DIR__ . '/Repository/FakeToken.php';
-// require_once __DIR__ . '/Repository/NullExitCallback.php';
-// require_once __DIR__ . '/Repository/NullSettings.php';
-// require_once __DIR__ . '/Repository/FakeRepository.php';

@@ -1,6 +1,6 @@
 <?php
 
-namespace ModMyPages\Redirects\Types;
+namespace ModMyPages\Services\Types;
 
 interface IRedirectCallback
 {

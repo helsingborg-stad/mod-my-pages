@@ -2,12 +2,10 @@
 
 namespace ModMyPages\Test;
 
-use Brain\Monkey\Functions;
-use Mockery;
-use ModMyPages\Services\MockGetQueriedObjectId;
-use ModMyPages\Redirects\SpyRedirectCallback;
+use ModMyPages\Services\Mock\SpyRedirectCallback;
+use ModMyPages\Services\Mock\MockGetQueriedObjectId;
 
-class ProtectedPageTest extends \ModMyPages\Test\PluginTestCase
+class ProtectedPageTest extends PluginTestCase
 {
     public function testDenyUnauthenticated()
     {
@@ -20,10 +18,10 @@ class ProtectedPageTest extends \ModMyPages\Test\PluginTestCase
         ])
             ->run()
             ->redirect();
-        
+
         $this->assertTrue(count($redirectSpy::$redirects) === 1 && !empty($redirectSpy::$redirects[0]));
     }
-    
+
     public function testDenyExpiredToken()
     {
         $redirectSpy = new SpyRedirectCallback();
@@ -35,7 +33,7 @@ class ProtectedPageTest extends \ModMyPages\Test\PluginTestCase
         ])
             ->run()
             ->redirect();
-        
+
         $this->assertTrue(count($redirectSpy::$redirects) === 1 && !empty($redirectSpy::$redirects[0]));
     }
 
@@ -50,7 +48,7 @@ class ProtectedPageTest extends \ModMyPages\Test\PluginTestCase
         ])
             ->run()
             ->redirect();
-        
+
         $this->assertTrue(count($redirectSpy::$redirects) === 0);
     }
 
@@ -65,8 +63,7 @@ class ProtectedPageTest extends \ModMyPages\Test\PluginTestCase
         ])
             ->run()
             ->redirect();
-        
+
         $this->assertTrue(count($redirectSpy::$redirects) === 0);
     }
 }
-

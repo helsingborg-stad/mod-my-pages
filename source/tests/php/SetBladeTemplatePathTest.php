@@ -2,15 +2,9 @@
 
 namespace ModMyPages\Test;
 
-use Mockery;
 use Brain\Monkey\Functions;
-use ModMyPages\Services\MockTokenService;
-use ModMyPages\Cookie\Constants\AccessToken;
-use ModMyPages\Cookie\MemoryCookieRepository;
-use ModMyPages\Redirects\SpyRedirectCallback;
 
-use ModMyPages\Services\MockGetQueriedObjectId;
-class SetBladeTemplatePathTest extends \ModMyPages\Test\PluginTestCase
+class SetBladeTemplatePathTest extends PluginTestCase
 {
     public function testIsMainTheme()
     {
@@ -26,7 +20,7 @@ class SetBladeTemplatePathTest extends \ModMyPages\Test\PluginTestCase
         ];
 
         $bladePaths = $app->setBladeTemplatePaths($examplePaths);
-        
+
         $this->assertCount(count($examplePaths) + 1, $bladePaths);
         $this->assertContains(MOD_MY_PAGES_PATH . 'views/', $bladePaths);
     }
@@ -45,9 +39,8 @@ class SetBladeTemplatePathTest extends \ModMyPages\Test\PluginTestCase
         ];
 
         $bladePaths = $app->setBladeTemplatePaths($examplePaths);
-        
+
         $this->assertCount(count($examplePaths) + 1, $bladePaths);
         $this->assertContains(MOD_MY_PAGES_PATH . 'views/', $bladePaths);
     }
 }
-

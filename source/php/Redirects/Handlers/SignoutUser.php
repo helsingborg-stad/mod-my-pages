@@ -1,15 +1,16 @@
 <?php
+
 namespace ModMyPages\Redirects\Handlers;
 
+use ModMyPages\Token\AccessToken;
 use ModMyPages\Repository\Types\Cookie;
+use ModMyPages\Services\Types\ICookieRepository;
 use ModMyPages\Redirects\Types\IRedirectHandler;
-use ModMyPages\Cookie\Types\ICookieRepository;
-use ModMyPages\Cookie\Constants\AccessToken;
 
 class SignoutUser implements IRedirectHandler
 {
     private ICookieRepository $cookies;
-    
+
     private string $url;
 
     public function __construct(string $redirectUrl, ICookieRepository $cookies)

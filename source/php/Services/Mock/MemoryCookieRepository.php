@@ -1,8 +1,11 @@
 <?php
 
-namespace ModMyPages\Cookie;
+namespace ModMyPages\Services\Mock;
 
-class MemoryCookieRepository extends CookieRepository implements Types\ICookieRepository
+use ModMyPages\Services\CookieRepository;
+use ModMyPages\Services\Types\ICookieRepository;
+
+class MemoryCookieRepository extends CookieRepository implements ICookieRepository
 {
     public static array $cookies = [];
 

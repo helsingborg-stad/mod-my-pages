@@ -1,5 +1,6 @@
 <?php
-namespace ModMyPages\Services;
+
+namespace ModMyPages\Services\Mock;
 
 use ModMyPages\Services\Types\ITokenService;
 use ModMyPages\Admin\Settings;

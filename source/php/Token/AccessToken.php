@@ -1,6 +1,6 @@
 <?php
 
-namespace ModMyPages\Cookie\Constants;
+namespace ModMyPages\Token;
 
 class AccessToken
 {

@@ -2,10 +2,15 @@
 
 namespace ModMyPages\Test;
 
-use PHPUnit\Framework\TestCase;
-use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Brain\Monkey;
 use Firebase\JWT\JWT;
+use ModMyPages\Helper\Type;
+use PHPUnit\Framework\TestCase;
+use ModMyPages\Services\Mock\MockTokenService;
+use ModMyPages\Services\Mock\NullRedirectCallback;
+use ModMyPages\Services\Mock\MemoryCookieRepository;
+use ModMyPages\Services\Mock\MockGetQueriedObjectId;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
 class PluginTestCase extends \PHPUnit\Framework\TestCase
 {
@@ -52,7 +57,7 @@ class PluginTestCase extends \PHPUnit\Framework\TestCase
 
     public function createFakeServices(array $overrides = [])
     {
-        return \ModMyPages\Helper\Type::cast(
+        return Type::cast(
             array_merge([], $overrides),
             '\ModMyPages\Types\ApplicationServices'
         );
@@ -60,17 +65,17 @@ class PluginTestCase extends \PHPUnit\Framework\TestCase
 
     public function createFakeApp(array $overrides = [])
     {
-        return \ModMyPages\Helper\Type::cast(
+        return Type::cast(
             array_merge([
                 'protectedPages' => [],
                 'serverPath' => '/',
                 'isAuthenticated' => true,
                 'services' => $this->createFakeServices(array_merge(
                     [
-                        'cookieRepository'      => new \ModMyPages\Cookie\MemoryCookieRepository(),
-                        'redirectCallback'      => new \ModMyPages\Redirects\NullRedirectCallback(),
-                        'getQueriedObjectId'    => new \ModMyPages\Services\MockGetQueriedObjectId(),
-                        'tokenService'          => new \ModMyPages\Services\MockTokenService($this->createFakeToken())
+                        'cookieRepository'      => new MemoryCookieRepository(),
+                        'redirectCallback'      => new NullRedirectCallback(),
+                        'getQueriedObjectId'    => new MockGetQueriedObjectId(),
+                        'tokenService'          => new MockTokenService($this->createFakeToken())
                     ],
                     $overrides
                 ))

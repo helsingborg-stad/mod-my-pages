@@ -1,4 +1,5 @@
 <?php
+
 namespace ModMyPages\Services;
 
 use ModMyPages\Services\Types\IGetQueriredObjectIdCallback;

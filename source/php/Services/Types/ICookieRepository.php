@@ -1,6 +1,6 @@
 <?php
 
-namespace ModMyPages\Cookie\Types;
+namespace ModMyPages\Services\Types;
 
 interface ICookieRepository
 {

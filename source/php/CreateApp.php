@@ -2,14 +2,14 @@
 
 namespace ModMyPages;
 
-use ModMyPages\Types\ApplicationFactory;
+use ModMyPages\Token\AccessToken;
 use ModMyPages\Types\Application;
-use ModMyPages\Types\ApplicationServices;
-use ModMyPages\Cookie\CookieRepository;
-use ModMyPages\Redirects\RedirectCallback;
-use ModMyPages\Services\GetQueriedObjectId;
 use ModMyPages\Services\TokenService;
-use ModMyPages\Cookie\Constants\AccessToken;
+use ModMyPages\Types\ApplicationFactory;
+use ModMyPages\Services\CookieRepository;
+use ModMyPages\Services\RedirectCallback;
+use ModMyPages\Types\ApplicationServices;
+use ModMyPages\Services\GetQueriedObjectId;
 
 class CreateApp implements ApplicationFactory
 {
@@ -27,7 +27,8 @@ class CreateApp implements ApplicationFactory
                         'meta_key' => 'mod_my_pages_protected_page',
                         'meta_value' => 1,
                         'fields' => 'ids'
-                    ]) ?? [],    
+                    ]
+                ) ?? [],
             ],
             $this->createServices(
                 [
@@ -40,7 +41,7 @@ class CreateApp implements ApplicationFactory
         );
     }
 
-    public function createServices(array $services) : ApplicationServices
+    public function createServices(array $services): ApplicationServices
     {
         return \ModMyPages\Helper\Type::cast(
             $services,

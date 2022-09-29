@@ -1,8 +1,10 @@
 <?php
 
-namespace ModMyPages\Redirects;
+namespace ModMyPages\Services\Mock;
 
-class SpyRedirectCallback implements Types\IRedirectCallback
+use ModMyPages\Services\Types\IRedirectCallback;
+
+class SpyRedirectCallback implements IRedirectCallback
 {
     public static array $redirects;
     public function __construct()

@@ -2,21 +2,19 @@
 
 namespace ModMyPages\Test;
 
-use Brain\Monkey\Functions;
-use Mockery;
-use ModMyPages\Services\MockGetQueriedObjectId;
-use ModMyPages\Redirects\SpyRedirectCallback;
-use ModMyPages\Cookie\Constants\AccessToken;
+use ModMyPages\Token\AccessToken;
+use ModMyPages\Services\Mock\SpyRedirectCallback;
+use ModMyPages\Services\Mock\MemoryCookieRepository;
 
-class SignoutUserTest extends \ModMyPages\Test\PluginTestCase
+class SignoutUserTest extends PluginTestCase
 {
     public function testRemoveCookieAndRedirect()
     {
         $redirectSpy = new SpyRedirectCallback();
-        $cookieRepository = new \ModMyPages\Cookie\MemoryCookieRepository();
+        $cookieRepository = new MemoryCookieRepository();
         $cookieRepository->set(AccessToken::$cookieName, $this->createFakeToken());
         $cookieExistsBeforeInit = !empty($cookieRepository->get(AccessToken::$cookieName));
-        
+
         $this->createFakeApp([
             'serverPath'            => '/signout',
             'cookieRepository'      => $cookieRepository,
@@ -29,4 +27,3 @@ class SignoutUserTest extends \ModMyPages\Test\PluginTestCase
         $this->assertTrue($cookieRepository->get(AccessToken::$cookieName) === '');
     }
 }
-

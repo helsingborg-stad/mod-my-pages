@@ -1,4 +1,5 @@
 <?php
+
 namespace ModMyPages\Redirects\Handlers;
 
 use ModMyPages\Repository\Types\Cookie;
@@ -9,7 +10,7 @@ class ProtectedPage implements IRedirectHandler
     private int $currentPostId;
 
     private array $protectedPageIds;
-    
+
     private bool $isEnabled;
 
     public function __construct(array $protectedPageIds, int $currentPostId, bool $enabled = false)

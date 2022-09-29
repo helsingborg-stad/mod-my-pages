@@ -2,22 +2,22 @@
 
 namespace ModMyPages;
 
-use ModMyPages\Redirects\UseRedirect;
-use ModMyPages\Redirects\Handlers\ProtectedPage;
-use ModMyPages\Redirects\Handlers\SignoutUser;
-use ModMyPages\Redirects\Handlers\AuthenticateUser;
 use ModMyPages\Types\Application;
+use ModMyPages\Redirects\UseRedirect;
+use ModMyPages\Redirects\Handlers\SignoutUser;
+use ModMyPages\Redirects\Handlers\ProtectedPage;
+use ModMyPages\Redirects\Handlers\AuthenticateUser;
 
 class App extends Application
 {
-    public function run() : Application
+    public function run(): Application
     {
         add_action('template_redirect', array($this, 'redirect'), 5);
         add_filter('body_class', array($this, 'bodyClassNames'), 5);
         add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
         add_action('acf/init', array($this, 'optionsPage'), 5);
         add_action('init', array($this, 'registerMenus'), 5, 2);
-        
+
         return $this;
     }
 
@@ -59,7 +59,7 @@ class App extends Application
         is_child_theme()
         ? array_splice($array, 2, 0, array(MOD_MY_PAGES_PATH . 'views/'))
         : array_unshift($array, MOD_MY_PAGES_PATH . 'views/');
-        
+
         return $array;
     }
 

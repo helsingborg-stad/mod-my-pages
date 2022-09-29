@@ -1,10 +1,11 @@
 <?php
+
 namespace ModMyPages\Redirects\Handlers;
 
-use ModMyPages\Redirects\Types\IRedirectHandler;
-use ModMyPages\Cookie\Types\ICookieRepository;
-use ModMyPages\Cookie\Constants\AccessToken;
+use ModMyPages\Token\AccessToken;
 use ModMyPages\Services\Types\ITokenService;
+use ModMyPages\Services\Types\ICookieRepository;
+use ModMyPages\Redirects\Types\IRedirectHandler;
 
 class AuthenticateUser implements IRedirectHandler
 {
@@ -27,7 +28,7 @@ class AuthenticateUser implements IRedirectHandler
     public function redirectUrl(array $args): string
     {
         $jwt = ($this->tokenService)($args['ts_session_id']);
-        
+
         if (!empty($jwt) && true) {
             $this->cookies->set(AccessToken::$cookieName, $jwt);
             return $args['callbackUrl'] ?? $this->successUrl;

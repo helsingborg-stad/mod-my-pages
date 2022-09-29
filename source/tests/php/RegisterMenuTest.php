@@ -2,16 +2,9 @@
 
 namespace ModMyPages\Test;
 
-use Mockery;
 use Brain\Monkey\Functions;
-use ModMyPages\Services\MockTokenService;
-use ModMyPages\Cookie\Constants\AccessToken;
-use ModMyPages\Cookie\MemoryCookieRepository;
-use ModMyPages\Redirects\SpyRedirectCallback;
 
-use ModMyPages\Services\MockGetQueriedObjectId;
-
-class RegisterMenuTest extends \ModMyPages\Test\PluginTestCase
+class RegisterMenuTest extends PluginTestCase
 {
     public function testRegisterOptionsPage()
     {
@@ -24,4 +17,3 @@ class RegisterMenuTest extends \ModMyPages\Test\PluginTestCase
         self::assertNotFalse(has_action('init', 'ModMyPages\App->registerMenus()'));
     }
 }
-

@@ -1,8 +1,10 @@
 <?php
 
-namespace ModMyPages\Cookie;
+namespace ModMyPages\Services;
 
-class CookieRepository implements Types\ICookieRepository
+use ModMyPages\Services\Types\ICookieRepository;
+
+class CookieRepository implements ICookieRepository
 {
     public function get(string $key): string
     {

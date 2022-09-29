@@ -1,4 +1,5 @@
 <?php
+
 namespace ModMyPages\Services\Types;
 
 interface ITokenService
