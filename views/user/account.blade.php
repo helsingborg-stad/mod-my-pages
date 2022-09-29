@@ -2,5 +2,5 @@
 use ModMyPages\Session\Profile;
 @endphp
 
-@includeWhen(!Profile::isAuthenticated(), 'user.partials.login')
-@includeWhen(Profile::isAuthenticated(), 'user.partials.menu')
+@includeWhen(!empty($myPagesMenu['login']), 'user.partials.login')
+@includeWhen(!empty($myPagesMenu['dropdown']), 'user.partials.menu')

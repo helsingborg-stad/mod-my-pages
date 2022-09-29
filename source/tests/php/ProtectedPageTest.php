@@ -1,41 +1,64 @@
 <?php
-namespace ModMyPages;
 
-use ModMyPages\App;
-use Brain\Monkey;
+namespace ModMyPages\Test;
+
 use Brain\Monkey\Functions;
 use Mockery;
+use ModMyPages\Services\MockGetQueriedObjectId;
+use ModMyPages\Redirects\SpyRedirectCallback;
 
-class ProtectedPageTest extends \PluginTestCase\PluginTestCase
+class ProtectedPageTest extends \ModMyPages\Test\PluginTestCase
 {
     public function testDenyUnauthenticated()
     {
-        Monkey\Functions\when('ModMyPages\Session\Profile\isAuthenticated')
-            ->justReturn(false);
-        Monkey\Functions\when('ModMyPages\get_posts')
-            ->justReturn([13, 14]);
-        Monkey\Functions\when('ModMyPages\get_queried_object_id')
-            ->justReturn(13);
+        $redirectSpy = new SpyRedirectCallback();
+        $this->createFakeApp([
+            'protectedPages'        => [1336, 1337],
+            'getQueriedObjectId'    => new MockGetQueriedObjectId(1337),
+            'isAuthenticated'       => false,
+            'redirectCallback'      => $redirectSpy,
+        ])->redirect();
+        
+        $this->assertTrue(count($redirectSpy::$redirects) === 1 && !empty($redirectSpy::$redirects[0]));
+    }
+    
+    public function testDenyExpiredToken()
+    {
+        $redirectSpy = new SpyRedirectCallback();
+        $this->createFakeApp([
+            'protectedPages'        => [1336, 1337],
+            'getQueriedObjectId'    => new MockGetQueriedObjectId(1337),
+            'isAuthenticated'       => false,
+            'redirectCallback'      => $redirectSpy,
+        ])->redirect();
+        
+        $this->assertTrue(count($redirectSpy::$redirects) === 1 && !empty($redirectSpy::$redirects[0]));
+    }
 
-        Functions\expect('wp_redirect')
-            ->once();
-
-        (new App())
-            ->redirect();
+    public function testAllowNotProtectedPages()
+    {
+        $redirectSpy = new SpyRedirectCallback();
+        $this->createFakeApp([
+            'protectedPages'        => [1336, 1337],
+            'getQueriedObjectId'    => new MockGetQueriedObjectId(1),
+            'isAuthenticated'       => false,
+            'redirectCallback'      => $redirectSpy,
+        ])->redirect();
+        
+        $this->assertTrue(count($redirectSpy::$redirects) === 0);
     }
 
     public function testAllowAuthenticated()
     {
-        Monkey\Functions\when('ModMyPages\get_posts')
-            ->justReturn([13, 14]);
-        Monkey\Functions\when('ModMyPages\get_queried_object_id')
-            ->justReturn(13);
-
-        Functions\expect('wp_redirect')
-            ->never();
-
-        $this->setFakeToken();
-        (new App())
-            ->redirect();
+        $redirectSpy = new SpyRedirectCallback();
+        $this->createFakeApp([
+            'protectedPages'        => [1336, 1337],
+            'getQueriedObjectId'    => new MockGetQueriedObjectId(1337),
+            'isAuthenticated'       => true,
+            'redirectCallback'      => $redirectSpy,
+        ])->redirect();
+        
+        $this->assertTrue(count($redirectSpy::$redirects) === 0);
     }
 }
+
