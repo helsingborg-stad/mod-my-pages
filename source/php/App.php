@@ -14,6 +14,9 @@ class App extends Application
     {
         add_action('template_redirect', array($this, 'redirect'), 5);
         add_filter('body_class', array($this, 'bodyClassNames'), 5);
+        add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
+        add_action('acf/init', array($this, 'optionsPage'), 5);
+        add_action('init', array($this, 'registerMenus'), 5, 2);
         return $this;
     }
 
@@ -48,5 +51,24 @@ class App extends Application
             $classNames,
             $this->isAuthenticated ? ['is-authenticated'] : []
         );
+    }
+
+    public function setBladeTemplatePaths(array $array): array
+    {
+        is_child_theme()
+        ? array_splice($array, 2, 0, array(MOD_MY_PAGES_PATH . 'views/'))
+        : array_unshift($array, MOD_MY_PAGES_PATH . 'views/');
+        
+        return $array;
+    }
+
+    public function optionsPage()
+    {
+        new Admin\OptionsPage();
+    }
+
+    public function registerMenus()
+    {
+        register_nav_menu('my-pages-menu', __('My Pages Menu', MOD_MY_PAGES_TEXT_DOMAIN));
     }
 }
