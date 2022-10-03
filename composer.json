@@ -18,10 +18,13 @@
         "psr-4": {"ModMyPages\\": "source/php/"}
     },
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+        "firebase/php-jwt": "^6.3"
+    },
     "require-dev": {
         "brain/monkey": "^2.6",
         "codedungeon/phpunit-result-printer": "^0.31.0",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "spatie/phpunit-watcher": "^1.23"
     }
 }

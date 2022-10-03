@@ -2,6 +2,7 @@
     "redefinable-internals": [
         "file_exists",
         "file_get_contents",
-        "function_exists"
+        "function_exists",
+        "setcookie"
     ]
 }

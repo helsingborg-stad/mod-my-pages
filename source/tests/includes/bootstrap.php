@@ -8,7 +8,8 @@ if (!defined('ABSPATH')) {
 define('MOD_MY_PAGES_PATH', __DIR__ . '/../../../');
 define('MOD_MY_PAGES_URL', 'https://example.com/wp-content/plugins/' . 'modularity-mod-my-pages');
 define('MOD_MY_PAGES_TEMPLATE_PATH', MOD_MY_PAGES_PATH . 'templates/');
-
+define('MOD_MY_PAGES_TEXT_DOMAIN', '');
+define('PHPUNIT_RUNNING', 1);
 
 // Register the autoloader
 $loader = require __DIR__ . '/../../../vendor/autoload.php';

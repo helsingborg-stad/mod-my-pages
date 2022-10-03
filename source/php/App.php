@@ -2,46 +2,70 @@
 
 namespace ModMyPages;
 
-use ModMyPages\Redirect\UseRedirect;
-use ModMyPages\Session\Cookie;
-use ModMyPages\Session\Token;
-use ModPages\Admin\Settings;
+use ModMyPages\Redirects\Handlers\AuthenticateUser;
+use ModMyPages\Redirects\Handlers\ProtectedPage;
+use ModMyPages\Redirects\Handlers\SignoutUser;
+use ModMyPages\Redirects\UseRedirect;
+use ModMyPages\Token\AccessToken;
+use ModMyPages\Types\Application;
 
-class App
+class App extends Application
 {
-    public function __construct()
+    public function run(): Application
     {
-        add_action('acf/init', array($this, 'optionsPage'), 5);
         add_action('template_redirect', array($this, 'redirect'), 5);
         add_filter('body_class', array($this, 'bodyClassNames'), 5);
-        add_filter('Municipio/Navigation/Item', array($this, 'replaceMenuLabels'));
+        add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
+        add_action('acf/init', array($this, 'optionsPage'), 5);
+        add_action('init', array($this, 'registerMenus'), 5, 2);
+        add_filter('Municipio/viewData', (function (bool $isAuthenticated) {
+            $controller = $isAuthenticated ? 'dropDownMenuController' : 'loginButtonController';
+            return array($this, $controller);
+        })($this->isAuthenticated), 1, 1);
+
+        return $this;
     }
 
     public function redirect()
     {
-        new UseRedirect([
-            '/auth' => new Authentication([
-                'successUrl' => home_url('/my-pages'),
-                'errorUrl' => home_url('/404'),
-            ]),
-            '/signout' => new SignOut([
-                'successUrl' => home_url(),
-                'errorUrl' => home_url('/404'),
-            ]),
-            '*' => new ProtectedPage(
-                array_map(
-                    fn ($p) => $p->ID,
-                    get_posts(
-                        [
-                            'post_type' => 'page',
-                            'posts_per_page' => -1,
-                            'meta_key' => 'mod_my_pages_protected_page',
-                            'meta_value' => 1
-                        ]
-                    )
-                )
-            ),
-        ]);
+        new UseRedirect(
+            [
+                '*' => new ProtectedPage(
+                    $this->protectedPages,
+                    ($this->services->getQueriedObjectId)(),
+                    !$this->isAuthenticated,
+                ),
+                '/signout' => new SignoutUser(
+                    home_url(),
+                    $this->services->cookieRepository
+                ),
+                '/auth' => new AuthenticateUser([
+                    'successUrl'    => home_url('/my-pages'),
+                    'errorUrl'      => home_url('/404'),
+                    'tokenService'  => $this->services->tokenService,
+                    'cookies'       => $this->services->cookieRepository,
+                ]),
+            ],
+            $this->serverPath,
+            $this->services->redirectCallback
+        );
+    }
+
+    public function bodyClassNames(array $classNames): array
+    {
+        return array_merge(
+            $classNames,
+            $this->isAuthenticated ? ['is-authenticated'] : []
+        );
+    }
+
+    public function setBladeTemplatePaths(array $array): array
+    {
+        is_child_theme()
+            ? array_splice($array, 2, 0, array(MOD_MY_PAGES_PATH . 'views/'))
+            : array_unshift($array, MOD_MY_PAGES_PATH . 'views/');
+
+        return $array;
     }
 
     public function optionsPage()
@@ -49,19 +73,54 @@ class App
         new Admin\OptionsPage();
     }
 
-    public function bodyClassNames(array $classNames)
+    public function registerMenus()
     {
-        return array_merge(
-            $classNames,
-            Cookie::get() && Token::isValid(Cookie::get()) ? ['is-authenticated'] : []
-        );
+        register_nav_menu('my-pages-menu', __('My Pages Menu', MOD_MY_PAGES_TEXT_DOMAIN));
     }
 
-    public function replaceMenuLabels($item)
+    public function profile(): array
     {
-        if (Cookie::get() && Token::isValid(Cookie::get())) {
-            $item['label'] = Frontend\TemplateStrings::replace($item['label']);
-        }
-        return $item;
+        $jwt = $this->services->cookieRepository->get(AccessToken::$cookieName);
+        $decoded = AccessToken::decode($jwt) ?? [];
+
+        return [
+            'name' => $decoded['payload']['name'] ?? ''
+        ];
+    }
+
+    public function loginButtonController(array $data): array
+    {
+        $data['myPagesMenu'] = [
+            'login'     => [
+                'text'      => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
+                'url'       => ($this->services->loginUrlService)()
+            ],
+        ];
+
+        return $data;
+    }
+
+    public function dropDownMenuController(array $data): array
+    {
+        $dropdownItems = array_map(
+            fn ($p) => [
+                'text' => $p->title,
+                'link' => $p->url,
+                'attributeList' => [
+                    'title' => $p->attr_title
+                ],
+                'classList' => $p->classes,
+            ],
+            wp_get_nav_menu_items(get_nav_menu_locations()['my-pages-menu'] ?? 0) ?? []
+        );
+
+        $data['myPagesMenu'] = [
+            'dropdown'  => [
+                'text'      => $this->profile()['name'],
+                'items'     => $dropdownItems
+            ],
+        ];
+
+        return $data;
     }
 }

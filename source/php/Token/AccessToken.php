@@ -1,9 +1,11 @@
 <?php
 
-namespace ModMyPages\Session;
+namespace ModMyPages\Token;
 
-class Token
+class AccessToken
 {
+    public static $cookieName = 'mypages_accesstoken';
+
     public static function decode(string $value): array
     {
         $tokenPartials = explode('.', $value);
@@ -14,25 +16,25 @@ class Token
         ];
     }
 
-    public static function isValid(string $token): bool
+    public static function isValid(string $token, callable $time = null): bool
     {
         try {
             $decoded = self::decode($token);
-            return self::validatePayload($decoded['payload']);
-        } catch (Exception $ex) {
+            return self::validatePayload($decoded['payload'], $time);
+        } catch (\Exception $ex) {
             return false;
         }
     }
 
-    public function validatePayload(array $payload): bool
+    public static function validatePayload(array $payload, callable $time = null): bool
     {
-        $payloadKeys = ['id', 'name', 'exp', 'aud', 'iss', 'sub'];
+        $payloadKeys = ['id', 'name', 'exp'];
         foreach ($payloadKeys as $key) {
             if (!in_array($key, array_keys($payload))) {
                 return false;
             }
         }
 
-        return $payload['exp'] > time();
+        return $payload['exp'] > ($time ? $time() : time());
     }
 }

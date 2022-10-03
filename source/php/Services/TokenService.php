@@ -1,14 +1,15 @@
 <?php
 
-namespace ModMyPages\Service;
+namespace ModMyPages\Services;
 
 use ModMyPages\Admin\Settings;
+use ModMyPages\Services\Types\ITokenService;
 
-class AuthService
+class TokenService implements ITokenService
 {
-    public static function token($args)
+    public function __invoke(string $sessionId): string
     {
-        $queryArgs  = ['ts_session_id' => $args['ts_session_id']];
+        $queryArgs  = ['ts_session_id' => $sessionId];
         $requestUrl = add_query_arg($queryArgs, Settings::apiUrl() . '/api/v1/auth/token');
         $request = curl_init($requestUrl);
         curl_setopt($request, CURLOPT_CUSTOMREQUEST, "GET");
@@ -18,6 +19,6 @@ class AuthService
             'Content-Type: application/json'
         ]);
         $response = json_decode(curl_exec($request), true);
-        return $response['accessToken'];
+        return $response['accessToken'] ?? '';
     }
 }

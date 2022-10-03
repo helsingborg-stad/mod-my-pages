@@ -1,7 +1,7 @@
 
 # Workflow for running smoke tests for pull requests etc.
 
-name: Pre merge tests
+name: Run tests
 
 on:
   pull_request:
