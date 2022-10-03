@@ -2,11 +2,12 @@
 
 namespace ModMyPages;
 
-use ModMyPages\Types\Application;
-use ModMyPages\Redirects\UseRedirect;
-use ModMyPages\Redirects\Handlers\SignoutUser;
-use ModMyPages\Redirects\Handlers\ProtectedPage;
 use ModMyPages\Redirects\Handlers\AuthenticateUser;
+use ModMyPages\Redirects\Handlers\ProtectedPage;
+use ModMyPages\Redirects\Handlers\SignoutUser;
+use ModMyPages\Redirects\UseRedirect;
+use ModMyPages\Token\AccessToken;
+use ModMyPages\Types\Application;
 
 class App extends Application
 {
@@ -17,6 +18,10 @@ class App extends Application
         add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
         add_action('acf/init', array($this, 'optionsPage'), 5);
         add_action('init', array($this, 'registerMenus'), 5, 2);
+        add_filter('Municipio/viewData', (function (bool $isAuthenticated) {
+            $controller = $isAuthenticated ? 'dropDownMenuController' : 'loginButtonController';
+            return array($this, $controller);
+        })($this->isAuthenticated), 1, 1);
 
         return $this;
     }
@@ -46,7 +51,7 @@ class App extends Application
         );
     }
 
-    public function bodyClassNames(array $classNames)
+    public function bodyClassNames(array $classNames): array
     {
         return array_merge(
             $classNames,
@@ -57,8 +62,8 @@ class App extends Application
     public function setBladeTemplatePaths(array $array): array
     {
         is_child_theme()
-        ? array_splice($array, 2, 0, array(MOD_MY_PAGES_PATH . 'views/'))
-        : array_unshift($array, MOD_MY_PAGES_PATH . 'views/');
+            ? array_splice($array, 2, 0, array(MOD_MY_PAGES_PATH . 'views/'))
+            : array_unshift($array, MOD_MY_PAGES_PATH . 'views/');
 
         return $array;
     }
@@ -71,5 +76,51 @@ class App extends Application
     public function registerMenus()
     {
         register_nav_menu('my-pages-menu', __('My Pages Menu', MOD_MY_PAGES_TEXT_DOMAIN));
+    }
+
+    public function profile(): array
+    {
+        $jwt = $this->services->cookieRepository->get(AccessToken::$cookieName);
+        $decoded = AccessToken::decode($jwt) ?? [];
+
+        return [
+            'name' => $decoded['payload']['name'] ?? ''
+        ];
+    }
+
+    public function loginButtonController(array $data): array
+    {
+        $data['myPagesMenu'] = [
+            'login'     => [
+                'text'      => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
+                'url'       => ($this->services->loginUrlService)()
+            ],
+        ];
+
+        return $data;
+    }
+
+    public function dropDownMenuController(array $data): array
+    {
+        $dropdownItems = array_map(
+            fn ($p) => [
+                'text' => $p->title,
+                'link' => $p->url,
+                'attributeList' => [
+                    'title' => $p->attr_title
+                ],
+                'classList' => $p->classes,
+            ],
+            wp_get_nav_menu_items(get_nav_menu_locations()['my-pages-menu'] ?? 0) ?? []
+        );
+
+        $data['myPagesMenu'] = [
+            'dropdown'  => [
+                'text'      => $this->profile()['name'],
+                'items'     => $dropdownItems
+            ],
+        ];
+
+        return $data;
     }
 }

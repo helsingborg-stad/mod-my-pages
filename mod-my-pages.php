@@ -14,7 +14,7 @@
  */
 
 // Protect agains direct file access
-if (! defined('WPINC')) {
+if (!defined('WPINC')) {
     die;
 }
 
@@ -43,4 +43,5 @@ add_action('acf/init', function () {
 });
 
 // Start application
-(new ModMyPages\CreateApp())()->run();
+ModMyPages\WpAppFactory::create()
+    ->run();

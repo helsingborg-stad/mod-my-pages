@@ -10,7 +10,7 @@ class OptionsPageTest extends PluginTestCase
     {
         Functions\expect('acf_add_options_sub_page')->once();
 
-        $app = $this->createFakeApp()
+        $this->createFakeApp()
             ->run()
             ->optionsPage();
 

@@ -2,9 +2,9 @@
 
 namespace ModMyPages\Test;
 
-use ModMyPages\Token\AccessToken;
-use ModMyPages\Services\Mock\SpyRedirectCallback;
 use ModMyPages\Services\Mock\MemoryCookieRepository;
+use ModMyPages\Services\Mock\SpyRedirectCallback;
+use ModMyPages\Token\AccessToken;
 
 class SignoutUserTest extends PluginTestCase
 {

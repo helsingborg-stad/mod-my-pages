@@ -2,10 +2,10 @@
 
 namespace ModMyPages\Redirects\Handlers;
 
-use ModMyPages\Token\AccessToken;
-use ModMyPages\Services\Types\ITokenService;
-use ModMyPages\Services\Types\ICookieRepository;
 use ModMyPages\Redirects\Types\IRedirectHandler;
+use ModMyPages\Services\Types\ICookieRepository;
+use ModMyPages\Services\Types\ITokenService;
+use ModMyPages\Token\AccessToken;
 
 class AuthenticateUser implements IRedirectHandler
 {

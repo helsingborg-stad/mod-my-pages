@@ -4,15 +4,18 @@ namespace ModMyPages\Test;
 
 use Brain\Monkey;
 use Firebase\JWT\JWT;
-use ModMyPages\Helper\Type;
-use PHPUnit\Framework\TestCase;
-use ModMyPages\Services\Mock\MockTokenService;
-use ModMyPages\Services\Mock\NullRedirectCallback;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use ModMyPages\App;
+use ModMyPages\AppFactory;
+use ModMyPages\Services\LoginUrlServiceFactory;
 use ModMyPages\Services\Mock\MemoryCookieRepository;
 use ModMyPages\Services\Mock\MockGetQueriedObjectId;
-use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use ModMyPages\Services\Mock\MockTokenService;
+use ModMyPages\Services\Mock\NullRedirectCallback;
+use ModMyPages\Types\ApplicationServices;
+use PHPUnit\Framework\TestCase;
 
-class PluginTestCase extends \PHPUnit\Framework\TestCase
+class PluginTestCase extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -34,7 +37,17 @@ class PluginTestCase extends \PHPUnit\Framework\TestCase
         Monkey\Functions\when('_n')
             ->returnArg(1);
         Monkey\Functions\when('home_url')
-            ->alias(fn ($v = '') => 'http://example.test' . $v);
+            ->alias(fn ($v = '') => $this->homeUrl() . $v);
+    }
+
+    public function apiUrl()
+    {
+        return 'http://localhost:3000';
+    }
+
+    public function homeUrl()
+    {
+        return 'http://example.test';
     }
 
     public function createExpiredFakeToken(): string
@@ -55,33 +68,18 @@ class PluginTestCase extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function createFakeServices(array $overrides = [])
+    public function createFakeApp(array $args = []): App
     {
-        return Type::cast(
-            array_merge([], $overrides),
-            '\ModMyPages\Types\ApplicationServices'
-        );
-    }
-
-    public function createFakeApp(array $overrides = [])
-    {
-        return Type::cast(
-            array_merge([
-                'protectedPages' => [],
-                'serverPath' => '/',
-                'isAuthenticated' => true,
-                'services' => $this->createFakeServices(array_merge(
-                    [
-                        'cookieRepository'      => new MemoryCookieRepository(),
-                        'redirectCallback'      => new NullRedirectCallback(),
-                        'getQueriedObjectId'    => new MockGetQueriedObjectId(),
-                        'tokenService'          => new MockTokenService($this->createFakeToken())
-                    ],
-                    $overrides
-                ))
-            ], $overrides),
-            '\ModMyPages\App'
-        );
+        return AppFactory::create([
+            'isAuthenticated'   => isset($args['isAuthenticated']) ? $args['isAuthenticated'] : false,
+            'serverPath'        => $args['serverPath'] ?? '/',
+            'protectedPages'    => $args['protectedPages'] ?? [],
+            'cookieRepository'      => $args['cookieRepository'] ?? new MemoryCookieRepository(),
+            'redirectCallback'      => $args['redirectCallback'] ?? new NullRedirectCallback(),
+            'getQueriedObjectId'    => $args['getQueriedObjectId'] ?? new MockGetQueriedObjectId(),
+            'tokenService'          => $args['tokenService'] ?? new MockTokenService($this->createFakeToken()),
+            'loginUrlService'       => $args['loginUrlService'] ?? LoginUrlServiceFactory::create($this->apiUrl(), $this->homeUrl(), $this->homeUrl() . '/my-pages'),
+        ]);
     }
 
     /**

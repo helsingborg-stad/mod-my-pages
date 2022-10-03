@@ -2,8 +2,8 @@
 
 namespace ModMyPages\Redirects\Handlers;
 
-use ModMyPages\Repository\Types\Cookie;
 use ModMyPages\Redirects\Types\IRedirectHandler;
+use ModMyPages\Repository\Types\Cookie;
 
 class ProtectedPage implements IRedirectHandler
 {

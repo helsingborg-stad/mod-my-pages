@@ -2,8 +2,8 @@
 
 namespace ModMyPages\Test;
 
-use ModMyPages\Services\Mock\SpyRedirectCallback;
 use ModMyPages\Services\Mock\MockGetQueriedObjectId;
+use ModMyPages\Services\Mock\SpyRedirectCallback;
 
 class ProtectedPageTest extends PluginTestCase
 {
@@ -24,6 +24,7 @@ class ProtectedPageTest extends PluginTestCase
 
     public function testDenyExpiredToken()
     {
+        // TODO: Implement Token Validation
         $redirectSpy = new SpyRedirectCallback();
         $this->createFakeApp([
             'protectedPages'        => [1336, 1337],

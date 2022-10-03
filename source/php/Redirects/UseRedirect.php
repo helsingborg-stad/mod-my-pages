@@ -5,15 +5,15 @@ namespace ModMyPages\Redirects;
 class UseRedirect
 {
     private array $routes;
-    private string $path;
+    private string $currentRoute;
 
     public function __construct(
         array $routesWithRedirectHandler,
-        string $currentPath,
+        string $serverPath,
         callable $redirectCallback
     ) {
         $this->routes = $routesWithRedirectHandler;
-        $this->path = $currentPath;
+        $this->currentRoute = $serverPath;
         $this->enable($redirectCallback);
     }
 
@@ -33,6 +33,6 @@ class UseRedirect
 
     public function matchRoute(string $route)
     {
-        return $route === '*' || $route === $this->path;
+        return $route === '*' || $route === $this->currentRoute;
     }
 }

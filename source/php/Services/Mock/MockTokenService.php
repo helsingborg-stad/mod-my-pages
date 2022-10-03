@@ -2,8 +2,8 @@
 
 namespace ModMyPages\Services\Mock;
 
-use ModMyPages\Services\Types\ITokenService;
 use ModMyPages\Admin\Settings;
+use ModMyPages\Services\Types\ITokenService;
 
 class MockTokenService implements ITokenService
 {

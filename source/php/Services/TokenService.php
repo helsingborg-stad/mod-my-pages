@@ -2,8 +2,8 @@
 
 namespace ModMyPages\Services;
 
-use ModMyPages\Services\Types\ITokenService;
 use ModMyPages\Admin\Settings;
+use ModMyPages\Services\Types\ITokenService;
 
 class TokenService implements ITokenService
 {

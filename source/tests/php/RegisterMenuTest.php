@@ -10,7 +10,7 @@ class RegisterMenuTest extends PluginTestCase
     {
         Functions\expect('register_nav_menu')->once();
 
-        $app = $this->createFakeApp()
+        $this->createFakeApp()
             ->run()
             ->registerMenus();
 

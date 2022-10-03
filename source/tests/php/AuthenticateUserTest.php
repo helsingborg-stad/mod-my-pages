@@ -2,10 +2,10 @@
 
 namespace ModMyPages\Test;
 
-use ModMyPages\Token\AccessToken;
+use ModMyPages\Services\Mock\MemoryCookieRepository;
 use ModMyPages\Services\Mock\MockTokenService;
 use ModMyPages\Services\Mock\SpyRedirectCallback;
-use ModMyPages\Services\Mock\MemoryCookieRepository;
+use ModMyPages\Token\AccessToken;
 
 class AuthenticateUserTest extends PluginTestCase
 {
@@ -51,7 +51,7 @@ class AuthenticateUserTest extends PluginTestCase
 
         $cookiesDoesNotExistAfterInit = empty($cookieRepository->get(AccessToken::$cookieName));
         $redirectedOnce = count($redirectSpy::$redirects) === 1;
-        $redirectedToErrorUrl = strpos($redirectSpy::$redirects[0], '/404') !== false;
+        $redirectedToErrorUrl = strpos($redirectSpy::$redirects[0] ?? '', '/404') !== false;
 
         $this->assertTrue($cookieDoesNotExistBeforeInit);
         $this->assertTrue($cookiesDoesNotExistAfterInit);

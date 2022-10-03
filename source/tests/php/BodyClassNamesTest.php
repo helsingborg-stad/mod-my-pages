@@ -2,8 +2,8 @@
 
 namespace ModMyPages\Test;
 
-use ModMyPages\Token\AccessToken;
 use ModMyPages\Services\Mock\MemoryCookieRepository;
+use ModMyPages\Token\AccessToken;
 
 class BodyClassNamesTest extends PluginTestCase
 {
