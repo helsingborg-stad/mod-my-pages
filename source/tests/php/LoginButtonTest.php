@@ -86,6 +86,6 @@ class LoginButtonTest extends PluginTestCase
 
         self::assertArrayHasKey('callbackUrl', $redirectUrlQuery ?? []);
         self::assertNotEmpty($callbackUrl);
-        self::assertEquals($EXPECT_CALLBACK_URL_TO_HAVE_THIS_PATH . 'TEST BROKEN TEST', $getPathFromUrl($callbackUrl));
+        self::assertEquals($EXPECT_CALLBACK_URL_TO_HAVE_THIS_PATH, $getPathFromUrl($callbackUrl));
     }
 }
