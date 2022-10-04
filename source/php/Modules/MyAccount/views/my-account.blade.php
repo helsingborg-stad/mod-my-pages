@@ -55,7 +55,7 @@
                         @endfield
                     </div>
 
-                    <div class="o-grid-12">
+                    <div class="o-grid-12 u-margin__top--2">
                         @typography([
                             'element' => 'h3'
                         ])
