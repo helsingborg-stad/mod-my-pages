@@ -17,10 +17,15 @@ class WpAppFactory implements IApplicationFactory
 {
     public static function create(array $args = []): Application
     {
+        $homeUrlPath = parse_url(home_url());
+        $serverPath = empty($homeUrlPath['path'])
+            ? $_SERVER['PHP_SELF']
+            : str_replace($homeUrlPath['path'], '', $_SERVER['PHP_SELF']);
+
         return AppFactory::create([
             'isAuthenticated'   => !empty($_COOKIE[AccessToken::$cookieName]),
             'cookieDomain'      => $_SERVER['SERVER_NAME'] ?? '',
-            'serverPath'        => $_SERVER['PHP_SELF'],
+            'serverPath'        => $serverPath,
             'protectedPages'    => get_posts(
                 [
                     'post_type' => 'page',
@@ -34,7 +39,11 @@ class WpAppFactory implements IApplicationFactory
             'redirectCallback'      => new RedirectCallback(),
             'getQueriedObjectId'    => new GetQueriedObjectId(),
             'tokenService'          => new TokenService(),
-            'loginUrlService'       => LoginUrlServiceFactory::create(Settings::apiUrl(), home_url(), home_url('/mina-sidor')),
+            'loginUrlService'       => LoginUrlServiceFactory::create(
+                Settings::apiUrl(),
+                home_url(),
+                home_url('/mina-sidor')
+            ),
         ]);
     }
 }
