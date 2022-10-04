@@ -2,6 +2,8 @@
 
 namespace ModMyPages\Modules\MyAccount;
 
+use ModMyPages\Token\AccessToken;
+
 class MyAccount extends \Modularity\Module
 {
 
@@ -21,7 +23,14 @@ class MyAccount extends \Modularity\Module
      */
     public function data(): array
     {
-        return [];
+        $decoded = AccessToken::decode($_COOKIE[AccessToken::$cookieName] ?? '');
+
+        $data['session'] = [
+            'name' => $decoded['payload']['name'],
+            'ssn' => $decoded['payload']['id'],
+        ];
+
+        return $data;
     }
 
     /**
