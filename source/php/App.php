@@ -18,10 +18,14 @@ class App extends Application
         add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
         add_action('acf/init', array($this, 'optionsPage'), 5);
         add_action('init', array($this, 'registerMenus'), 5, 2);
-        add_filter('Municipio/viewData', (function (bool $isAuthenticated) {
+
+        (function (bool $isAuthenticated) {
             $controller = $isAuthenticated ? 'dropDownMenuController' : 'loginButtonController';
-            return array($this, $controller);
-        })($this->isAuthenticated), 1, 1);
+            add_filter('Municipio/viewData', array($this, $controller));
+        })($this->isAuthenticated);
+
+        add_action('plugins_loaded', array($this, 'registerModules'));
+
 
         return $this;
     }
@@ -122,5 +126,29 @@ class App extends Application
         ];
 
         return $data;
+    }
+
+    public function registerModules()
+    {
+        foreach (['mod-my-account' => 'MyAccount'] as $slug => $name) {
+            if (function_exists('modularity_register_module')) {
+                modularity_register_module(
+                    MOD_MY_PAGES_MODULE_PATH . "/" . $name,
+                    $name
+                );
+            }
+
+            add_filter(
+                '/Modularity/externalViewPath',
+                fn (array $paths) => array_merge(
+                    $paths,
+                    [
+                        $slug => MOD_MY_PAGES_MODULE_PATH . "/" . $name . "/views"
+                    ]
+                ),
+                1,
+                3
+            );
+        }
     }
 }
