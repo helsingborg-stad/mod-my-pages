@@ -19,7 +19,7 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "firebase/php-jwt": "^6.3"
+        "firebase/php-jwt": "^5.5.1"
     },
     "require-dev": {
         "brain/monkey": "^2.6",
