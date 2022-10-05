@@ -1,19 +1,3 @@
-<div class="u-margin__bottom--4">
-    @notice([
-        'type' => 'info',
-        'message' => [
-            'text' =>
-                'Vi saknar dina kontaktuppgifter. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna eros.',
-            'size' => 'sm'
-        ],
-        'icon' => [
-            'name' => 'info',
-            'size' => 'md',
-            'color' => 'black'
-        ]
-    ])
-    @endnotice
-</div>
 <div style="max-width: var(--container-width-content,calc(var(--base, 8px)*76));">
     @card([
         'classList' => []
