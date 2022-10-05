@@ -71,7 +71,7 @@
                 </div>
                 <form class="u-display--none" name="submit-my-contact-details" enctype="multipart/form-data"
                     data-js-toggle-item="example" data-js-toggle-class="u-display--none">
-                    <div class="o-grid o-grid--form">
+                    <div class="o-grid o-grid--form  u-margin__top--1">
                         <div class="o-grid-12">
                             @field([
                                 'id' => 'email',
@@ -101,7 +101,7 @@
                             @endfield
                         </div>
 
-                        <div class="o-grid-12">
+                        <div class="o-grid-12 u-margin__top--2">
                             @field([
                                 'id' => 'phone',
                                 'type' => 'tel',
