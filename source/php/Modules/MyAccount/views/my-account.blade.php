@@ -19,112 +19,152 @@
         'classList' => []
     ])
         <div class="c-card__body ">
-            <form name="submit-my-contact-details" enctype="multipart/form-data">
-                <div class="o-grid o-grid--form">
-
-                    <div class="o-grid-12">
-                        @field([
-                            'id' => 'name',
-                            'type' => 'text',
-                            'label' => 'Namn',
-                            'placeholder' => 'name',
-                            'value' => $session['name'],
-                            'attributeList' => [
-                                'type' => 'text',
-                                'name' => 'Name',
-                                'readonly' => 1
-                            ]
-                        ])
-                        @endfield
-                    </div>
-
-                    <div class="o-grid-12">
-                        @field([
-                            'id' => 'ssn',
-                            'type' => 'text',
-                            'label' => 'Personnummer',
-                            'placeholder' => 'ssn',
-                            'value' => $session['ssn'],
-                            'icon' => 'user',
-                            'attributeList' => [
-                                'type' => 'text',
-                                'name' => 'ssn',
-                                'readonly' => 1
-                            ]
-                        ])
-                        @endfield
-                    </div>
-
-                    <div class="o-grid-12 u-margin__top--2">
+            <div class="o-grid o-grid--form">
+                <div class="o-grid-12">
+                    @typography([
+                        'element' => 'h4'
+                    ])
+                        {{ $session['name'] ?? 'Jan Ove Waldner' }}
+                    @endtypography
+                    @typography([
+                        'element' => 'span'
+                    ])
+                        {{ $session['ssn'] ?? '1912121212-XXXX' }}
+                    @endtypography
+                    <div data-js-toggle-item="example" data-js-toggle-class="u-display--none">
                         @typography([
-                            'element' => 'h3'
+                            'element' => 'h4',
+                            'classList' => ['u-margin__top--2']
                         ])
-                            Kontaktuppgifter
+                            E-post
                         @endtypography
+                        @typography([
+                            'element' => 'span'
+                        ])
+                            exempel@placeholder.com
+                        @endtypography
+                        @typography([
+                            'element' => 'h4',
+                            'classList' => ['u-margin__top--2']
+                        ])
+                            Telefon
+                        @endtypography
+                        @typography([
+                            'element' => 'span'
+                        ])
+                            {{ '0700011000' }}
+                        @endtypography
+                        <div class="u-margin__top--2">
+                            @button([
+                                'text' => __('Ändra uppgifter', 'event-integration'),
+                                'color' => 'primary',
+                                'style' => 'filled',
+                                'type' => 'submit',
+                                'classList' => [],
+                                'attributeList' => [
+                                    'data-js-toggle-trigger' => 'example',
+                                ],
+                            ])
+                            @endbutton
+                        </div>
                     </div>
-                    <div class="o-grid-12">
-                        @field([
-                            'id' => 'email',
-                            'type' => 'email',
-                            'label' => 'E-post',
-                            'placeholder' => 'exempel@placeholder.com',
-                            'value' => '',
-                            'attributeList' => [
+                </div>
+                <form class="u-display--none" name="submit-my-contact-details" enctype="multipart/form-data"
+                    data-js-toggle-item="example" data-js-toggle-class="u-display--none">
+                    <div class="o-grid o-grid--form">
+                        <div class="o-grid-12">
+                            @field([
+                                'id' => 'email',
                                 'type' => 'email',
-                                'name' => 'email'
-                            ]
-                        ])
-                        @endfield
-                    </div>
+                                'label' => 'E-post',
+                                'placeholder' => 'exempel@epost.se',
+                                'value' => '',
+                                'attributeList' => [
+                                    'type' => 'email',
+                                    'name' => 'email'
+                                ]
+                            ])
+                            @endfield
+                        </div>
+                        <div class="o-grid-12">
+                            @field([
+                                'id' => 'email-confirmation',
+                                'type' => 'email',
+                                'label' => 'Upprepa E-post',
+                                'placeholder' => 'exempel@epost.se',
+                                'value' => '',
+                                'attributeList' => [
+                                    'type' => 'email',
+                                    'name' => 'email'
+                                ]
+                            ])
+                            @endfield
+                        </div>
 
-                    <div class="o-grid-12">
-                        @field([
-                            'id' => 'ssn',
-                            'type' => 'tel',
-                            'label' => 'Telefon',
-                            'placeholder' => '0700011000',
-                            'value' => '123',
-                            'classList' => ['is-invalid'],
-                            'helperText' => 'Felaktigt telefonnummer',
-                            'attributeList' => [
+                        <div class="o-grid-12">
+                            @field([
+                                'id' => 'phone',
                                 'type' => 'tel',
-                                'name' => 'phone',
-                                'data-invalid-message' => 'You need to add a valid E-mail!'
-                            ]
-                        ])
-                        @endfield
+                                'label' => 'Telefon',
+                                'placeholder' => '0732000000',
+                                'value' => '',
+                                'attributeList' => [
+                                    'type' => 'email',
+                                    'name' => 'email'
+                                ]
+                            ])
+                            @endfield
+                        </div>
+
+                        <div class="o-grid-12">
+                            @field([
+                                'id' => 'phone-confirmation',
+                                'type' => 'tel',
+                                'label' => 'Upprepa telefon',
+                                'placeholder' => '0732000000',
+                                'value' => '',
+                                'attributeList' => [
+                                    'type' => 'email',
+                                    'name' => 'email'
+                                ]
+                            ])
+                            @endfield
+                        </div>
+
+                        <div class="o-grid-12 u-margin__top--2">
+                            <div class="o-grid o-grid--form">
+                                <div class="o-grid-auto">
+                                    @button([
+                                        'text' => __('Spara uppgifter', 'event-integration'),
+                                        'color' => 'primary',
+                                        'style' => 'filled',
+                                        'type' => 'button',
+                                        'classList' => [],
+                                        'attributeList' => [
+                                            'data-js-toggle-trigger' => 'example',
+                                        ],
+                                    ])
+                                    @endbutton
+                                </div>
+                                <div class="o-grid-auto">
+                                    @button([
+                                        'text' => __('Avbryt', 'event-integration'),
+                                        'color' => 'primary',
+                                        'style' => 'basic',
+                                        'type' => 'button',
+                                        'attributeList' => [
+                                            'data-js-toggle-trigger' => 'example',
+                                        ],
+                                        'classList' => [],
+                                    ])
+                                    @endbutton
+
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-
-
-                    <div class="o-grid-12 u-margin__top--2">
-                        @button([
-                            'text' => __('Spara uppgifter', 'event-integration'),
-                            'color' => 'primary',
-                            'style' => 'filled',
-                            'type' => 'submit',
-                            'classList' => [],
-                        ])
-                        @endbutton
-                    </div>
-
-
-                    <div class="o-grid-12 u-margin__top--2">
-                        @notice([
-                            'type' => 'success',
-                            'message' => [
-                                'text' => 'Uppgifterna är uppdaterade.',
-                                'size' => 'sm'
-                            ],
-                            'icon' => [
-                                'name' => 'done',
-                                'size' => 'md',
-                                'color' => 'black'
-                            ]
-                        ])
-                        @endnotice
-                    </div>
-
-            </form>
-        </div>
-    @endcard
-</div>
+                </form>
+            </div>
+        @endcard
+    </div>
