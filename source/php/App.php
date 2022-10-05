@@ -2,6 +2,7 @@
 
 namespace ModMyPages;
 
+use ModMyPages\Helper\CacheBust;
 use ModMyPages\Redirects\Handlers\AuthenticateUser;
 use ModMyPages\Redirects\Handlers\ProtectedPage;
 use ModMyPages\Redirects\Handlers\SignoutUser;
@@ -25,7 +26,7 @@ class App extends Application
         })($this->isAuthenticated);
 
         add_action('plugins_loaded', array($this, 'registerModules'));
-
+        add_action('wp_enqueue_scripts', array($this, 'script'));
 
         return $this;
     }
@@ -150,5 +151,15 @@ class App extends Application
                 3
             );
         }
+    }
+
+    public function script()
+    {
+        wp_enqueue_script(
+            'modularity-mypages',
+            MOD_MY_PAGES_URL . '/dist/' . CacheBust::name('js/mod-my-pages.js'),
+            null,
+            '1.0.0'
+        );
     }
 }
