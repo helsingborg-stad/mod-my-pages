@@ -64,6 +64,7 @@
                                 'attributeList' => [
                                     'data-js-toggle-trigger' => 'example',
                                 ],
+                                'classList' => ['u-width--100@xs', 'u-display--block'],
                             ])
                             @endbutton
                         </div>
@@ -71,7 +72,7 @@
                 </div>
                 <form class="u-display--none" name="submit-my-contact-details" enctype="multipart/form-data"
                     data-js-toggle-item="example" data-js-toggle-class="u-display--none">
-                    <div class="o-grid o-grid--form  u-margin__top--1">
+                    <div class="o-grid o-grid--form">
                         <div class="o-grid-12">
                             @field([
                                 'id' => 'email',
@@ -86,7 +87,7 @@
                             ])
                             @endfield
                         </div>
-                        <div class="o-grid-12">
+                        <div class="o-grid-12 u-margin__top--1">
                             @field([
                                 'id' => 'email-confirmation',
                                 'type' => 'email',
@@ -116,7 +117,7 @@
                             @endfield
                         </div>
 
-                        <div class="o-grid-12">
+                        <div class="o-grid-12 u-margin__top--1">
                             @field([
                                 'id' => 'phone-confirmation',
                                 'type' => 'tel',
@@ -133,13 +134,12 @@
 
                         <div class="o-grid-12 u-margin__top--2">
                             <div class="o-grid o-grid--form">
-                                <div class="o-grid-auto">
+                                <div class="o-grid-fit">
                                     @button([
                                         'text' => __('Spara uppgifter', 'event-integration'),
                                         'color' => 'primary',
                                         'style' => 'filled',
                                         'type' => 'button',
-                                        'classList' => [],
                                         'attributeList' => [
                                             'data-js-toggle-trigger' => 'example',
                                         ],
@@ -155,7 +155,12 @@
                                         'attributeList' => [
                                             'data-js-toggle-trigger' => 'example',
                                         ],
-                                        'classList' => [],
+                                        'classList' => [
+                                            'u-margin__right--auto',
+                                            'u-padding__left--3',
+                                            'u-padding__right--3',
+                                            'u-display--block',
+                                        ],
                                     ])
                                     @endbutton
 
