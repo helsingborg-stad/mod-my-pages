@@ -10,9 +10,9 @@ class AccessToken
     {
         $tokenPartials = explode('.', $value);
         return [
-            'header' => json_decode(base64_decode($tokenPartials[0]), true),
-            'payload' => json_decode(base64_decode($tokenPartials[1]), true),
-            'signature' => $tokenPartials[2],
+            'header' => json_decode(base64_decode($tokenPartials[0] ?? ''), true),
+            'payload' => json_decode(base64_decode($tokenPartials[1] ?? ''), true),
+            'signature' => $tokenPartials[2] ?? '',
         ];
     }
 

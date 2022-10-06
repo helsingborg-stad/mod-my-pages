@@ -26,8 +26,8 @@ class MyAccount extends \Modularity\Module
         $decoded = AccessToken::decode($_COOKIE[AccessToken::$cookieName] ?? '');
 
         $data['session'] = [
-            'name' => $decoded['payload']['name'],
-            'ssn' => $decoded['payload']['id'],
+            'name' => $decoded['payload']['name'] ?? '',
+            'ssn' => $decoded['payload']['id'] ?? '',
         ];
 
         return $data;
