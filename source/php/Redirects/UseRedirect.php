@@ -13,7 +13,7 @@ class UseRedirect
         callable $redirectCallback
     ) {
         $this->routes = $routesWithRedirectHandler;
-        $this->currentRoute = $serverPath;
+        $this->currentRoute = rtrim($serverPath, '/');
         $this->enable($redirectCallback);
     }
 
