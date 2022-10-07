@@ -20,6 +20,7 @@ class AppFactory implements IApplicationFactory
                 $args['getQueriedObjectId'],
                 $args['loginUrlService'],
                 $args['tokenService'],
+                $args['pageCacheBust']
             ),
         );
     }

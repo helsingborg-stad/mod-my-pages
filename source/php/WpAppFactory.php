@@ -4,6 +4,7 @@ namespace ModMyPages;
 
 use ModMyPages\Admin\Settings;
 use ModMyPages\AppFactory;
+use ModMyPages\Helper\PageCache;
 use ModMyPages\Services\CookieRepository;
 use ModMyPages\Services\GetQueriedObjectId;
 use ModMyPages\Services\LoginUrlServiceFactory;
@@ -45,6 +46,9 @@ class WpAppFactory implements IApplicationFactory
                 home_url('/mina-sidor'),
                 defined('WP_DEBUG') && WP_DEBUG ? ['debug' => 1] : []
             ),
+            'pageCacheBust'         => function () {
+                PageCache::bypass();
+            }
         ]);
     }
 }

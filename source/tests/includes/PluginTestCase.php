@@ -79,6 +79,7 @@ class PluginTestCase extends TestCase
             'getQueriedObjectId'    => $args['getQueriedObjectId'] ?? new MockGetQueriedObjectId(),
             'tokenService'          => $args['tokenService'] ?? new MockTokenService($this->createFakeToken()),
             'loginUrlService'       => $args['loginUrlService'] ?? LoginUrlServiceFactory::create($this->apiUrl(), $this->homeUrl(), $this->homeUrl() . '/my-pages'),
+            'pageCacheBust'         => fn () => null
         ]);
     }
 

@@ -14,6 +14,10 @@ class App extends Application
 {
     public function run(): Application
     {
+        if ($this->isAuthenticated) {
+            ($this->services->pageCacheBust)();
+        }
+
         add_action('template_redirect', array($this, 'redirect'), 5);
         add_filter('body_class', array($this, 'bodyClassNames'), 5);
         add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
