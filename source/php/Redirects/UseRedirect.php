@@ -26,9 +26,9 @@ class UseRedirect
 
     public function normalizePath($path)
     {
-        $removeLeftSlash = fn ($s) => ltrim($path, '/');
-        $removeRightSlash = fn ($s) => rtrim($path, '/');
-        $removeQueryArgs = fn ($s) => strtok($path, '?');
+        $removeLeftSlash = fn ($s) => ltrim($s, '/');
+        $removeRightSlash = fn ($s) => rtrim($s, '/');
+        $removeQueryArgs = fn ($s) => strtok($s, '?');
 
         return $removeLeftSlash($removeRightSlash($removeQueryArgs($path)));
     }
