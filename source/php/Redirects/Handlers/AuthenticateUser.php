@@ -17,20 +17,23 @@ class AuthenticateUser implements IRedirectHandler
 
     private ITokenService $tokenService;
 
+    private string $cookieDomain;
+
     public function __construct(array $args)
     {
         $this->successUrl = $args['successUrl'];
         $this->errorUrl = $args['errorUrl'];
         $this->cookies = $args['cookies'];
         $this->tokenService = $args['tokenService'];
+        $this->cookieDomain = $args['cookieDomain'] ?? '';
     }
 
     public function redirectUrl(array $args): string
     {
         $jwt = ($this->tokenService)($args['ts_session_id']);
 
-        if (!empty($jwt) && true) {
-            $this->cookies->set(AccessToken::$cookieName, $jwt);
+        if (!empty($jwt)) {
+            $this->cookies->set(AccessToken::$cookieName, $jwt, 1200, $this->cookieDomain);
             return $args['callbackUrl'] ?? $this->successUrl;
         }
 
