@@ -14,6 +14,7 @@ class UseRedirect
     ) {
         $this->routes = $routesWithRedirectHandler;
         $this->currentRoute = rtrim($serverPath, '/');
+        var_dump($this->currentRoute);
         $this->enable($redirectCallback);
     }
 
