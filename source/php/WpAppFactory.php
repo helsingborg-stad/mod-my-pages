@@ -19,8 +19,8 @@ class WpAppFactory implements IApplicationFactory
     {
         $homeUrlPath = parse_url(home_url());
         $serverPath = empty($homeUrlPath['path'])
-            ? $_SERVER['PHP_SELF']
-            : str_replace($homeUrlPath['path'], '', $_SERVER['PHP_SELF']);
+            ? $_SERVER['REQUEST_URI']
+            : str_replace($homeUrlPath['path'], '', $_SERVER['REQUEST_URI']);
 
         return AppFactory::create([
             'isAuthenticated'   => !empty($_COOKIE[AccessToken::$cookieName]),
