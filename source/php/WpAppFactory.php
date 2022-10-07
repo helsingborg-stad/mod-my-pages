@@ -22,11 +22,6 @@ class WpAppFactory implements IApplicationFactory
             ? $_SERVER['REQUEST_URI']
             : str_replace($homeUrlPath['path'], '', $_SERVER['REQUEST_URI']);
 
-
-        if (defined('WP_DEBUG') && WP_DEBUG) {
-            var_dump($_SERVER);
-        }
-
         return AppFactory::create([
             'isAuthenticated'   => !empty($_COOKIE[AccessToken::$cookieName]),
             'cookieDomain'      => $_SERVER['SERVER_NAME'] ?? '',
