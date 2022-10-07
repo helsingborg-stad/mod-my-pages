@@ -12,13 +12,14 @@ class LoginUrlService implements ILoginUrlService
     public function __construct(
         string $apiUrl,
         string $homeUrl,
-        string $defaultCallbackUrl
+        string $defaultCallbackUrl,
+        array $redirectUrlParams = []
     ) {
         $buildUrlWithQueryArgs = fn ($url, $params) => $url . '?'  . http_build_query($params);
 
         $buildRedirectUrl = fn (string $callbackUrl) => $buildUrlWithQueryArgs(
             $homeUrl . '/auth',
-            ['callbackUrl' => $callbackUrl]
+            array_merge(['callbackUrl' => $callbackUrl], $redirectUrlParams)
         );
 
         $buildLoginUrl = fn (string $callbackUrl = '') => $buildUrlWithQueryArgs(

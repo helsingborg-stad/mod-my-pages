@@ -42,7 +42,8 @@ class WpAppFactory implements IApplicationFactory
             'loginUrlService'       => LoginUrlServiceFactory::create(
                 Settings::apiUrl(),
                 home_url(),
-                home_url('/mina-sidor')
+                home_url('/mina-sidor'),
+                defined('WP_DEBUG') && WP_DEBUG ? ['debug' => 1] : []
             ),
         ]);
     }
