@@ -71,22 +71,8 @@
                             ])
                             @endfield
                         </div>
-                        <div class="o-grid-12 u-margin__top--1">
-                            @field([
-                                'id' => 'email-confirmation',
-                                'type' => 'email',
-                                'label' => 'Upprepa E-post',
-                                'placeholder' => 'exempel@epost.se',
-                                'value' => '',
-                                'attributeList' => [
-                                    'type' => 'email',
-                                    'name' => 'email'
-                                ]
-                            ])
-                            @endfield
-                        </div>
 
-                        <div class="o-grid-12 u-margin__top--2">
+                        <div class="o-grid-12">
                             @field([
                                 'id' => 'phone',
                                 'type' => 'tel',
@@ -101,22 +87,7 @@
                             @endfield
                         </div>
 
-                        <div class="o-grid-12 u-margin__top--1">
-                            @field([
-                                'id' => 'phone-confirmation',
-                                'type' => 'tel',
-                                'label' => 'Upprepa telefon',
-                                'placeholder' => '0732000000',
-                                'value' => '',
-                                'attributeList' => [
-                                    'type' => 'email',
-                                    'name' => 'email'
-                                ]
-                            ])
-                            @endfield
-                        </div>
-
-                        <div class="o-grid-12 u-margin__top--2">
+                        <div class="o-grid-12">
                             <div class="o-grid o-grid--form">
                                 <div class="o-grid-fit">
                                     @button([
