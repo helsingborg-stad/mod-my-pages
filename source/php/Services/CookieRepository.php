@@ -2,6 +2,7 @@
 
 namespace ModMyPages\Services;
 
+use ModMyPages\Helper\PageCache;
 use ModMyPages\Services\Types\ICookieRepository;
 
 class CookieRepository implements ICookieRepository
@@ -18,6 +19,7 @@ class CookieRepository implements ICookieRepository
         string $cookieDomain = '',
         string $cookiePath = ''
     ) {
+        PageCache::bypass();
 
         if (!headers_sent()) {
             if (
