@@ -12,8 +12,6 @@ use ModMyPages\Types\Application;
 
 class App extends Application
 {
-    const DIST_PATH = MOD_MY_PAGES_URL . '/dist/';
-
     public function run(): Application
     {
         add_action('template_redirect', array($this, 'redirect'), 5);
@@ -167,13 +165,13 @@ class App extends Application
     {
         wp_enqueue_script(
             'gdi-host',
-            self::DIST_PATH . CacheBust::name('js/gdi-host.js'),
+            MOD_MY_PAGES_DIST_URL . CacheBust::name('js/gdi-host.js'),
             null
         );
 
         wp_enqueue_script(
             'modularity-mypages',
-            self::DIST_PATH . CacheBust::name('js/mod-my-pages.js'),
+            MOD_MY_PAGES_DIST_URL . CacheBust::name('js/mod-my-pages.js'),
             null
         );
 
@@ -184,7 +182,7 @@ class App extends Application
     {
         wp_enqueue_style(
             'modularity-mypages',
-            self::DIST_PATH . CacheBust::name('css/mod-my-pages.css'),
+            MOD_MY_PAGES_DIST_URL . CacheBust::name('css/mod-my-pages.css'),
             null
         );
     }
