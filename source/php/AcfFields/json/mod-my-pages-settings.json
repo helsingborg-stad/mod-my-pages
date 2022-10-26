@@ -4,11 +4,11 @@
     "fields": [
         {
             "key": "field_63282ab922787",
-            "label": "API URL",
+            "label": "Auth API URL",
             "name": "mod_my_pages_api_url",
             "type": "url",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -19,12 +19,31 @@
             "placeholder": ""
         },
         {
+            "key": "field_63402f643ecf5",
+            "label": "Auth API Secret",
+            "name": "mod_my_pages_api_auth_secret",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_6329bafc7006a",
             "label": "Session Length",
             "name": "mod_my_pages_session_length_in_seconds",
             "type": "number",
             "instructions": "eg. 600 = 10 minutes",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -32,12 +51,31 @@
                 "id": ""
             },
             "default_value": 600,
-            "placeholder": "",
-            "prepend": "",
-            "append": "Seconds",
             "min": 1,
             "max": "",
-            "step": ""
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": "Seconds"
+        },
+        {
+            "key": "field_6340479ba2851",
+            "label": "My Pages Home URL",
+            "name": "my_pages_home_url",
+            "type": "page_link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": "",
+            "taxonomy": "",
+            "allow_archives": 1,
+            "multiple": 0,
+            "allow_null": 0
         }
     ],
     "location": [
