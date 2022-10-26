@@ -48,7 +48,8 @@ class WpAppFactory implements IApplicationFactory
             ),
             'pageCacheBust'         => function () {
                 PageCache::bypass();
-            }
+            },
+            'apiAuthSecret'         => get_field('mod_my_pages_api_auth_secret', 'options')
         ]);
     }
 }

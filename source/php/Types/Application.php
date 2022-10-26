@@ -10,6 +10,8 @@ abstract class Application implements IApplicationRecipe
 
     public string $serverPath;
 
+    public string $apiAuthSecret;
+
     public array $protectedPages;
 
     public ApplicationServices $services;
@@ -18,11 +20,13 @@ abstract class Application implements IApplicationRecipe
         bool $isAuthenticated,
         string $serverPath,
         array $protectedPages,
+        string $apiAuthSecret,
         ApplicationServices $services
     ) {
         $this->isAuthenticated = $isAuthenticated;
         $this->serverPath = $serverPath;
         $this->protectedPages = $protectedPages;
         $this->services = $services;
+        $this->apiAuthSecret = $apiAuthSecret;
     }
 }

@@ -14,6 +14,7 @@ class AppFactory implements IApplicationFactory
             $args['isAuthenticated'],
             $args['serverPath'],
             $args['protectedPages'],
+            $args['apiAuthSecret'],
             new ApplicationServices(
                 $args['cookieRepository'],
                 $args['redirectCallback'],

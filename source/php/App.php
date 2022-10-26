@@ -56,7 +56,8 @@ class App extends Application
                     'errorUrl'      => home_url('/404'),
                     'tokenService'  => $this->services->tokenService,
                     'cookies'       => $this->services->cookieRepository,
-                    'cookieDomain'  => home_url()
+                    'cookieDomain'  => home_url(),
+                    'jwtSecretKey'  => $this->apiAuthSecret,
                 ]),
             ],
             $this->serverPath,

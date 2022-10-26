@@ -63,7 +63,7 @@ class PluginTestCase extends TestCase
                 'name' => 'Example Person',
                 'exp' => $isExpired ? time() - 600 : time() + 1200
             ],
-            'key',
+            'apan_japan',
             'HS256'
         );
     }
@@ -78,8 +78,13 @@ class PluginTestCase extends TestCase
             'redirectCallback'      => $args['redirectCallback'] ?? new NullRedirectCallback(),
             'getQueriedObjectId'    => $args['getQueriedObjectId'] ?? new MockGetQueriedObjectId(),
             'tokenService'          => $args['tokenService'] ?? new MockTokenService($this->createFakeToken()),
-            'loginUrlService'       => $args['loginUrlService'] ?? LoginUrlServiceFactory::create($this->apiUrl(), $this->homeUrl(), $this->homeUrl() . '/my-pages'),
-            'pageCacheBust'         => fn () => null
+            'loginUrlService'       => $args['loginUrlService'] ?? LoginUrlServiceFactory::create(
+                $this->apiUrl(),
+                $this->homeUrl(),
+                $this->homeUrl() . '/my-pages'
+            ),
+            'pageCacheBust'         => fn () => null,
+            'apiAuthSecret'         => $args['apiAuthSecret'] ?? 'apan_japan',
         ]);
     }
 
