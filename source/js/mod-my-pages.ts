@@ -1,1 +1,1 @@
-import "./GdiHost";
+import { setBodyClass } from "./setBodyClass"
