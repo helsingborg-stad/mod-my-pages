@@ -23,14 +23,11 @@ class TokenService implements ITokenService
         $response = json_decode($request, true);
 
         if (defined('WP_DEBUG') && WP_DEBUG) {
-            error_log('TOKEN SERVICE ---------');
-            error_log(PHP_EOL);
-            error_log('RESPONSE ---------');
-            error_log(print_r($response, true));
+            error_log('TOKEN SERVICE ---------' . PHP_EOL);
             error_log('REQUEST ---------');
             error_log(print_r($request, true));
+            error_log('END SERVICE ---------' . PHP_EOL);
             error_log(PHP_EOL);
-            error_log('END SERVICE ---------');
         }
 
         return $response['accessToken'] ?? '';
