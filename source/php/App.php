@@ -166,5 +166,7 @@ class App extends Application
             null,
             '1.0.0'
         );
+
+        wp_localize_script('modularity-mypages', 'modMyPages', ['restUrl' => get_rest_url()]);
     }
 }
