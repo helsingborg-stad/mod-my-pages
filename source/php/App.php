@@ -32,6 +32,12 @@ class App extends Application
         add_action('plugins_loaded', array($this, 'registerModules'));
         add_action('wp_enqueue_scripts', array($this, 'script'));
         add_action('wp_enqueue_styles', array($this, 'style'));
+        add_action('rest_api_init', function () {
+            register_rest_route('mod-my-pages/v1', '/access-token', array(
+                'methods' => 'GET',
+                'callback' => fn () => $_COOKIE[AccessToken::$cookieName] ?? '',
+            ));
+        });
 
         return $this;
     }
