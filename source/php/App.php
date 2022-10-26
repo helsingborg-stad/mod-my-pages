@@ -31,6 +31,7 @@ class App extends Application
 
         add_action('plugins_loaded', array($this, 'registerModules'));
         add_action('wp_enqueue_scripts', array($this, 'script'));
+        add_action('wp_enqueue_styles', array($this, 'style'));
 
         return $this;
     }
@@ -168,5 +169,15 @@ class App extends Application
         );
 
         wp_localize_script('modularity-mypages', 'modMyPages', ['restUrl' => get_rest_url()]);
+    }
+
+    public function style()
+    {
+        wp_enqueue_style(
+            'modularity-mypages',
+            MOD_MY_PAGES_URL . '/dist/' . CacheBust::name('css/mod-my-pages.css'),
+            null,
+            '1.0.0'
+        );
     }
 }
