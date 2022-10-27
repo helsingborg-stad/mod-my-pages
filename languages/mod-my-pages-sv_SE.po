@@ -1,24 +1,86 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Mod My Pages\n"
-"POT-Creation-Date: 2022-03-28 16:14+0200\n"
-"PO-Revision-Date: 2022-03-28 16:14+0200\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2022-10-27 12:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: sv_SE\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-WPHeader: boilerplate.php\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Generator: Poedit 3.2\n"
+"X-Poedit-Basepath: .\n"
+
+#: source/php/AcfFields/php/mod-my-pages-protected-page.php:6
+msgid "My Pages Protected Page"
+msgstr "Mina sidor: Skyddad sida"
+
+#: source/php/AcfFields/php/mod-my-pages-protected-page.php:10
+msgid "Protected Page"
+msgstr "Skyddad sida"
+
+#: source/php/AcfFields/php/mod-my-pages-protected-page.php:24
+msgid "Enabled"
+msgstr "Aktiv"
+
+#: source/php/AcfFields/php/mod-my-pages-protected-page.php:25
+msgid "Disabled"
+msgstr "Inaktiv"
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:6
+msgid "My Pages Settings"
+msgstr "Inställningar för Mina sidor"
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:10
+msgid "Auth API URL"
+msgstr ""
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:26
+msgid "Auth API Secret"
+msgstr ""
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:45
+msgid "Session Length"
+msgstr "Sessionslängd"
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:48
+msgid "eg. 600 = 10 minutes"
+msgstr "t.ex. 600 = 10 minuter"
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:62
+msgid "Seconds"
+msgstr "Sekunder"
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:66
+msgid "My Pages Home URL"
+msgstr "Hemadress för Mina sidor"
+
+#: source/php/Admin/OptionsPage.php:11
+msgid "My Pages settings"
+msgstr "Inställningar för Mina sidor"
+
+#: source/php/Admin/OptionsPage.php:12 source/php/App.php:154
+msgid "My Pages"
+msgstr "Mina Sidor"
+
+#: source/php/App.php:105
+msgid "My Pages Menu"
+msgstr "Mina sidor meny"
+
+#: source/php/App.php:122 source/php/App.php:124
+msgid "Login"
+msgstr "Logga in"
+
+#: source/php/Modules/MyAccount/MyAccount.php:15
+#: source/php/Modules/MyAccount/MyAccount.php:16
+msgid "My Pages: My Account"
+msgstr "Mina sidor: Mitt konto"
+
+#: source/php/Modules/MyAccount/MyAccount.php:17
+msgid "Displays account details for authenticated user"
+msgstr "Visar kontodetaljer för autentiserade användare"
 
 #. Plugin Name of the plugin/theme
 msgid "Mod My Pages"
