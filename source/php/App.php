@@ -15,7 +15,6 @@ class App extends Application
     public function run(): Application
     {
         add_action('template_redirect', array($this, 'redirect'), 5);
-        add_filter('body_class', array($this, 'bodyClassNames'), 5);
         add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
         add_action('acf/init', array($this, 'optionsPage'), 5);
         add_action('init', array($this, 'registerMenus'), 5, 2);
@@ -75,14 +74,6 @@ class App extends Application
             ],
             $this->serverPath,
             $this->services->redirectCallback
-        );
-    }
-
-    public function bodyClassNames(array $classNames): array
-    {
-        return array_merge(
-            $classNames,
-            $this->isAuthenticated ? ['is-authenticated'] : []
         );
     }
 
