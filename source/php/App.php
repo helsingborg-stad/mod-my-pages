@@ -22,7 +22,7 @@ class App extends Application
         add_filter('Municipio/viewData', array($this, 'dropDownMenuController'));
         add_action('plugins_loaded', array($this, 'registerModules'));
         add_action('wp_enqueue_scripts', array($this, 'script'));
-        add_action('wp_enqueue_styles', array($this, 'style'));
+        add_action('wp_enqueue_scripts', array($this, 'style'));
         add_action('rest_api_init', function () {
             register_rest_route('mod-my-pages/v1', '/access-token', array(
                 'methods' => 'GET',
@@ -192,7 +192,7 @@ class App extends Application
         );
 
         wp_enqueue_script(
-            'modularity-mypages',
+            'mod-my-pages-js',
             MOD_MY_PAGES_DIST_URL . CacheBust::name('js/mod-my-pages.js'),
             null
         );
@@ -203,7 +203,7 @@ class App extends Application
     public function style()
     {
         wp_enqueue_style(
-            'modularity-mypages',
+            'mod-my-pages-styles',
             MOD_MY_PAGES_DIST_URL . CacheBust::name('css/mod-my-pages.css'),
             null
         );
