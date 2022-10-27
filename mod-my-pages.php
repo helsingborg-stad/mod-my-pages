@@ -26,7 +26,7 @@ define('MOD_MY_PAGES_TEXT_DOMAIN', 'mod-my-pages');
 
 define('MOD_MY_PAGES_MODULE_PATH', MOD_MY_PAGES_PATH . 'source/php/Modules/');
 
-load_plugin_textdomain(MOD_MY_PAGES_TEXT_DOMAIN, false, MOD_MY_PAGES_PATH . '/languages');
+load_plugin_textdomain(MOD_MY_PAGES_TEXT_DOMAIN, false, plugin_basename(dirname(__FILE__)) . '/languages');
 
 require_once MOD_MY_PAGES_PATH . 'Public.php';
 
