@@ -16,7 +16,5 @@ interface IApplicationRecipe
 
     public function registerMenus();
 
-    public function loginButtonController(array $data): array;
-
     public function dropDownMenuController(array $data): array;
 }

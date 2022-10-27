@@ -19,12 +19,7 @@ class App extends Application
         add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
         add_action('acf/init', array($this, 'optionsPage'), 5);
         add_action('init', array($this, 'registerMenus'), 5, 2);
-
-        (function (bool $isAuthenticated) {
-            $controller = $isAuthenticated ? 'dropDownMenuController' : 'loginButtonController';
-            add_filter('Municipio/viewData', array($this, $controller));
-        })($this->isAuthenticated);
-
+        add_filter('Municipio/viewData', array($this, 'dropDownMenuController'));
         add_action('plugins_loaded', array($this, 'registerModules'));
         add_action('wp_enqueue_scripts', array($this, 'script'));
         add_action('wp_enqueue_styles', array($this, 'style'));
@@ -34,6 +29,24 @@ class App extends Application
                 'callback' => fn () => ['token' => $_COOKIE[AccessToken::$cookieName] ?? ''],
             ));
         });
+        add_filter(
+            'ModMyPages/App/myPagesMenuItems',
+            fn ($items) => array_map(
+                function ($item) {
+                    $item->classes = array_merge(
+                        array_filter(
+                            $item->classes,
+                            fn ($c) => !empty($c)
+                        ),
+                        ['show-authenticated']
+                    );
+                    return $item;
+                },
+                $items
+            ),
+            10,
+            1
+        );
 
         return $this;
     }
@@ -102,20 +115,28 @@ class App extends Application
         ];
     }
 
-    public function loginButtonController(array $data): array
+    public function loginButton(): array
     {
-        $data['myPagesMenu'] = [
-            'login'     => [
-                'text'      => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
-                'url'       => ($this->services->loginUrlService)()
-            ],
+        return [
+            (object) [
+                'title'         => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
+                'url'           => ($this->services->loginUrlService)(),
+                'attr_title'    => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
+                'classes'       => ['hide-authenticated']
+            ]
         ];
-
-        return $data;
     }
 
     public function dropDownMenuController(array $data): array
     {
+        $items = array_merge(
+            $this->loginButton(),
+            apply_filters(
+                'ModMyPages/App/myPagesMenuItems',
+                wp_get_nav_menu_items(get_nav_menu_locations()['my-pages-menu'] ?? 0) ?? []
+            )
+        );
+
         $dropdownItems = array_map(
             fn ($p) => [
                 'text' => $p->title,
@@ -125,12 +146,12 @@ class App extends Application
                 ],
                 'classList' => $p->classes,
             ],
-            wp_get_nav_menu_items(get_nav_menu_locations()['my-pages-menu'] ?? 0) ?? []
+            $items
         );
 
         $data['myPagesMenu'] = [
             'dropdown'  => [
-                'text'      => $this->profile()['name'],
+                'text'      => __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN),
                 'items'     => $dropdownItems
             ],
         ];
