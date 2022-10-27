@@ -1,11 +1,3 @@
-body:not(.is-authenticated) {
-    .show-authenticated {
-        display: none;
-    }
-}
-
-body.is-authenticated {
-    .hide-authenticated {
-        display: none;
-    }
-}
+@import './settings/var_colors';
+@import './utils/authenticated';
+@import './components/my-pages-button';

@@ -5,10 +5,11 @@
 ])
     @button([
         'text' => $myPagesMenu['dropdown']['text'],
-        'icon' => 'keyboard_arrow_down',
+        'icon' => 'person',
         'size' => 'md',
         'style' => 'basic',
+        'reversePositions' => true,
+        'classList' => ['c-button--my-pages'],
     ])
     @endbutton
 @enddropdown
-

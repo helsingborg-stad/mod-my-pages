@@ -1,0 +1,43 @@
+.c-button.c-button--my-pages {
+    .c-button__label-icon,
+    .c-icon {
+        border-radius: 40px;
+    }
+
+    .c-button__label-icon:not(.c-button__label-icon--reverse) {
+        margin-left: 4px;
+    }
+
+    .c-button__label-icon.c-button__label-icon--reverse {
+        margin-right: 4px;
+    }
+
+    .c-button__label-icon,
+    .c-icon {
+        transition: background-color 120ms ease-in, border-color 120ms ease-in, color 120ms ease-in;
+    }
+
+    .c-button__label-icon {
+        background-color: $color-lightest;
+        border: solid 1px;
+        padding: 2px;
+        border-color: $color-lightest;
+    }
+    .c-icon {
+        background-color: $color-lightest;
+        padding: 3px;
+        color: $color-complementary;
+    }
+}
+
+body.is-authenticated .c-button.c-button--my-pages,
+.c-button.c-button--my-pages.is-active {
+    .c-button__label-icon {
+        background-color: $color-lightest;
+        border-color: $color-primary;
+    }
+    .c-icon {
+        background-color: $color-complementary-light;
+        color: $color-primary;
+    }
+}
