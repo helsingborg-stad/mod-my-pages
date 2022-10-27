@@ -8,8 +8,6 @@ interface IApplicationRecipe
 
     public function redirect();
 
-    public function bodyClassNames(array $classNames): array;
-
     public function setBladeTemplatePaths(array $paths): array;
 
     public function optionsPage();
