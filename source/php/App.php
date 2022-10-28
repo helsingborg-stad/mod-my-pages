@@ -24,7 +24,7 @@ class App extends Application
         add_action('wp_enqueue_scripts', array($this, 'style'));
         add_action('rest_api_init', function () {
             register_rest_route('mod-my-pages/v1', '/access-token', array(
-                'methods' => 'GET',
+                'methods' => 'POST',
                 'callback' => fn () => ['token' => $_COOKIE[AccessToken::$cookieName] ?? ''],
             ));
         });
