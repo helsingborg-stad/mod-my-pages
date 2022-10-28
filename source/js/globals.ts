@@ -1,10 +1,5 @@
-export interface ModMyPagesInterface {
-    restUrl: string
-}
-
-export interface GdiHostInterface {
-    getAccessToken: () => Promise<string>;
-}
+import { GdiHostInterface } from "./GdiHost"
+import { ModMyPagesInterface } from "./mod-my-pages"
 
 declare global {
     interface Window {
