@@ -115,10 +115,13 @@ class App extends Application
     {
         return [
             (object) [
-                'title'         => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
-                'url'           => ($this->services->loginUrlService)(),
-                'attr_title'    => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
-                'classes'       => ['hide-authenticated'],
+                'title'             => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
+                'url'               => ($this->services->loginUrlService)(),
+                'attr_title'        => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
+                'classes'           => ['hide-authenticated'],
+                'linkAttributeList' => [
+                    'data-no-instant' => ''
+                ]
             ]
         ];
     }
