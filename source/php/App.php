@@ -137,9 +137,7 @@ class App extends Application
             fn ($p) => [
                 'text' => $p->title,
                 'link' => $p->url,
-                'attributeList' => [
-                    'title' => $p->attr_title
-                ],
+                'attributeList' => [],
                 'linkAttributeList' => $p->linkAttributeList ?? [],
                 'classList' => $p->classes,
             ],
