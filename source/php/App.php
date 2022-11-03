@@ -39,6 +39,11 @@ class App extends Application
                         ),
                         ['show-authenticated']
                     );
+
+                    $item->linkAttributeList = array_merge($item->linkAttributeList ?? [], [
+                        'data-no-instant' => ''
+                    ]);
+
                     return $item;
                 },
                 $items
@@ -113,7 +118,7 @@ class App extends Application
                 'title'         => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
                 'url'           => ($this->services->loginUrlService)(),
                 'attr_title'    => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
-                'classes'       => ['hide-authenticated']
+                'classes'       => ['hide-authenticated'],
             ]
         ];
     }
@@ -135,6 +140,7 @@ class App extends Application
                 'attributeList' => [
                     'title' => $p->attr_title
                 ],
+                'linkAttributeList' => $p->linkAttributeList ?? [],
                 'classList' => $p->classes,
             ],
             $items
