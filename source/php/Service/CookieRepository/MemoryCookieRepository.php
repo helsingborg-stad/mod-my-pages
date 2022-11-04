@@ -1,9 +1,8 @@
 <?php
 
-namespace ModMyPages\Services\Mock;
+namespace ModMyPages\Service\CookieRepository;
 
-use ModMyPages\Services\CookieRepository;
-use ModMyPages\Services\Types\ICookieRepository;
+use ModMyPages\Service\CookieRepository\CookieRepository;
 
 class MemoryCookieRepository extends CookieRepository implements ICookieRepository
 {
@@ -14,8 +13,13 @@ class MemoryCookieRepository extends CookieRepository implements ICookieReposito
         return !empty(self::$cookies[$key]) ? self::$cookies[$key]['value'] : '';
     }
 
-    public function set(string $key, string $value, int $cookieLength = 1200, string $cookieDomain = '', string $cookiePath = '/')
-    {
+    public function set(
+        string $key,
+        string $value,
+        int $cookieLength = 1200,
+        string $cookieDomain = '',
+        string $cookiePath = '/'
+    ) {
         if (!empty($value)) {
             self::$cookies[$key] = [
                 'value' => $value,

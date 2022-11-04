@@ -1,8 +1,8 @@
 <?php
 
-namespace ModMyPages\Services;
+namespace ModMyPages\Service\CookieRepository;
 
-use ModMyPages\Services\Types\ICookieRepository;
+use ModMyPages\Service\CookieRepository\ICookieRepository;
 
 class CookieRepository implements ICookieRepository
 {

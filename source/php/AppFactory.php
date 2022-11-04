@@ -5,6 +5,7 @@ namespace ModMyPages;
 use ModMyPages\Admin\Settings;
 use ModMyPages\App;
 use ModMyPages\Redirect\UseRedirectFactory;
+use ModMyPages\Service\CookieRepository\CookieRepositoryFactory;
 use ModMyPages\Services\CookieRepository;
 use ModMyPages\Services\LoginUrlServiceFactory;
 use ModMyPages\Services\TokenService;
@@ -21,6 +22,7 @@ class AppFactory implements IApplicationFactory
             array_merge(
                 [
                     'useRedirect' => UseRedirectFactory::createFromEnv(),
+                    'cookieRepository'      => CookieRepositoryFactory::createFromEnv(),
                     'protectedPages'    => fn () => get_posts(
                         [
                             'post_type' => 'page',
@@ -30,7 +32,6 @@ class AppFactory implements IApplicationFactory
                             'fields' => 'ids'
                         ]
                     ) ?? [],
-                    'cookieRepository'      => new CookieRepository(),
                     'tokenService'          => new TokenService(),
                     'loginUrlService'       => LoginUrlServiceFactory::create(
                         Settings::apiUrl(),
