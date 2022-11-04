@@ -2,21 +2,17 @@
 
 namespace ModMyPages\Types;
 
+use Closure;
 use ModMyPages\Redirect\IUseRedirect;
 use ModMyPages\Services\Types\ICookieRepository;
 use ModMyPages\Services\Types\ILoginUrlService;
 use ModMyPages\Services\Types\ITokenService;
-use ModMyPages\Types\ApplicationServices;
 
 abstract class Application implements IApplicationRecipe
 {
-    public bool $isAuthenticated;
+    public Closure $apiAuthSecret;
 
-    public string $serverPath;
-
-    public string $apiAuthSecret;
-
-    public array $protectedPages;
+    public Closure $protectedPages;
 
     public ICookieRepository $cookies;
 
@@ -26,12 +22,10 @@ abstract class Application implements IApplicationRecipe
 
     public IUseRedirect $useRedirect;
 
-    public \Closure $getMenuItemsByMenuName;
+    public Closure $getMenuItemsByMenuName;
 
     public function __construct(array $args)
     {
-        $this->isAuthenticated = $args['isAuthenticated'];
-        $this->serverPath = $args['serverPath'];
         $this->protectedPages = $args['protectedPages'];
         $this->apiAuthSecret = $args['apiAuthSecret'];
         $this->cookies = $args['cookieRepository'];

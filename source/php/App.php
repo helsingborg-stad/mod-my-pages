@@ -40,7 +40,7 @@ class App extends Application
                 'successUrl'    => home_url('/my-pages'),
                 'errorUrl'      => home_url('/404'),
                 'tokenService'  => $this->tokenService,
-                'jwtSecretKey'  => new Key($this->apiAuthSecret, 'HS256'),
+                'jwtSecretKey'  => new Key(($this->apiAuthSecret)(), 'HS256'),
                 'onSuccess'     => function ($jwt) {
                     $this->cookies->set(AccessToken::$cookieName, $jwt);
                 },

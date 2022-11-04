@@ -17,18 +17,11 @@ class AppFactory implements IApplicationFactory
 {
     public static function create(array $args = []): Application
     {
-        $homeUrlPath = parse_url(home_url());
-        $serverPath = empty($homeUrlPath['path'])
-            ? $_SERVER['REQUEST_URI']
-            : str_replace($homeUrlPath['path'], '', $_SERVER['REQUEST_URI']);
-
         return new App(
             array_merge(
                 [
-                    'isAuthenticated'   => !empty($_COOKIE[AccessToken::$cookieName]),
-                    'cookieDomain'      => $_SERVER['SERVER_NAME'] ?? '',
-                    'serverPath'        => $serverPath,
-                    'protectedPages'    => get_posts(
+                    'useRedirect' => UseRedirectFactory::createFromEnv(),
+                    'protectedPages'    => fn () => get_posts(
                         [
                             'post_type' => 'page',
                             'posts_per_page' => -1,
@@ -45,8 +38,7 @@ class AppFactory implements IApplicationFactory
                         home_url('/mina-sidor'),
                         defined('WP_DEBUG') && WP_DEBUG ? ['debug' => 1] : []
                     ),
-                    'apiAuthSecret'         => get_field('mod_my_pages_api_auth_secret', 'options') ?? '',
-                    'useRedirect' => UseRedirectFactory::createFromEnv(),
+                    'apiAuthSecret'         => fn () => get_field('mod_my_pages_api_auth_secret', 'options') ?? '',
                     'getMenuItemsByMenuName' => function ($menuName) {
                         $toArray = fn ($items) => array_map(fn ($obj) => (array) $obj, $items);
                         $getMenuItemsByMenuName = fn ($name) => $toArray(
