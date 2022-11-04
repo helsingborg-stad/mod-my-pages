@@ -7,16 +7,15 @@ use Firebase\JWT\JWT;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use ModMyPages\App;
 use ModMyPages\AppFactory;
-use ModMyPages\Services\LoginUrlServiceFactory;
-use ModMyPages\Services\Mock\MemoryCookieRepository;
-use ModMyPages\Services\Mock\MockGetQueriedObjectId;
-use ModMyPages\Services\Mock\MockTokenService;
-use ModMyPages\Services\Mock\NullRedirectCallback;
-use ModMyPages\Types\ApplicationServices;
+use ModMyPages\Redirect\UseRedirectFactory;
+use ModMyPages\Service\LoginUrlService\LoginUrlServiceFactory;
+use ModMyPages\Service\TokenService\TokenServiceFactory;
 use PHPUnit\Framework\TestCase;
 
 class PluginTestCase extends TestCase
 {
+    static $redirects = [];
+
     use MockeryPHPUnitIntegration;
 
     /**
@@ -42,12 +41,12 @@ class PluginTestCase extends TestCase
 
     public function apiUrl()
     {
-        return 'http://localhost:3000';
+        return 'http://api-url.test';
     }
 
     public function homeUrl()
     {
-        return 'http://example.test';
+        return 'http://home-url.test';
     }
 
     public function createExpiredFakeToken(): string
@@ -55,37 +54,66 @@ class PluginTestCase extends TestCase
         return $this->createFakeToken(true);
     }
 
-    public function createFakeToken(bool $isExpired = false): string
+    public function fakeJwtSecret(): string
     {
+        return 'test-jwt-secret';
+    }
+
+    public function createFakeToken(
+        bool $isExpired = false,
+        bool $hasInvalidSecret = false
+    ): string {
         return JWT::encode(
             [
                 'id' => '201111223333',
                 'name' => 'Example Person',
                 'exp' => $isExpired ? time() - 600 : time() + 1200
             ],
-            'apan_japan',
+            !$hasInvalidSecret ? $this->fakeJwtSecret() : time(),
             'HS256'
         );
     }
 
+    public function createRedirectSpy(): \Closure
+    {
+        return function ($url = '') {
+            static $redirects = [];
+            if (!empty($url)) {
+                $redirects[] = $url;
+            }
+            return $redirects;
+        };
+    }
+
+    public function createMockMenu(string $menuName): array
+    {
+        return [];
+    }
+
     public function createFakeApp(array $args = []): App
     {
-        return AppFactory::create([
-            'isAuthenticated'   => isset($args['isAuthenticated']) ? $args['isAuthenticated'] : false,
-            'serverPath'        => $args['serverPath'] ?? '/',
-            'protectedPages'    => $args['protectedPages'] ?? [],
-            'cookieRepository'      => $args['cookieRepository'] ?? new MemoryCookieRepository(),
-            'redirectCallback'      => $args['redirectCallback'] ?? new NullRedirectCallback(),
-            'getQueriedObjectId'    => $args['getQueriedObjectId'] ?? new MockGetQueriedObjectId(),
-            'tokenService'          => $args['tokenService'] ?? new MockTokenService($this->createFakeToken()),
-            'loginUrlService'       => $args['loginUrlService'] ?? LoginUrlServiceFactory::create(
-                $this->apiUrl(),
-                $this->homeUrl(),
-                $this->homeUrl() . '/my-pages'
-            ),
-            'pageCacheBust'         => fn () => null,
-            'apiAuthSecret'         => $args['apiAuthSecret'] ?? 'apan_japan',
-        ]);
+        return AppFactory::createFromEnv(array_merge(
+            [
+                'apiAuthSecret'             => fn () => $args['mockJwtSecret'] ?? $this->fakeJwtSecret(),
+                'getMenuItemsByMenuName'    => fn ($menuName) => $this->createMockmenu($menuName),
+                'protectedPages'            => fn () => [1, 3, 4],
+                'useRedirect'               => UseRedirectFactory::createFromEnv([
+                    'mockPath'              => $args['mockPath'] ?? null,
+                    'mockRedirectCallback'  => $args['mockRedirectCallback'] ?? null
+                ]),
+                'loginUrlService'           => LoginUrlServiceFactory::createFromEnv([
+                    'apiUrl' => $args['mockApiUrl'] ?? $this->apiUrl(),
+                    'homeUrl' => $args['mockHomeUrl'] ?? $this->homeUrl(),
+                ]),
+                'tokenService'           => TokenServiceFactory::createFromEnv([
+                    'mockTokenResponse' => $args['mockTokenResponse'] ?? $this->createFakeToken(
+                        $args['mockExpiredToken'] ?? false,
+                        $args['mockInvalidToken'] ?? false
+                    ),
+                ]),
+            ],
+            $args
+        ));
     }
 
     /**

@@ -60,11 +60,12 @@ class App extends Application
 
     public function dropdownMenuController(array $data): array
     {
+        $createDropdownItemsFromMenu = $this->getMenuItemsByMenuName;
         $createMyPagesMenu = fn () => [
             'dropdown'  => [
                 'text'      => __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN),
                 'items'     => DropdownMenu::create(
-                    ($this->getMenuItemsByMenuName)('my-pages-menu'),
+                    $createDropdownItemsFromMenu('my-pages-menu'),
                     fn () => ($this->loginUrl)()
                 ),
             ],

@@ -8,7 +8,6 @@ use ModMyPages\Service\CookieRepository\CookieRepositoryFactory;
 use ModMyPages\Service\LoginUrlService\LoginUrlServiceFactory;
 use ModMyPages\Service\TokenService\TokenServiceFactory;
 use ModMyPages\Types\Application;
-use ModMyPages\Types\IApplicationFactory;
 
 class AppFactory
 {
@@ -31,7 +30,7 @@ class AppFactory
                         );
                         return $getMenuItemsByMenuName($menuName);
                     },
-                    'protectedPages'    => fn () => get_posts(
+                    'protectedPages'        => fn () => get_posts(
                         [
                             'post_type' => 'page',
                             'posts_per_page' => -1,

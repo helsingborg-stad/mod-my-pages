@@ -12,9 +12,9 @@ class OptionsPageTest extends PluginTestCase
 
         $this->createFakeApp()
             ->run()
-            ->optionsPage();
+            ->registerOptionsPage();
 
 
-        self::assertNotFalse(has_action('acf/init', 'ModMyPages\App->optionsPage()'));
+        self::assertNotFalse(has_action('acf/init', 'ModMyPages\App->registerOptionsPage()'));
     }
 }

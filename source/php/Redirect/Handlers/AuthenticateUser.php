@@ -44,7 +44,9 @@ class AuthenticateUser implements IRedirectHandler, IRedirectHandlerFactory
     public function redirectUrl(array $args): string
     {
         try {
-            $jwt = ($this->tokenService)($args['ts_session_id']);
+            $jwt = !empty($args['ts_session_id'])
+                ? ($this->tokenService)($args['ts_session_id'])
+                : null;
 
             if (!empty($jwt)) {
                 JWT::decode($jwt, $this->secret);
