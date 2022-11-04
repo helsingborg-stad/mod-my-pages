@@ -6,6 +6,7 @@ use Closure;
 use ModMyPages\Redirect\IUseRedirect;
 use ModMyPages\Service\CookieRepository\ICookieRepository;
 use ModMyPages\Service\LoginUrlService\ILoginUrlService;
+use ModMyPages\Service\MenuService\IMenuService;
 use ModMyPages\Service\TokenService\ITokenService;
 
 abstract class Application implements IApplicationRecipe
@@ -22,7 +23,7 @@ abstract class Application implements IApplicationRecipe
 
     public IUseRedirect $useRedirect;
 
-    public Closure $getMenuItemsByMenuName;
+    public IMenuService $getMenuItems;
 
     public function __construct(array $args)
     {
@@ -32,6 +33,6 @@ abstract class Application implements IApplicationRecipe
         $this->loginUrl = $args['loginUrlService'];
         $this->tokenService = $args['tokenService'];
         $this->useRedirect = $args['useRedirect'];
-        $this->getMenuItemsByMenuName = $args['getMenuItemsByMenuName'];
+        $this->getMenuItems = $args['menuService'];
     }
 }
