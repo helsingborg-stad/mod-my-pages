@@ -18,13 +18,13 @@ class SignoutUser implements IRedirectHandler, IRedirectHandlerFactory
         $this->onRedirect = $args['onRedirect'];
     }
 
-    public function redirectUrl(array $args): string
+    public function redirectUrl(array $query): string
     {
         ($this->onRedirect)();
-        return $args['callbackUrl'] ?? $this->redirectUrl;
+        return $query['callbackUrl'] ?? $this->redirectUrl;
     }
 
-    public function shouldRedirect(array $args): bool
+    public function shouldRedirect(array $query): bool
     {
         return true;
     }

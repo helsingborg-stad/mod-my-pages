@@ -30,12 +30,6 @@ class App extends Application
     public function redirect()
     {
         $this->useRedirect
-            ->use('/signout', SignoutUser::create([
-                'redirectUrl' => home_url(),
-                'onRedirect' => function () {
-                    $this->cookies->set(AccessToken::$cookieName, '');
-                },
-            ]))
             ->use('/auth', AuthenticateUser::create([
                 'successUrl'    => home_url('/my-pages'),
                 'errorUrl'      => home_url('/404'),
@@ -43,6 +37,12 @@ class App extends Application
                 'jwtSecretKey'  => new Key(($this->apiAuthSecret)(), 'HS256'),
                 'onSuccess'     => function ($jwt) {
                     $this->cookies->set(AccessToken::$cookieName, $jwt);
+                },
+            ]))
+            ->use('/signout', SignoutUser::create([
+                'redirectUrl' => home_url(),
+                'onRedirect' => function () {
+                    $this->cookies->set(AccessToken::$cookieName, '');
                 },
             ]))
             ->redirect();
@@ -64,7 +64,7 @@ class App extends Application
             'dropdown'  => [
                 'text'      => __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN),
                 'items'     => DropdownMenu::create(
-                    ($this->getMenuItems)('my-pages-menu'),
+                    ($this->menuService)('my-pages-menu'),
                     fn () => ($this->loginUrl)()
                 ),
             ],

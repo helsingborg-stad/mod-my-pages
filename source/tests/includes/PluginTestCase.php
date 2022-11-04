@@ -76,7 +76,7 @@ class PluginTestCase extends TestCase
 
     public function createRedirectSpy(): \Closure
     {
-        return function ($url = '') {
+        return function ($url = ''): array {
             static $redirects = [];
             if (!empty($url)) {
                 $redirects[] = $url;

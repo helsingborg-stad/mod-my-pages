@@ -23,7 +23,7 @@ abstract class Application implements IApplicationRecipe
 
     public IUseRedirect $useRedirect;
 
-    public IMenuService $getMenuItems;
+    public IMenuService $menuService;
 
     public function __construct(array $args)
     {
@@ -33,6 +33,6 @@ abstract class Application implements IApplicationRecipe
         $this->loginUrl = $args['loginUrlService'];
         $this->tokenService = $args['tokenService'];
         $this->useRedirect = $args['useRedirect'];
-        $this->getMenuItems = $args['menuService'];
+        $this->menuService = $args['menuService'];
     }
 }

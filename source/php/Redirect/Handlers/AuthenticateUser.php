@@ -2,6 +2,7 @@
 
 namespace ModMyPages\Redirect\Handlers;
 
+use Closure;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use LogicException;
@@ -20,38 +21,31 @@ class AuthenticateUser implements IRedirectHandler, IRedirectHandlerFactory
 
     private Key $secret;
 
-    private \Closure $onSuccess;
+    private Closure $onSuccess;
 
-    private \Closure $onError;
+    private Closure $onError;
 
     public function __construct(array $args)
     {
-        $logError = defined('WP_DEBUG') && WP_DEBUG
-            ? function (string $msg) {
-                error_log('Failed to decode JWT: ' . $msg);
-                error_log(PHP_EOL);
-            }
-            : fn (string $msg) => $msg;
-
         $this->successUrl = $args['successUrl'];
         $this->errorUrl = $args['errorUrl'];
         $this->tokenService = $args['tokenService'];
         $this->secret = $args['jwtSecretKey'];
-        $this->onSuccess = $args['onSuccess'] ?? fn (string $jwt) => null;
-        $this->onError = $args['onError'] ?? $logError;
+        $this->onSuccess = $args['onSuccess'];
+        $this->onError = $args['onError'];
     }
 
-    public function redirectUrl(array $args): string
+    public function redirectUrl(array $query): string
     {
         try {
-            $jwt = !empty($args['ts_session_id'])
-                ? ($this->tokenService)($args['ts_session_id'])
+            $jwt = !empty($query['ts_session_id'])
+                ? ($this->tokenService)($query['ts_session_id'])
                 : null;
 
             if (!empty($jwt)) {
                 JWT::decode($jwt, $this->secret);
                 ($this->onSuccess)($jwt);
-                return $args['callbackUrl'] ?? $this->successUrl;
+                return $query['callbackUrl'] ?? $this->successUrl;
             }
         } catch (LogicException $e) {
             // errors having to do with environmental setup or malformed JWT Keys
@@ -61,16 +55,29 @@ class AuthenticateUser implements IRedirectHandler, IRedirectHandlerFactory
             ($this->onError)($e->getMessage());
         }
 
-        return $args['callbackUrl'] ?? $this->errorUrl;
+        return $query['callbackUrl'] ?? $this->errorUrl;
     }
 
-    public function shouldRedirect(array $args): bool
+    public function shouldRedirect(array $query): bool
     {
         return true;
     }
 
     public static function create(array $args = []): IRedirectHandler
     {
-        return new AuthenticateUser($args);
+        $logError = function (string $msg) {
+            error_log('Failed to decode JWT: ' . $msg);
+            error_log(PHP_EOL);
+        };
+
+        return new AuthenticateUser(array_merge(
+            [
+                'onSuccess' => fn (string $jwt) => null,
+                'onError' => defined('WP_DEBUG') && WP_DEBUG
+                    ? $logError
+                    : fn (string $msg) => $msg,
+            ],
+            $args
+        ));
     }
 }

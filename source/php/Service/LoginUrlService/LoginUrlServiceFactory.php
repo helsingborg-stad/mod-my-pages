@@ -25,6 +25,7 @@ class LoginUrlServiceFactory
             ? $mockApiUrl
             : $apiUrl;
     }
+
     private static function createHomeUrl(string $mockUrl = ''): \Closure
     {
         $homeUrl = fn () => home_url();
@@ -34,6 +35,7 @@ class LoginUrlServiceFactory
             ? $mockHomeUrl
             : $homeUrl;
     }
+
     private static function createDefaultCallbackUrl(string $mockUrl = ''): \Closure
     {
         $defaultCallbackUrl = fn () =>  home_url('/mina-sidor');

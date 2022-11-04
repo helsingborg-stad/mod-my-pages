@@ -29,7 +29,7 @@ class LoginUrlService implements ILoginUrlService
         $this->createLoginUrl = fn (string $callbackUrl = ''): string => $buildLoginUrl($callbackUrl);
     }
 
-    function buildUrl(string $callbackUrl = ''): string
+    public function buildUrl(string $callbackUrl = ''): string
     {
         return ($this->createLoginUrl)($callbackUrl);
     }

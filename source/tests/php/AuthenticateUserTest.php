@@ -24,22 +24,6 @@ class AuthenticateUserTest extends PluginTestCase
         $this->assertCount(1, $redirectSpy());
     }
 
-    public function testShouldNotRedirect()
-    {
-        $_GET['ts_session_id'] = 'fakeSession';
-
-        $redirectSpy = $this->createRedirectSpy();
-
-        $this->createFakeApp([
-            'mockPath'                  => '/',
-            'mockRedirectCallback'      => $redirectSpy,
-        ])
-            ->run()
-            ->redirect();
-
-        $this->assertCount(0, $redirectSpy());
-    }
-
     public function testShouldSetCookie()
     {
         $_GET['ts_session_id'] = 'fakeSession';
@@ -54,11 +38,13 @@ class AuthenticateUserTest extends PluginTestCase
             ->run()
             ->redirect();
 
-        $this->assertTrue(!empty($cookieRepository->get(AccessToken::$cookieName)));
+        $this->assertNotEmpty($cookieRepository->get(AccessToken::$cookieName));
     }
 
-    public function testShouldNotSetCookieWhenInvalidJwtSignature()
+    public function testShouldNotSetCookieWhenJwtSignatureIsInvalid()
     {
+        $_GET['ts_session_id'] = 'fakeSession';
+
         $cookieRepository = CookieRepositoryFactory::createFromEnv();
         $cookieRepository->set(AccessToken::$cookieName, '');
 
@@ -73,8 +59,10 @@ class AuthenticateUserTest extends PluginTestCase
         $this->assertEquals('', $cookieRepository->get(AccessToken::$cookieName));
     }
 
-    public function testShouldNotSetCookieWhenExpiredJwt()
+    public function testShouldNotSetCookieWhenJwtIsExpired()
     {
+        $_GET['ts_session_id'] = 'fakeSession';
+
         $cookieRepository = CookieRepositoryFactory::createFromEnv();
         $cookieRepository->set(AccessToken::$cookieName, '');
 
