@@ -7,7 +7,7 @@ use Firebase\JWT\Key;
 use LogicException;
 use ModMyPages\Redirect\IRedirectHandler;
 use ModMyPages\Redirect\IRedirectHandlerFactory;
-use ModMyPages\Services\Types\ITokenService;
+use ModMyPages\Service\TokenService\ITokenService;
 use UnexpectedValueException;
 
 class AuthenticateUser implements IRedirectHandler, IRedirectHandlerFactory

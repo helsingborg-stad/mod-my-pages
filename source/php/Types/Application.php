@@ -4,9 +4,9 @@ namespace ModMyPages\Types;
 
 use Closure;
 use ModMyPages\Redirect\IUseRedirect;
-use ModMyPages\Services\Types\ICookieRepository;
-use ModMyPages\Services\Types\ILoginUrlService;
-use ModMyPages\Services\Types\ITokenService;
+use ModMyPages\Service\CookieRepository\ICookieRepository;
+use ModMyPages\Service\LoginUrlService\ILoginUrlService;
+use ModMyPages\Service\TokenService\ITokenService;
 
 abstract class Application implements IApplicationRecipe
 {

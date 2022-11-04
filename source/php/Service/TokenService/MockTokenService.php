@@ -1,9 +1,6 @@
 <?php
 
-namespace ModMyPages\Services\Mock;
-
-use ModMyPages\Admin\Settings;
-use ModMyPages\Services\Types\ITokenService;
+namespace ModMyPages\Service\TokenService;
 
 class MockTokenService implements ITokenService
 {

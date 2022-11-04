@@ -1,6 +1,6 @@
 <?php
 
-namespace ModMyPages\Services\Types;
+namespace ModMyPages\Service\TokenService;
 
 interface ITokenService
 {

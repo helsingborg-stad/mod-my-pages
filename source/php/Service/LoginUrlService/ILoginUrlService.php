@@ -1,6 +1,6 @@
 <?php
 
-namespace ModMyPages\Services\Types;
+namespace ModMyPages\Service\LoginUrlService;
 
 interface ILoginUrlService
 {

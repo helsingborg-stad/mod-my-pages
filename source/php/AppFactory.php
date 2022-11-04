@@ -2,16 +2,12 @@
 
 namespace ModMyPages;
 
-use ModMyPages\Admin\Settings;
 use ModMyPages\App;
 use ModMyPages\Redirect\UseRedirectFactory;
 use ModMyPages\Service\CookieRepository\CookieRepositoryFactory;
-use ModMyPages\Services\CookieRepository;
-use ModMyPages\Services\LoginUrlServiceFactory;
-use ModMyPages\Services\TokenService;
-use ModMyPages\Token\AccessToken;
+use ModMyPages\Service\LoginUrlService\LoginUrlServiceFactory;
+use ModMyPages\Service\TokenService\TokenServiceFactory;
 use ModMyPages\Types\Application;
-use ModMyPages\Types\ApplicationServices;
 use ModMyPages\Types\IApplicationFactory;
 
 class AppFactory implements IApplicationFactory
@@ -21,24 +17,10 @@ class AppFactory implements IApplicationFactory
         return new App(
             array_merge(
                 [
-                    'useRedirect' => UseRedirectFactory::createFromEnv(),
+                    'useRedirect'           => UseRedirectFactory::createFromEnv(),
                     'cookieRepository'      => CookieRepositoryFactory::createFromEnv(),
-                    'protectedPages'    => fn () => get_posts(
-                        [
-                            'post_type' => 'page',
-                            'posts_per_page' => -1,
-                            'meta_key' => 'mod_my_pages_protected_page',
-                            'meta_value' => 1,
-                            'fields' => 'ids'
-                        ]
-                    ) ?? [],
-                    'tokenService'          => new TokenService(),
-                    'loginUrlService'       => LoginUrlServiceFactory::create(
-                        Settings::apiUrl(),
-                        home_url(),
-                        home_url('/mina-sidor'),
-                        defined('WP_DEBUG') && WP_DEBUG ? ['debug' => 1] : []
-                    ),
+                    'loginUrlService'       => LoginUrlServiceFactory::createFromEnv(),
+                    'tokenService'          => TokenServiceFactory::createFromEnv(),
                     'apiAuthSecret'         => fn () => get_field('mod_my_pages_api_auth_secret', 'options') ?? '',
                     'getMenuItemsByMenuName' => function ($menuName) {
                         $toArray = fn ($items) => array_map(fn ($obj) => (array) $obj, $items);
@@ -49,6 +31,15 @@ class AppFactory implements IApplicationFactory
                         );
                         return $getMenuItemsByMenuName($menuName);
                     },
+                    'protectedPages'    => fn () => get_posts(
+                        [
+                            'post_type' => 'page',
+                            'posts_per_page' => -1,
+                            'meta_key' => 'mod_my_pages_protected_page',
+                            'meta_value' => 1,
+                            'fields' => 'ids'
+                        ]
+                    ) ?? [],
                 ],
                 $args
             )
