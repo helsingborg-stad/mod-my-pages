@@ -2,159 +2,82 @@
 
 namespace ModMyPages;
 
+use Firebase\JWT\Key;
 use ModMyPages\Helper\CacheBust;
-use ModMyPages\Redirects\Handlers\AuthenticateUser;
-use ModMyPages\Redirects\Handlers\ProtectedPage;
-use ModMyPages\Redirects\Handlers\SignoutUser;
-use ModMyPages\Redirects\UseRedirect;
+use ModMyPages\Redirect\Handlers\AuthenticateUser;
+use ModMyPages\Redirect\Handlers\SignoutUser;
 use ModMyPages\Token\AccessToken;
 use ModMyPages\Types\Application;
+use ModMyPages\UI\DropdownMenu;
 
 class App extends Application
 {
     public function run(): Application
     {
         add_action('template_redirect', array($this, 'redirect'), 5);
-        add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
-        add_action('acf/init', array($this, 'optionsPage'), 5);
         add_action('init', array($this, 'registerMenus'), 5, 2);
-        add_filter('Municipio/viewData', array($this, 'dropDownMenuController'));
+        add_action('acf/init', array($this, 'registerOptionsPage'), 5);
         add_action('plugins_loaded', array($this, 'registerModules'));
-        add_action('wp_enqueue_scripts', array($this, 'script'));
-        add_action('wp_enqueue_scripts', array($this, 'style'));
-        add_action('rest_api_init', function () {
-            register_rest_route('mod-my-pages/v1', '/access-token', array(
-                'methods' => 'POST',
-                'callback' => fn () => ['token' => $_COOKIE[AccessToken::$cookieName] ?? ''],
-            ));
-        });
-        add_filter(
-            'ModMyPages/App/myPagesMenuItems',
-            fn ($items) => array_map(
-                function ($item) {
-                    $item->classes = array_merge(
-                        array_filter(
-                            $item->classes,
-                            fn ($c) => !empty($c)
-                        ),
-                        ['show-authenticated']
-                    );
-
-                    $item->linkAttributeList = array_merge($item->linkAttributeList ?? [], [
-                        'data-no-instant' => ''
-                    ]);
-
-                    return $item;
-                },
-                $items
-            ),
-            10,
-            1
-        );
-
+        add_action('wp_enqueue_scripts', array($this, 'scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'styles'));
+        add_action('rest_api_init', array($this, 'registerRestRoutes'));
+        add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
+        add_filter('Municipio/viewData', array($this, 'dropdownMenuController'));
+        add_filter('ModMyPages/UI/DropdownMenu::items', array($this, 'disableInstantPageOnMenuItems'), 10, 1);
         return $this;
     }
 
     public function redirect()
     {
-        new UseRedirect(
-            [
-                '*' => new ProtectedPage(
-                    $this->protectedPages,
-                    ($this->services->getQueriedObjectId)(),
-                    !$this->isAuthenticated,
-                ),
-                '/signout' => new SignoutUser(
-                    home_url(),
-                    $this->services->cookieRepository
-                ),
-                '/auth' => new AuthenticateUser([
-                    'successUrl'    => home_url('/my-pages'),
-                    'errorUrl'      => home_url('/404'),
-                    'tokenService'  => $this->services->tokenService,
-                    'cookies'       => $this->services->cookieRepository,
-                    'cookieDomain'  => home_url(),
-                    'jwtSecretKey'  => $this->apiAuthSecret,
-                ]),
+        $this->useRedirect
+            ->use('/signout', SignoutUser::create([
+                'redirectUrl' => home_url(),
+                'onRedirect' => function () {
+                    $this->cookies->set(AccessToken::$cookieName, '');
+                },
+            ]))
+            ->use('/auth', AuthenticateUser::create([
+                'successUrl'    => home_url('/my-pages'),
+                'errorUrl'      => home_url('/404'),
+                'tokenService'  => $this->tokenService,
+                'jwtSecretKey'  => new Key($this->apiAuthSecret, 'HS256'),
+                'onSuccess'     => function ($jwt) {
+                    $this->cookies->set(AccessToken::$cookieName, $jwt);
+                },
+            ]))
+            ->redirect();
+    }
+
+    public function registerRestRoutes()
+    {
+        register_rest_route('mod-my-pages/v1', '/access-token', array(
+            'methods' => 'POST',
+            'callback' => fn () => [
+                'token' => $this->cookies->get(AccessToken::$cookieName) ?? ''
             ],
-            $this->serverPath,
-            $this->services->redirectCallback
-        );
+        ));
     }
 
-    public function setBladeTemplatePaths(array $array): array
+    public function dropdownMenuController(array $data): array
     {
-        is_child_theme()
-            ? array_splice($array, 2, 0, array(MOD_MY_PAGES_PATH . 'views/'))
-            : array_unshift($array, MOD_MY_PAGES_PATH . 'views/');
+        $createMyPagesMenu = fn () => [
+            'dropdown'  => [
+                'text'      => __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN),
+                'items'     => DropdownMenu::create(
+                    ($this->getMenuItemsByMenuName)('my-pages-menu'),
+                    fn () => ($this->loginUrl)()
+                ),
+            ],
+        ];
 
-        return $array;
-    }
+        $data['myPagesMenu'] = $createMyPagesMenu();
 
-    public function optionsPage()
-    {
-        new Admin\OptionsPage();
+        return $data;
     }
 
     public function registerMenus()
     {
         register_nav_menu('my-pages-menu', __('My Pages Menu', MOD_MY_PAGES_TEXT_DOMAIN));
-    }
-
-    public function profile(): array
-    {
-        $jwt = $this->services->cookieRepository->get(AccessToken::$cookieName);
-        $decoded = AccessToken::decode($jwt) ?? [];
-
-        return [
-            'name' => $decoded['payload']['name'] ?? ''
-        ];
-    }
-
-    public function loginButton(): array
-    {
-        return [
-            (object) [
-                'title'             => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
-                'url'               => ($this->services->loginUrlService)(),
-                'attr_title'        => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
-                'classes'           => ['hide-authenticated'],
-                'linkAttributeList' => [
-                    'data-no-instant' => ''
-                ]
-            ]
-        ];
-    }
-
-    public function dropDownMenuController(array $data): array
-    {
-        $items = array_merge(
-            $this->loginButton(),
-            apply_filters(
-                'ModMyPages/App/myPagesMenuItems',
-                wp_get_nav_menu_items(get_nav_menu_locations()['my-pages-menu'] ?? 0) ?? []
-            )
-        );
-
-        $dropdownItems = array_map(
-            fn ($p) => [
-                'text' => $p->title,
-                'link' => $p->url,
-                'attributeList' => [],
-                'linkAttributeList' => $p->linkAttributeList ?? [],
-                'classList' => $p->classes,
-            ],
-            $items
-        );
-
-        $data['myPagesMenu'] = [
-            'dropdown'  => [
-                'text'      => __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN),
-                'items'     => $dropdownItems
-            ],
-        ];
-
-        return $data;
     }
 
     public function registerModules()
@@ -181,7 +104,12 @@ class App extends Application
         }
     }
 
-    public function script()
+    public function registerOptionsPage()
+    {
+        new Admin\OptionsPage();
+    }
+
+    public function scripts()
     {
         wp_enqueue_script(
             'gdi-host',
@@ -198,12 +126,34 @@ class App extends Application
         wp_localize_script('gdi-host', 'modMyPages', ['restUrl' => get_rest_url()]);
     }
 
-    public function style()
+    public function styles()
     {
         wp_enqueue_style(
             'mod-my-pages-styles',
             MOD_MY_PAGES_DIST_URL . CacheBust::name('css/mod-my-pages.css'),
             null
+        );
+    }
+
+    public function setBladeTemplatePaths(array $array): array
+    {
+        is_child_theme()
+            ? array_splice($array, 2, 0, array(MOD_MY_PAGES_PATH . 'views/'))
+            : array_unshift($array, MOD_MY_PAGES_PATH . 'views/');
+
+        return $array;
+    }
+
+    public function disableInstantPageOnMenuItems(array $items)
+    {
+        return array_map(
+            fn ($item) => array_merge($item, [
+                'linkAttributeList' => array_merge(
+                    $item['linkAttributeList'] ?? [],
+                    ['data-no-instant' => '']
+                )
+            ]),
+            $items
         );
     }
 }

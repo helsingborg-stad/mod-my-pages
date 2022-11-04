@@ -10,9 +10,9 @@ interface IApplicationRecipe
 
     public function setBladeTemplatePaths(array $paths): array;
 
-    public function optionsPage();
+    public function registerOptionsPage();
 
     public function registerMenus();
 
-    public function dropDownMenuController(array $data): array;
+    public function dropdownMenuController(array $data): array;
 }

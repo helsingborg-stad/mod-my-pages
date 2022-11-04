@@ -2,6 +2,10 @@
 
 namespace ModMyPages\Types;
 
+use ModMyPages\Redirect\IUseRedirect;
+use ModMyPages\Services\Types\ICookieRepository;
+use ModMyPages\Services\Types\ILoginUrlService;
+use ModMyPages\Services\Types\ITokenService;
 use ModMyPages\Types\ApplicationServices;
 
 abstract class Application implements IApplicationRecipe
@@ -14,19 +18,26 @@ abstract class Application implements IApplicationRecipe
 
     public array $protectedPages;
 
-    public ApplicationServices $services;
+    public ICookieRepository $cookies;
 
-    function __construct(
-        bool $isAuthenticated,
-        string $serverPath,
-        array $protectedPages,
-        string $apiAuthSecret,
-        ApplicationServices $services
-    ) {
-        $this->isAuthenticated = $isAuthenticated;
-        $this->serverPath = $serverPath;
-        $this->protectedPages = $protectedPages;
-        $this->services = $services;
-        $this->apiAuthSecret = $apiAuthSecret;
+    public ILoginUrlService $loginUrl;
+
+    public ITokenService $tokenService;
+
+    public IUseRedirect $useRedirect;
+
+    public \Closure $getMenuItemsByMenuName;
+
+    public function __construct(array $args)
+    {
+        $this->isAuthenticated = $args['isAuthenticated'];
+        $this->serverPath = $args['serverPath'];
+        $this->protectedPages = $args['protectedPages'];
+        $this->apiAuthSecret = $args['apiAuthSecret'];
+        $this->cookies = $args['cookieRepository'];
+        $this->loginUrl = $args['loginUrlService'];
+        $this->tokenService = $args['tokenService'];
+        $this->useRedirect = $args['useRedirect'];
+        $this->getMenuItemsByMenuName = $args['getMenuItemsByMenuName'];
     }
 }

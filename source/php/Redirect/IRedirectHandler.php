@@ -1,6 +1,6 @@
 <?php
 
-namespace ModMyPages\Redirects\Types;
+namespace ModMyPages\Redirect;
 
 interface IRedirectHandler
 {

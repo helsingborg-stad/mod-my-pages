@@ -3,6 +3,7 @@
 namespace ModMyPages\Types;
 
 use Closure;
+use ModMyPages\Redirect\IUseRedirect;
 use ModMyPages\Services\Types\ICookieRepository;
 use ModMyPages\Services\Types\IGetQueriredObjectIdCallback;
 use ModMyPages\Services\Types\ILoginUrlService;
@@ -12,31 +13,23 @@ use ModMyPages\Services\Types\ITokenService;
 
 class ApplicationServices
 {
-    public ICookieRepository $cookieRepository;
+    public ICookieRepository $cookies;
 
-    public IRedirectCallback $redirectCallback;
-
-    public IGetQueriredObjectIdCallback $getQueriedObjectId;
-
-    public ILoginUrlService $loginUrlService;
+    public ILoginUrlService $loginUrl;
 
     public ITokenService $tokenService;
 
-    public Closure $pageCacheBust;
+    public IUseRedirect $useRedirect;
 
     public function __construct(
         ICookieRepository $cookieRepository,
-        IRedirectCallback $redirectCallback,
-        IGetQueriredObjectIdCallback $getQueriedObjectId,
         ILoginUrlService $loginUrlService,
         ITokenService $tokenService,
-        Closure $pageCacheBust
+        IUseRedirect $useRedirect
     ) {
-        $this->cookieRepository = $cookieRepository;
-        $this->redirectCallback = $redirectCallback;
-        $this->getQueriedObjectId = $getQueriedObjectId;
-        $this->loginUrlService = $loginUrlService;
+        $this->cookies = $cookieRepository;
+        $this->loginUrl = $loginUrlService;
         $this->tokenService = $tokenService;
-        $this->pageCacheBust = $pageCacheBust;
+        $this->useRedirect = $useRedirect;
     }
 }
