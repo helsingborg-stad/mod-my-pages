@@ -24,7 +24,8 @@ class CookieRepository implements ICookieRepository
                 !setcookie($key, $value, [
                     'expires'   => empty($value) ? $this->expiredDate() : $this->cookieLength($cookieLength),
                     'secure'    => true,
-                    'httponly'  => true
+                    'httponly'  => true,
+                    'path'      => '/',
                 ])
                 && defined('WP_DEBUG') && WP_DEBUG
             ) {
