@@ -10,9 +10,9 @@ use ModMyPages\Service\TokenService\TokenServiceFactory;
 use ModMyPages\Types\Application;
 use ModMyPages\Types\IApplicationFactory;
 
-class AppFactory implements IApplicationFactory
+class AppFactory
 {
-    public static function create(array $args = []): Application
+    public static function createFromEnv(array $args = []): Application
     {
         return new App(
             array_merge(

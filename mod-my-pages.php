@@ -46,5 +46,5 @@ add_action('acf/init', function () {
 });
 
 // Start application
-ModMyPages\AppFactory::create()
+ModMyPages\AppFactory::createFromEnv()
     ->run();
