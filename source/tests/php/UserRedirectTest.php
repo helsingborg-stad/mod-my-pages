@@ -2,10 +2,6 @@
 
 namespace ModMyPages\Test;
 
-use ModMyPages\Service\CookieRepository\CookieRepositoryFactory;
-use ModMyPages\Services\Mock\MockTokenService;
-use ModMyPages\Token\AccessToken;
-
 class UseRedirectTest extends PluginTestCase
 {
     public function testShouldNotRedirect()
