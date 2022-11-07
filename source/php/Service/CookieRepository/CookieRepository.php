@@ -22,7 +22,7 @@ class CookieRepository implements ICookieRepository
         if (!headers_sent()) {
             if (
                 !setcookie($key, $value, [
-                    'expires'   => empty($value) ? $this->expiredDate() : $this->cookieLength($cookieLength),
+                    'expires'   => empty($value) ? $this->expiredDate() : 0,
                     'secure'    => true,
                     'httponly'  => true,
                     'path'      => '/',
