@@ -2,6 +2,8 @@
 
 namespace ModMyPages;
 
+use Exception;
+use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use ModMyPages\Helper\CacheBust;
 use ModMyPages\Redirect\Handlers\AuthenticateUser;
@@ -52,9 +54,28 @@ class App extends Application
     {
         register_rest_route('mod-my-pages/v1', '/access-token', array(
             'methods' => 'POST',
-            'callback' => fn () => [
-                'token' => $this->cookies->get(AccessToken::$cookieName) ?? ''
-            ],
+            'callback' => function () {
+                $tryDecodeToken = function (string $jwt) {
+                    $decoded = false;
+                    try {
+                        $decoded = JWT::decode(
+                            $jwt,
+                            new Key(($this->apiAuthSecret)(), 'HS256')
+                        );
+                    } catch (Exception $e) {
+                        error_log($e->getMessage());
+                    }
+
+                    return $decoded;
+                };
+
+                $token = $this->cookies->get(AccessToken::$cookieName);
+
+                return [
+                    'token' => $tryDecodeToken($token) ? $token : '',
+                    'expires' => $tryDecodeToken($token)->exp ?? 0
+                ];
+            },
         ));
     }
 
