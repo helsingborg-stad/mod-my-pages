@@ -63,7 +63,7 @@ class App extends Application
                             new Key(($this->apiAuthSecret)(), 'HS256')
                         );
                     } catch (Exception $e) {
-                        error_log($e->getMessage());
+                        $this->cookies->set(AccessToken::$cookieName, '');
                     }
 
                     return $decoded;
