@@ -1,4 +1,5 @@
 import { setBodyClass } from "./body-class";
+import { reloadPageWhenTokenExpires } from "./reload-page";
 
 export interface ModMyPagesInterface {
     restUrl: string
@@ -6,4 +7,5 @@ export interface ModMyPagesInterface {
 
 document.addEventListener('DOMContentLoaded', () => {
     setBodyClass();
+    reloadPageWhenTokenExpires(10000);
 });
