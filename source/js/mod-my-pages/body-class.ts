@@ -1,4 +1,4 @@
-import { getAccessToken } from "../gdi-host/access-token"
+import { getAccessToken } from "../gdi-host/access-token";
 
 export const setBodyClass = async () => {
     const { token } = await getAccessToken();
