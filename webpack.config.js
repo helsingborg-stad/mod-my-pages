@@ -15,8 +15,8 @@ module.exports = {
      * Add your entry files here
      */
     entry: {
-        'js/gdi-host': './source/js/GdiHost/index.ts',
-        'js/mod-my-pages': './source/js/mod-my-pages.ts',
+        'js/gdi-host': './source/js/gdi-host/index.ts',
+        'js/mod-my-pages': './source/js/mod-my-pages/index.ts',
         'css/mod-my-pages': './source/sass/mod-my-pages.scss',
     },
 

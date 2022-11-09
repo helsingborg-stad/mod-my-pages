@@ -1,4 +1,4 @@
-import { GdiHostInterface } from "./GdiHost"
+import { GdiHostInterface } from "./gdi-host"
 import { ModMyPagesInterface } from "./mod-my-pages"
 
 declare global {

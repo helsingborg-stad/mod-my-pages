@@ -1,4 +1,4 @@
-import { setBodyClass } from "./setBodyClass"
+import { setBodyClass } from "./body-class";
 
 export interface ModMyPagesInterface {
     restUrl: string

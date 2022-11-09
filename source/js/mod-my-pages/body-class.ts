@@ -1,18 +1,18 @@
-import getAccessToken from "./GdiHost/getAccessToken"
+import { getAccessToken } from "../gdi-host/access-token"
 
 export const setBodyClass = async () => {
-    const token = await getAccessToken();
-    
+    const { token } = await getAccessToken();
+
     [...document.querySelectorAll('body')]
         .map((e) => ({
             classNames: [...e.classList],
             classList: e.classList,
             isAuthenticated: token?.length > 0
         }))
-        .filter(({ classNames, isAuthenticated }) => 
+        .filter(({ classNames, isAuthenticated }) =>
             isAuthenticated && !classNames.includes('is-authenticated')
         )
-        .forEach(({ classList }) => 
+        .forEach(({ classList }) =>
             classList.toggle('is-authenticated')
         );
 }
