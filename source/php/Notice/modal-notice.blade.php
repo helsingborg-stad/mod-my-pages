@@ -12,9 +12,10 @@
     'id' => 'notice-modal',
     'overlay' => 'dark',
     'size' => 'sm',
-    'classList' => []
+    'classList' => ['u-padding-bottom--0'],
+    'padding' => 0
 ])
-    <div class="u-text-align--center">
+    <div class="u-text-align--center u-margin__bottom--2">
         <header class="u-margin__bottom--4">
             <div class="u-margin__bottom--2">
                 @icon(['icon' => 'logout', 'size' => 'xl', 'color' => 'primary'])
@@ -23,14 +24,14 @@
             <div>
                 @typography([
                     'element' => 'h2',
-                    'variant' => 'h2',
+                    'variant' => 'h3',
                     'classList' => []
                 ])
                     {{ $labels['modalTitle'] ?? 'You have been automatically logged out.' }}
                 @endtypography
             </div>
         </header>
-        <div class="u-margin__bottom--2">
+        <div>
             @button([
                 'href' => '',
                 'isOutlined' => false,

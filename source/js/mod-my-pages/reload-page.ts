@@ -2,7 +2,8 @@ import { getAccessToken } from "../gdi-host/access-token";
 
 export const reloadPageWhenTokenExpires = async (frequencyInMs: number) => {
     const delayPromise = (delayInMs: number): Promise<void> =>
-        new Promise((resolve) => setTimeout(resolve, delayInMs))
+        new Promise((resolve) => setTimeout(resolve, delayInMs));
+
     const timestampInSeconds = (): number =>
         Math.floor(Date.now() / 1000);
 
@@ -29,7 +30,7 @@ export const reloadPageWhenTokenExpires = async (frequencyInMs: number) => {
                     getQueryParams(window.location.href)
                 )
             )
-        ].join('')
+        ].join('');
     }
 
     const tryReloadPageRecursively = (): Promise<void> =>
