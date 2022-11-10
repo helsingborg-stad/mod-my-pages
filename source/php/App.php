@@ -5,7 +5,9 @@ namespace ModMyPages;
 use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use ModMyPages\Helper\Blade;
 use ModMyPages\Helper\CacheBust;
+use ModMyPages\Notice\NoticeCodes;
 use ModMyPages\Redirect\Handlers\AuthenticateUser;
 use ModMyPages\Redirect\Handlers\SignoutUser;
 use ModMyPages\Token\AccessToken;
@@ -26,6 +28,7 @@ class App extends Application
         add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
         add_filter('Municipio/viewData', array($this, 'dropdownMenuController'));
         add_filter('ModMyPages/UI/DropdownMenu::items', array($this, 'disableInstantPageOnMenuItems'), 10, 1);
+        add_filter('wp_footer', array($this, 'notice'), 10, 1);
         return $this;
     }
 
@@ -77,6 +80,22 @@ class App extends Application
                 ];
             },
         ));
+    }
+
+    public function notice()
+    {
+        if (
+            !empty($_GET['notice'])
+            && $_GET['notice'] === NoticeCodes::INACTIVE_SIGNOUT
+        ) {
+
+            echo Blade::render('source/php/Notice/modal-notice.blade.php', [
+                'labels' => [
+                    'modalTitle' => __('You have been automatically logged out.', MOD_MY_PAGES_TEXT_DOMAIN),
+                    'buttonText' => __('Close', MOD_MY_PAGES_TEXT_DOMAIN),
+                ]
+            ]);
+        }
     }
 
     public function dropdownMenuController(array $data): array
