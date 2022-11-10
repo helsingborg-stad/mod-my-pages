@@ -3,7 +3,10 @@ import { triggerPressOnDomLoaded } from "./trigger-press";
 import { reloadPageWhenTokenExpires } from "./reload-page";
 
 export interface ModMyPagesInterface {
-    restUrl: string
+    restUrl: string,
+    noticeCodes: {
+        INACTIVE_SIGNOUT: string
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

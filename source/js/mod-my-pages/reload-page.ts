@@ -1,5 +1,7 @@
 import { getAccessToken } from "../gdi-host/access-token";
 
+const { noticeCodes: { INACTIVE_SIGNOUT } } = window.modMyPages;
+
 export const reloadPageWhenTokenExpires = async (frequencyInMs: number) => {
     const delayPromise = (delayInMs: number): Promise<void> =>
         new Promise((resolve) => setTimeout(resolve, delayInMs));
@@ -26,7 +28,7 @@ export const reloadPageWhenTokenExpires = async (frequencyInMs: number) => {
             window.location.host,
             window.location.pathname,
             toQueryString(
-                withQueryParams({ 'notice': 'inactive-signout' })(
+                withQueryParams({ 'notice': INACTIVE_SIGNOUT })(
                     getQueryParams(window.location.href)
                 )
             )

@@ -88,7 +88,6 @@ class App extends Application
             !empty($_GET['notice'])
             && $_GET['notice'] === NoticeCodes::INACTIVE_SIGNOUT
         ) {
-
             echo Blade::render('source/php/Notice/modal-notice.blade.php', [
                 'labels' => [
                     'modalTitle' => __('You have been automatically logged out.', MOD_MY_PAGES_TEXT_DOMAIN),
@@ -163,7 +162,12 @@ class App extends Application
             null
         );
 
-        wp_localize_script('gdi-host', 'modMyPages', ['restUrl' => get_rest_url()]);
+        wp_localize_script('gdi-host', 'modMyPages', [
+            'restUrl' => get_rest_url(),
+            'noticeCodes' => [
+                'INACTIVE_SIGNOUT' => NoticeCodes::INACTIVE_SIGNOUT
+            ]
+        ]);
     }
 
     public function styles()
