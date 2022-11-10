@@ -38,6 +38,7 @@
                 'color' => 'primary',
                 'text' => $labels['buttonText'] ?? 'close',
                 'attributeList' => ['data-close' => 'notice-modal'],
+                'classList' => ['u-drop-shadow-0'],
             ])
             @endbutton
         </div>
