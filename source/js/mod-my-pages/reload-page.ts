@@ -1,5 +1,4 @@
-import { getAccessToken } from "../gdi-host/access-token";
-
+const { getAccessToken } = window.gdiHost;
 const { noticeCodes: { INACTIVE_SIGNOUT } } = window.modMyPages;
 
 export const reloadPageWhenTokenExpires = async (frequencyInMs: number) => {
