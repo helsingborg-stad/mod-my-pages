@@ -1,8 +1,4 @@
-import { getAccessToken, AccessTokenResponse } from "./access-token";
-
-export interface GdiHostInterface {
-    getAccessToken: () => Promise<AccessTokenResponse>;
-}
+import { getAccessToken } from "./access-token";
 
 window.gdiHost = {
     getAccessToken,

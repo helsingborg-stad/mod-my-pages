@@ -1,11 +1,8 @@
+import { GetAccessTokenResponse } from "./api";
+
 const { modMyPages: { restUrl } } = window;
 
-export type AccessTokenResponse = {
-    token: string,
-    expires: number
-}
-
-export const getAccessToken = (): Promise<AccessTokenResponse> =>
+export const getAccessToken = (): Promise<GetAccessTokenResponse> =>
     fetch(`${restUrl}mod-my-pages/v1/access-token`, { method: 'POST' })
         .then(r => r.json())
         .then(({ token, expires }) => ({
