@@ -21,7 +21,6 @@ class App extends Application
         add_action('template_redirect', array($this, 'redirect'), 5);
         add_action('init', array($this, 'registerMenus'), 5, 2);
         add_action('acf/init', array($this, 'registerOptionsPage'), 5);
-        add_action('plugins_loaded', array($this, 'registerModules'));
         add_action('wp_enqueue_scripts', array($this, 'scripts'));
         add_action('wp_enqueue_scripts', array($this, 'styles'));
         add_action('rest_api_init', array($this, 'registerRestRoutes'));
@@ -117,30 +116,6 @@ class App extends Application
     public function registerMenus()
     {
         register_nav_menu('my-pages-menu', __('My Pages Menu', MOD_MY_PAGES_TEXT_DOMAIN));
-    }
-
-    public function registerModules()
-    {
-        foreach (['mod-my-account' => 'MyAccount'] as $slug => $name) {
-            if (function_exists('modularity_register_module')) {
-                modularity_register_module(
-                    MOD_MY_PAGES_MODULE_PATH . "/" . $name,
-                    $name
-                );
-            }
-
-            add_filter(
-                '/Modularity/externalViewPath',
-                fn (array $paths) => array_merge(
-                    $paths,
-                    [
-                        $slug => MOD_MY_PAGES_MODULE_PATH . "/" . $name . "/views"
-                    ]
-                ),
-                1,
-                3
-            );
-        }
     }
 
     public function registerOptionsPage()
