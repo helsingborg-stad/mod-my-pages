@@ -15,8 +15,7 @@ class SignOutService
         curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($request, CURLOPT_HTTPHEADER, [
             'Accept: application/json',
-            'Content-Type: application/json',
-            "Authorization: Bearer {$token}"
+            'Content-Type: application/json'
         ]);
 
         try {
