@@ -13,31 +13,48 @@
             </div>
 
             <div class="protected-page-prompt hide-authenticating">
-                <div class="o-container u-margin__bottom--12 u-margin__top--3">
-                    <header class="c-article">
-                        @typography([
-                            'element' => 'h1'
-                        ])
-                            Logga in för att se innehållet
-                        @endtypography
+                <div class="o-container u-margin__bottom--12">
+                    <div class="protected-page-prompt__prompt">
+                        <header class="c-article">
+                            @typography([
+                                'element' => 'h1',
+                                'classList' => ['protected-page-prompt__title']
+                            ])
+                                Logga in för att se innehållet
+                            @endtypography
 
-                        @button([
-                            'text' => $protectedPagePrompt['loginButton']['text'],
-                            'href' => $protectedPagePrompt['loginButton']['url'],
-                            'size' => 'md',
-                            'style' => 'filled',
-                            'color' => 'primary',
-                        ])
-                        @endbutton
+                            <div class="protected-page-prompt__actions">
+                                <div class="o-grid o-grid--no-gutter u-margin__top--4">
+                                    <div class="o-grid-12@xs u-margin__bottom--2">
+                                        @button([
+                                            'text' => $protectedPagePrompt['loginButton']['text'],
+                                            'href' => $protectedPagePrompt['loginButton']['url'],
+                                            'size' => 'md',
+                                            'style' => 'filled',
+                                            'color' => 'primary',
+                                            'classList' => ['u-width--100'],
+                                        ])
+                                        @endbutton
 
-                        @button([
-                            'text' => $protectedPagePrompt['homeButton']['text'],
-                            'href' => $protectedPagePrompt['homeButton']['url'],
-                            'size' => 'md',
-                            'style' => 'filled',
-                        ])
-                        @endbutton
-                    </header>
+                                    </div>
+                                    <div class="o-grid-12@xs">
+                                        @button([
+                                            'text' => $protectedPagePrompt['homeButton']['text'],
+                                            'href' => $protectedPagePrompt['homeButton']['url'],
+                                            'size' => 'md',
+                                            'style' => 'outlined',
+                                            'color' => 'primary',
+                                            'classList' => ['u-width--100'],
+                                        ])
+                                        @endbutton
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </header>
+                    </div>
+
                 </div>
             </div>
         </footer>
