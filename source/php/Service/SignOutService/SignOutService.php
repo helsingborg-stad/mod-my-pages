@@ -2,6 +2,7 @@
 
 namespace ModMyPages\Service\SignOutService;
 
+use Exception;
 use ModMyPages\Admin\Settings;
 
 class SignOutService
@@ -14,17 +15,18 @@ class SignOutService
         curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($request, CURLOPT_HTTPHEADER, [
             'Accept: application/json',
-            'Content-Type: application/json'
+            'Content-Type: application/json',
+            "Authorization: Bearer {$token}"
         ]);
 
-        $request = curl_exec($request);
-        $response = json_decode($request, true);
-
-        if (defined('WP_DEBUG') && WP_DEBUG) {
-            error_log('SIGNOUT SERVICE SERVICE ---------' . PHP_EOL);
-            error_log('REQUEST ---------');
-            error_log(print_r(array_keys($response), true));
-            error_log('END SERVICE ---------' . PHP_EOL);
+        try {
+            $request = curl_exec($request);
+        } catch (Exception $e) {
+            if (defined('WP_DEBUG') && WP_DEBUG) {
+                error_log('SIGN-OUT SERVICE SERVICE ERROR ---------' . PHP_EOL);
+                error_log($e->getMessage());
+                error_log('END SERVICE ---------' . PHP_EOL);
+            }
         }
     }
 }
