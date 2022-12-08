@@ -29,6 +29,8 @@ abstract class Application implements IApplicationRecipe
 
     public Closure $isProtectedPage;
 
+    public Closure $currentUrl;
+
     public function __construct(array $args)
     {
         $this->apiAuthSecret = $args['apiAuthSecret'];
@@ -40,5 +42,6 @@ abstract class Application implements IApplicationRecipe
         $this->signOutRedirectUrl = $args['signOutRedirectUrl'];
         $this->signOutService = $args['signOutService'];
         $this->isProtectedPage = $args['isProtectedPage'];
+        $this->currentUrl = $args['currentUrl'];
     }
 }

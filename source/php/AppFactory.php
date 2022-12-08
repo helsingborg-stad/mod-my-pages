@@ -32,6 +32,10 @@ class AppFactory
                         get_queried_object_id(),
                         Settings::protectedPages()
                     ),
+                    'currentUrl'       => function () {
+                        global $wp;
+                        return home_url($wp->request) ?? '';
+                    }
                 ],
                 $args
             )

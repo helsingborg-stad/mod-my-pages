@@ -111,7 +111,8 @@ class PluginTestCase extends TestCase
                     ),
                 ]),
                 'signOutRedirectUrl'    => fn () => $this->homeUrl(),
-                'isProtectedPage' => fn (): bool => false
+                'isProtectedPage' => fn (): bool => false,
+                'currentUrl' => fn (): string => $this->homeUrl(),
             ],
             $args
         ));
