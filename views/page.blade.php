@@ -4,7 +4,7 @@
 
     @if (!empty($protectedPagePrompt['isProtectedPage']))
         <footer class="hide-authenticated">
-            <div class="o-container show-authenticating">
+            <div class="o-container">
                 <div class="section-helper-navigation o-grid u-print-display--none">
                     <div class="o-grid-12">
                         @includeIf('partials.navigation.helper')
