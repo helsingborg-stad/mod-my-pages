@@ -21,12 +21,16 @@ class Settings
 
     public static function signInRedirectUrl(): string
     {
-        return get_field('after_sign_in_redirect_url', 'options') ?? home_url();
+        return !empty(get_field('after_sign_in_redirect_url', 'options'))
+            ? get_field('after_sign_in_redirect_url', 'options')
+            : home_url();
     }
 
     public static function signOutRedirectUrl(): string
     {
-        return get_field('after_sign_out_redirect_url', 'options') ?? home_url();
+        return !empty(get_field('after_sign_out_redirect_url', 'options'))
+            ? get_field('after_sign_out_redirect_url', 'options')
+            : home_url();
     }
 
     public static function protectedPages(): array
