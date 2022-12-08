@@ -46,8 +46,11 @@ class App extends Application
             ->use('/signout', SignOutUser::create([
                 'redirectUrl' => ($this->signOutRedirectUrl)(),
                 'onRedirect' => function () {
-                    ($this->signOutService)();
-                    $this->cookies->set(AccessToken::$cookieName, '');
+                    $token = $this->cookies->get(AccessToken::$cookieName);
+                    if (!empty($token)) {
+                        ($this->signOutService)($token);
+                        $this->cookies->set(AccessToken::$cookieName, '');
+                    }
                 },
             ]))
             ->redirect();
