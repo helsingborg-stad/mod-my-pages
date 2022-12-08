@@ -13,8 +13,6 @@ abstract class Application implements IApplicationRecipe
 {
     public Closure $apiAuthSecret;
 
-    public Closure $protectedPages;
-
     public ICookieRepository $cookies;
 
     public ILoginUrlService $loginUrl;
@@ -29,9 +27,10 @@ abstract class Application implements IApplicationRecipe
 
     public Closure $signOutService;
 
+    public Closure $isProtectedPage;
+
     public function __construct(array $args)
     {
-        $this->protectedPages = $args['protectedPages'];
         $this->apiAuthSecret = $args['apiAuthSecret'];
         $this->cookies = $args['cookieRepository'];
         $this->loginUrl = $args['loginUrlService'];
@@ -40,5 +39,6 @@ abstract class Application implements IApplicationRecipe
         $this->menuService = $args['menuService'];
         $this->signOutRedirectUrl = $args['signOutRedirectUrl'];
         $this->signOutService = $args['signOutService'];
+        $this->isProtectedPage = $args['isProtectedPage'];
     }
 }

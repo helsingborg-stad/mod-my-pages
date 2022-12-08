@@ -28,6 +28,8 @@ class App extends Application
         add_filter('Municipio/viewData', array($this, 'dropdownMenuController'));
         add_filter('ModMyPages/UI/DropdownMenu::items', array($this, 'disableInstantPageOnMenuItems'), 10, 1);
         add_filter('wp_footer', array($this, 'notice'), 10, 1);
+        add_filter('body_class', array($this, 'protectPage'), 20, 1);
+        add_filter('body_class', array($this, 'pendingAuthenticationClassName'), 20, 1);
         return $this;
     }
 
@@ -178,5 +180,15 @@ class App extends Application
             ]),
             $items
         );
+    }
+
+    public function protectPage(array $classes)
+    {
+        return array_merge($classes, ($this->isProtectedPage)() ? ['protected-page'] : []);
+    }
+
+    public function pendingAuthenticationClassName(array $classes)
+    {
+        return array_merge($classes, ['is-authenticating']);
     }
 }

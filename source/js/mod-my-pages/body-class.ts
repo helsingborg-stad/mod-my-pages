@@ -9,10 +9,12 @@ export const setBodyClass = async () => {
             classList: e.classList,
             isAuthenticated: token?.length > 0
         }))
-        .filter(({ classNames, isAuthenticated }) =>
-            isAuthenticated && !classNames.includes('is-authenticated')
-        )
-        .forEach(({ classList }) =>
-            classList.toggle('is-authenticated')
-        );
+        .forEach(({ classNames, isAuthenticated, classList }) =>
+        (
+            classNames.includes('is-authenticating') && classList.remove('is-authenticating'),
+            isAuthenticated
+                ? !classNames.includes('is-authenticated') && classList.toggle('is-authenticated')
+                : !classNames.includes('not-authenticated') && classList.toggle('not-authenticated')
+        ));
+
 }

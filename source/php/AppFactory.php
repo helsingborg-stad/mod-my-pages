@@ -25,9 +25,13 @@ class AppFactory
                     'tokenService'          => TokenServiceFactory::createFromEnv(),
                     'menuService'           => MenuServiceFactory::createFromEnv(),
                     'apiAuthSecret'         => fn () => Settings::apiAuthSecret(),
-                    'protectedPages'        => fn () => Settings::protectedPages(),
                     'signOutRedirectUrl'    => fn () => Settings::signOutRedirectUrl(),
                     'signOutService'        => SignOutServiceFactory::createFromEnv(),
+                    'isProtectedPage'       => fn (): bool =>
+                    get_queried_object_id() && in_array(
+                        get_queried_object_id(),
+                        Settings::protectedPages()
+                    ),
                 ],
                 $args
             )

@@ -96,7 +96,6 @@ class PluginTestCase extends TestCase
             [
                 'apiAuthSecret'             => fn () => $args['mockJwtSecret'] ?? $this->fakeJwtSecret(),
                 'getMenuItemsByMenuName'    => fn ($menuName) => $this->createMockmenu($menuName),
-                'protectedPages'            => fn () => [1, 3, 4],
                 'useRedirect'               => UseRedirectFactory::createFromEnv([
                     'mockPath'              => $args['mockPath'] ?? null,
                     'mockRedirectCallback'  => $args['mockRedirectCallback'] ?? null
@@ -111,7 +110,8 @@ class PluginTestCase extends TestCase
                         $args['mockInvalidToken'] ?? false
                     ),
                 ]),
-                'signOutRedirectUrl'    => fn () => $this->homeUrl()
+                'signOutRedirectUrl'    => fn () => $this->homeUrl(),
+                'isProtectedPage' => fn (): bool => false
             ],
             $args
         ));
