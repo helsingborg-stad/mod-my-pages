@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mod My Pages\n"
-"POT-Creation-Date: 2022-11-10 13:53+0100\n"
-"PO-Revision-Date: 2022-11-10 13:54+0100\n"
+"POT-Creation-Date: 2022-12-08 13:32+0100\n"
+"PO-Revision-Date: 2022-12-08 13:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -64,38 +64,47 @@ msgstr "Sekunder"
 msgid "My Pages Home URL"
 msgstr "Hemadress för Mina sidor"
 
+#: source/php/AcfFields/php/mod-my-pages-settings.php:85
+msgid "After sign in redirect url"
+msgstr ""
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:88
+#: source/php/AcfFields/php/mod-my-pages-settings.php:103
+msgid "Leave empty to redirect to same page"
+msgstr ""
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:100
+msgid "After sign out redirect url"
+msgstr ""
+
 #: source/php/Admin/OptionsPage.php:11
 msgid "My Pages settings"
 msgstr "Inställningar för Mina sidor"
 
-#: source/php/Admin/OptionsPage.php:12 source/php/App.php:105
+#: source/php/Admin/OptionsPage.php:12 source/php/App.php:110
 msgid "My Pages"
 msgstr "Mina Sidor"
 
-#: source/php/App.php:94
+#: source/php/App.php:99
 msgid "You have been automatically logged out."
 msgstr "Du har loggats ut automatiskt."
 
-#: source/php/App.php:95
+#: source/php/App.php:100
 msgid "Close"
 msgstr "Stäng"
 
-#: source/php/App.php:120
+#: source/php/App.php:125
 msgid "My Pages Menu"
 msgstr "Mina sidor meny"
 
-#: source/php/Modules/MyAccount/MyAccount.php:15
-#: source/php/Modules/MyAccount/MyAccount.php:16
-msgid "My Pages: My Account"
-msgstr "Mina sidor: Mitt konto"
-
-#: source/php/Modules/MyAccount/MyAccount.php:17
-msgid "Displays account details for authenticated user"
-msgstr "Visar kontodetaljer för autentiserade användare"
-
-#: source/php/UI/DropdownMenu.php:37 source/php/UI/DropdownMenu.php:39
+#: source/php/App.php:195 source/php/UI/DropdownMenu.php:37
+#: source/php/UI/DropdownMenu.php:39
 msgid "Login"
 msgstr "Logga in"
+
+#: source/php/App.php:199
+msgid "Back to homepage"
+msgstr "Tillbaka till startsidan"
 
 #. Plugin Name of the plugin/theme
 msgid "Mod My Pages"
@@ -116,3 +125,9 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad"
 msgstr ""
+
+#~ msgid "My Pages: My Account"
+#~ msgstr "Mina sidor: Mitt konto"
+
+#~ msgid "Displays account details for authenticated user"
+#~ msgstr "Visar kontodetaljer för autentiserade användare"
