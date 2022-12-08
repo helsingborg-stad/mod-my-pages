@@ -1,0 +1,12 @@
+.protected-page.is-authenticating {
+    main {
+        visibility: hidden;
+        opacity: 0;
+    }
+}   
+
+.protected-page.not-authenticated {
+    main {
+        display: none;
+    }
+}
