@@ -1,11 +1,8 @@
-body:not(.is-authenticated) {
-    .show-authenticated {
-        display: none;
-    }
-}
-
-body.is-authenticated {
-    .hide-authenticated {
-        display: none;
-    }
+body:not(.is-authenticated) .show-authenticated,
+body.is-authenticated .hide-authenticated, 
+body:not(.is-authenticating) .show-authenticating,
+body.is-authenticating .hide-authenticating,
+body:not(.not-authenticated) .show-not-authenticated,
+body.not-authenticated .hide-not-authenticated {
+    display: none;
 }
