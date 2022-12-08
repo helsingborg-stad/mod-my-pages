@@ -38,7 +38,8 @@ class LoginUrlServiceFactory
 
     private static function createDefaultCallbackUrl(string $mockUrl = ''): \Closure
     {
-        $defaultCallbackUrl = fn () =>  home_url('/mina-sidor');
+        $defaultCallbackUrl = fn () => Settings::signInRedirectUrl();
+
         $mockDefaultCallbackUrl = fn () => !empty($mockUrl) ? $mockUrl : 'http://example.test/mina-sidor';
 
         return defined('PHPUNIT_RUNNING')
