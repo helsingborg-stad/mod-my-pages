@@ -8,6 +8,7 @@ use ModMyPages\Redirect\UseRedirectFactory;
 use ModMyPages\Service\CookieRepository\CookieRepositoryFactory;
 use ModMyPages\Service\LoginUrlService\LoginUrlServiceFactory;
 use ModMyPages\Service\MenuService\MenuServiceFactory;
+use ModMyPages\Service\SignOutService\SignOutServiceFactory;
 use ModMyPages\Service\TokenService\TokenServiceFactory;
 use ModMyPages\Types\Application;
 
@@ -25,6 +26,8 @@ class AppFactory
                     'menuService'           => MenuServiceFactory::createFromEnv(),
                     'apiAuthSecret'         => fn () => Settings::apiAuthSecret(),
                     'protectedPages'        => fn () => Settings::protectedPages(),
+                    'signOutRedirectUrl'    => fn () => Settings::signOutRedirectUrl(),
+                    'signOutService'        => SignOutServiceFactory::createFromEnv(),
                 ],
                 $args
             )

@@ -25,6 +25,10 @@ abstract class Application implements IApplicationRecipe
 
     public IMenuService $menuService;
 
+    public Closure $signOutRedirectUrl;
+
+    public Closure $signOutService;
+
     public function __construct(array $args)
     {
         $this->protectedPages = $args['protectedPages'];
@@ -34,5 +38,7 @@ abstract class Application implements IApplicationRecipe
         $this->tokenService = $args['tokenService'];
         $this->useRedirect = $args['useRedirect'];
         $this->menuService = $args['menuService'];
+        $this->signOutRedirectUrl = $args['signOutRedirectUrl'];
+        $this->signOutService = $args['signOutService'];
     }
 }

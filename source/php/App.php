@@ -9,7 +9,7 @@ use ModMyPages\Helper\Blade;
 use ModMyPages\Helper\CacheBust;
 use ModMyPages\Notice\NoticeCodes;
 use ModMyPages\Redirect\Handlers\AuthenticateUser;
-use ModMyPages\Redirect\Handlers\SignoutUser;
+use ModMyPages\Redirect\Handlers\SignOutUser;
 use ModMyPages\Token\AccessToken;
 use ModMyPages\Types\Application;
 use ModMyPages\UI\DropdownMenu;
@@ -44,8 +44,9 @@ class App extends Application
                 },
             ]))
             ->use('/signout', SignOutUser::create([
-                'redirectUrl' => home_url(),
+                'redirectUrl' => ($this->signOutRedirectUrl)(),
                 'onRedirect' => function () {
+                    ($this->signOutService)();
                     $this->cookies->set(AccessToken::$cookieName, '');
                 },
             ]))

@@ -111,6 +111,7 @@ class PluginTestCase extends TestCase
                         $args['mockInvalidToken'] ?? false
                     ),
                 ]),
+                'signOutRedirectUrl'    => fn () => $this->homeUrl()
             ],
             $args
         ));
