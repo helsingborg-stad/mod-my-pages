@@ -19,6 +19,26 @@ class Settings
         return get_field('mod_my_pages_api_auth_secret', 'options') ?? '';
     }
 
+    public static function signInRedirectUrl(): string
+    {
+        $getCurrentUrl = function (): string {
+            global $wp;
+            return home_url($wp->request) ?? home_url() ?? '';
+        };
+
+        return get_field('after_sign_in_redirect_url', 'options') ?? $getCurrentUrl();
+    }
+
+    public static function signOutRedirectUrl(): string
+    {
+        $getCurrentUrl = function (): string {
+            global $wp;
+            return home_url($wp->request) ?? home_url() ?? '';
+        };
+
+        return get_field('after_sign_out_redirect_url', 'options') ?? $getCurrentUrl();
+    }
+
     public static function protectedPages(): array
     {
         return get_posts(
