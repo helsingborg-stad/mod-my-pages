@@ -30,6 +30,7 @@ class App extends Application
         add_filter('wp_footer', array($this, 'notice'), 10, 1);
         add_filter('body_class', array($this, 'protectPage'), 20, 1);
         add_filter('body_class', array($this, 'pendingAuthenticationClassName'), 20, 1);
+        add_filter('Municipio/viewData', array($this, 'protectedPagePromptController'));
         return $this;
     }
 
@@ -162,9 +163,7 @@ class App extends Application
 
     public function setBladeTemplatePaths(array $array): array
     {
-        is_child_theme()
-            ? array_splice($array, 2, 0, array(MOD_MY_PAGES_PATH . 'views/'))
-            : array_unshift($array, MOD_MY_PAGES_PATH . 'views/');
+        array_unshift($array, MOD_MY_PAGES_PATH . 'views/');
 
         return $array;
     }
@@ -185,6 +184,24 @@ class App extends Application
     public function protectPage(array $classes)
     {
         return array_merge($classes, ($this->isProtectedPage)() ? ['protected-page'] : []);
+    }
+
+
+    public function protectedPagePromptController(array $data): array
+    {
+        $data['protectedPagePrompt'] = [
+            'isProtectedPage' => ($this->isProtectedPage)(),
+            'loginButton'     => [
+                'text' => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
+                'url' => ($this->loginUrl)(($this->currentUrl)()),
+            ],
+            'homeButton'     => [
+                'text' => __('Back to homepage', MOD_MY_PAGES_TEXT_DOMAIN),
+                'url' => home_url(),
+            ],
+        ];
+
+        return $data;
     }
 
     public function pendingAuthenticationClassName(array $classes)
