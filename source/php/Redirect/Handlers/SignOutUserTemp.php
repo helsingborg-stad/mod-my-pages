@@ -6,7 +6,7 @@ use Closure;
 use ModMyPages\Redirect\IRedirectHandler;
 use ModMyPages\Redirect\IRedirectHandlerFactory;
 
-class SignoutUser implements IRedirectHandler, IRedirectHandlerFactory
+class SignOutUser implements IRedirectHandler, IRedirectHandlerFactory
 {
     private string $redirectUrl;
 
@@ -31,6 +31,6 @@ class SignoutUser implements IRedirectHandler, IRedirectHandlerFactory
 
     public static function create(array $args = []): IRedirectHandler
     {
-        return new SignoutUser($args);
+        return new SignOutUser($args);
     }
 }
