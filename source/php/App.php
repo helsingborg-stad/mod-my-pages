@@ -43,7 +43,7 @@ class App extends Application
                     $this->cookies->set(AccessToken::$cookieName, $jwt);
                 },
             ]))
-            ->use('/signout', SignoutUser::create([
+            ->use('/signout', SignOutUser::create([
                 'redirectUrl' => home_url(),
                 'onRedirect' => function () {
                     $this->cookies->set(AccessToken::$cookieName, '');
