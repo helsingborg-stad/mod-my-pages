@@ -21,22 +21,12 @@ class Settings
 
     public static function signInRedirectUrl(): string
     {
-        $getCurrentUrl = function (): string {
-            global $wp;
-            return home_url($wp->request) ?? home_url() ?? '';
-        };
-
-        return get_field('after_sign_in_redirect_url', 'options') ?? $getCurrentUrl();
+        return get_field('after_sign_in_redirect_url', 'options') ?? home_url();
     }
 
     public static function signOutRedirectUrl(): string
     {
-        $getCurrentUrl = function (): string {
-            global $wp;
-            return home_url($wp->request) ?? home_url() ?? '';
-        };
-
-        return get_field('after_sign_out_redirect_url', 'options') ?? $getCurrentUrl();
+        return get_field('after_sign_out_redirect_url', 'options') ?? home_url();
     }
 
     public static function protectedPages(): array
