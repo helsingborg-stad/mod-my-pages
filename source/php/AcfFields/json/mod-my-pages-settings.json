@@ -76,6 +76,36 @@
             "allow_archives": 1,
             "multiple": 0,
             "allow_null": 0
+        },
+        {
+            "key": "field_638761a2d3481",
+            "label": "After sign in redirect url",
+            "name": "after_sign_in_redirect_url",
+            "type": "link",
+            "instructions": "Leave empty to redirect to same page",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url"
+        },
+        {
+            "key": "field_6387615cd3480",
+            "label": "After sign out redirect url",
+            "name": "after_sign_out_redirect_url",
+            "type": "link",
+            "instructions": "Leave empty to redirect to same page",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url"
         }
     ],
     "location": [

@@ -80,6 +80,36 @@
             'multiple' => 0,
             'allow_null' => 0,
         ),
+        4 => array(
+            'key' => 'field_638761a2d3481',
+            'label' => __('After sign in redirect url', 'mod-my-pages'),
+            'name' => 'after_sign_in_redirect_url',
+            'type' => 'link',
+            'instructions' => __('Leave empty to redirect to same page', 'mod-my-pages'),
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'return_format' => 'url',
+        ),
+        5 => array(
+            'key' => 'field_6387615cd3480',
+            'label' => __('After sign out redirect url', 'mod-my-pages'),
+            'name' => 'after_sign_out_redirect_url',
+            'type' => 'link',
+            'instructions' => __('Leave empty to redirect to same page', 'mod-my-pages'),
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'return_format' => 'url',
+        ),
     ),
     'location' => array(
         0 => array(
