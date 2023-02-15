@@ -26,6 +26,7 @@ class AppFactory
                     'menuService'           => MenuServiceFactory::createFromEnv(),
                     'apiAuthSecret'         => fn () => Settings::apiAuthSecret(),
                     'signOutRedirectUrl'    => fn () => Settings::signOutRedirectUrl(),
+                    'myPagesMenu'           => fn () => Settings::myPagesMenu(),
                     'signOutService'        => SignOutServiceFactory::createFromEnv(),
                     'isProtectedPage'       => fn (): bool =>
                     get_queried_object_id() && in_array(

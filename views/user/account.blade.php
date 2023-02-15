@@ -1,5 +1,3 @@
-@php
-    use ModMyPages\Session\Profile;
-@endphp
-
-@includeWhen(!empty($myPagesMenu['dropdown']), 'user.partials.menu')
+@includeWhen(
+    !empty($myPagesMenu['dropdown']) && !empty($myPagesMenu['position']) && $myPagesMenu['position'] === 'header',
+    'user.partials.menu')

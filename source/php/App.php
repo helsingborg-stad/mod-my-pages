@@ -105,6 +105,12 @@ class App extends Application
 
     public function dropdownMenuController(array $data): array
     {
+        $menuPositions = [
+            'enabled' => 'header',
+            'disabled' => 'none',
+            'protected-pages' => ($this->isProtectedPage)() ? 'helper' : 'none'
+        ];
+
         $createMyPagesMenu = fn () => [
             'dropdown'  => [
                 'text'      => __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN),
@@ -113,6 +119,7 @@ class App extends Application
                     fn () => ($this->loginUrl)()
                 ),
             ],
+            'position' => $menuPositions[($this->myPagesMenu)()]
         ];
 
         $data['myPagesMenu'] = $createMyPagesMenu();

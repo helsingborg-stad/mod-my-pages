@@ -26,6 +26,13 @@ class Settings
             : home_url();
     }
 
+    public static function myPagesMenu(): string
+    {
+        return !empty(get_field('my_pages_menu', 'options'))
+            ? get_field('my_pages_menu', 'options')
+            : 'enabled';
+    }
+
     public static function signOutRedirectUrl(): string
     {
         return !empty(get_field('after_sign_out_redirect_url', 'options'))

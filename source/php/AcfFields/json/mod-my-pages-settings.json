@@ -106,6 +106,32 @@
                 "id": ""
             },
             "return_format": "url"
+        },
+        {
+            "key": "field_63ec88ccc6aad",
+            "label": "My Pages Menu",
+            "name": "my_pages_menu",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "enabled": "Enabled",
+                "disabled": "Disabled",
+                "protected-pages": "Only on protected pages"
+            },
+            "default_value": "enabled",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
         }
     ],
     "location": [

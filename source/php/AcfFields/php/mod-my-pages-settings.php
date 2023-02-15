@@ -110,6 +110,32 @@
             ),
             'return_format' => 'url',
         ),
+        6 => array(
+            'key' => 'field_63ec88ccc6aad',
+            'label' => __('My Pages Menu', 'mod-my-pages'),
+            'name' => 'my_pages_menu',
+            'type' => 'select',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'choices' => array(
+                'enabled' => __('Enabled', 'mod-my-pages'),
+                'disabled' => __('Disabled', 'mod-my-pages'),
+                'protected-pages' => __('Only on protected pages', 'mod-my-pages'),
+            ),
+            'default_value' => __('enabled', 'mod-my-pages'),
+            'return_format' => 'value',
+            'multiple' => 0,
+            'allow_null' => 0,
+            'ui' => 0,
+            'ajax' => 0,
+            'placeholder' => '',
+        ),
     ),
     'location' => array(
         0 => array(
