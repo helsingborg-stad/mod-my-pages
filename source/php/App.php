@@ -8,6 +8,7 @@ use Firebase\JWT\Key;
 use ModMyPages\Helper\Blade;
 use ModMyPages\Helper\CacheBust;
 use ModMyPages\Notice\NoticeCodes;
+use ModMyPages\PostTypes\MyPages;
 use ModMyPages\Redirect\Handlers\AuthenticateUser;
 use ModMyPages\Redirect\Handlers\SignOutUser;
 use ModMyPages\Token\AccessToken;
@@ -31,6 +32,8 @@ class App extends Application
         add_filter('body_class', array($this, 'protectPage'), 20, 1);
         add_filter('body_class', array($this, 'pendingAuthenticationClassName'), 20, 1);
         add_filter('Municipio/viewData', array($this, 'protectedPagePromptController'));
+        add_action('init', array(new MyPages(), 'registerPostType'), 9);
+
         return $this;
     }
 
