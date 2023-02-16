@@ -1,8 +1,10 @@
 @dropdown([
+    'id' => 'my-pages-menu',
     'items' => $myPagesMenu['dropdown']['items'],
     'direction' => 'down',
     'popup' => 'click',
-    'attributeList' => ['aria-hidden' => 'true']
+    'attributeList' => ['aria-hidden' => 'true'],
+    'classList' => ['c-dropdown--my-pages-menu']
 ])
     @button([
         'text' => $myPagesMenu['dropdown']['text'],
