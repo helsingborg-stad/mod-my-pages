@@ -144,14 +144,12 @@ class App extends Application
     {
         wp_enqueue_script(
             'gdi-host',
-            MOD_MY_PAGES_DIST_URL . CacheBust::name('js/gdi-host.js'),
-            null
+            MOD_MY_PAGES_DIST_URL . CacheBust::name('js/gdi-host.js')
         );
 
         wp_enqueue_script(
             'mod-my-pages-js',
-            MOD_MY_PAGES_DIST_URL . CacheBust::name('js/mod-my-pages.js'),
-            null
+            MOD_MY_PAGES_DIST_URL . CacheBust::name('js/mod-my-pages.js')
         );
 
         wp_localize_script('gdi-host', 'modMyPages', [
@@ -166,8 +164,7 @@ class App extends Application
     {
         wp_enqueue_style(
             'mod-my-pages-styles',
-            MOD_MY_PAGES_DIST_URL . CacheBust::name('css/mod-my-pages.css'),
-            null
+            MOD_MY_PAGES_DIST_URL . CacheBust::name('css/mod-my-pages.css')
         );
     }
 
