@@ -33,10 +33,11 @@ class AppFactory
                         get_queried_object_id(),
                         Settings::protectedPages()
                     ),
-                    'currentUrl'       => function () {
+                    'currentUrl'            => function () {
                         global $wp;
                         return home_url($wp->request) ?? '';
-                    }
+                    },
+                    'getPostType'           => fn (int $postId = \null): string => get_post_type($postId) ?? ''
                 ],
                 $args
             )

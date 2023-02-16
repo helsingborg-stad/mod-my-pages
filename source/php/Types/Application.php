@@ -33,6 +33,8 @@ abstract class Application implements IApplicationRecipe
 
     public Closure $myPagesMenu;
 
+    public Closure $getPostType;
+
     public function __construct(array $args)
     {
         $this->apiAuthSecret = $args['apiAuthSecret'];
@@ -46,5 +48,6 @@ abstract class Application implements IApplicationRecipe
         $this->isProtectedPage = $args['isProtectedPage'];
         $this->currentUrl = $args['currentUrl'];
         $this->myPagesMenu = $args['myPagesMenu'];
+        $this->getPostType = $args['getPostType'];
     }
 }
