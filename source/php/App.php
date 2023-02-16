@@ -111,7 +111,7 @@ class App extends Application
         $menuPositions = [
             'enabled' => 'header',
             'disabled' => 'none',
-            'protected-pages' => ($this->isProtectedPage)() ? 'helper' : 'none'
+            'protected-pages' => ($this->getPostType)() === MyPages::$postType ? 'helper' : 'none'
         ];
 
         $createMyPagesMenu = fn () => [
@@ -190,14 +190,14 @@ class App extends Application
 
     public function protectPage(array $classes)
     {
-        return array_merge($classes, ($this->isProtectedPage)() ? ['protected-page'] : []);
+        return array_merge($classes, ($this->getPostType)() === MyPages::$postType ? ['protected-page'] : []);
     }
 
 
     public function protectedPagePromptController(array $data): array
     {
         $data['protectedPagePrompt'] = [
-            'isProtectedPage' => ($this->isProtectedPage)(),
+            'isProtectedPage' => ($this->getPostType)() === MyPages::$postType,
             'loginButton'     => [
                 'text' => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
                 'url' => ($this->loginUrl)(($this->currentUrl)()),
