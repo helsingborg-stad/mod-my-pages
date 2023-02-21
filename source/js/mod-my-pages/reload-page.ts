@@ -1,17 +1,18 @@
-import { GetAccessTokenResponse } from '../gdi-host/api';
 const { getAccessToken } = window.gdiHost;
 const {
   noticeCodes: { INACTIVE_SIGNOUT },
 } = window.modMyPages;
 
-export const reloadPageWhenTokenExpires = async (
-  expires: number,
-  frequencyInMs: number,
-) => {
+export const reloadPageWhenTokenExpires = async (expires: number) => {
+  const timestampInSeconds = (): number => Math.floor(Date.now() / 1000);
+
+  const halfTimeOfExpiryDate = (expiresInSeconds: number) =>
+    (expiresInSeconds - timestampInSeconds()) / 2;
+
+  const toMs = (seconds: number) => seconds * 1000;
+
   const delayPromise = (delayInMs: number): Promise<void> =>
     new Promise((resolve) => setTimeout(resolve, delayInMs));
-
-  const timestampInSeconds = (): number => Math.floor(Date.now() / 1000);
 
   const reloadPage = () => {
     const getQueryParams = (url: string): URLSearchParams =>
@@ -39,17 +40,17 @@ export const reloadPageWhenTokenExpires = async (
     ].join('');
   };
 
-  const tryReloadPageRecursively = (): Promise<void> =>
-    delayPromise(frequencyInMs)
+  const tryReloadPageRecursively = (delayInMs: number = 0): Promise<void> =>
+    delayPromise(delayInMs)
       .then(getAccessToken)
       .then(({ expires }) =>
         timestampInSeconds() >= expires
           ? reloadPage()
-          : tryReloadPageRecursively(),
+          : tryReloadPageRecursively(toMs(halfTimeOfExpiryDate(expires))),
       );
 
   [expires]
-    .map((expires) => expires > 0)
-    .filter((isLoggedIn) => isLoggedIn)
+    .filter((exp) => exp > 0)
+    .map((exp) => toMs(halfTimeOfExpiryDate(exp)))
     .forEach(tryReloadPageRecursively);
 };

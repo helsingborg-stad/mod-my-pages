@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (isAuthenticated) {
     replaceStrings('.js-my-pages-string', { name: '', ...decoded });
-    reloadPageWhenTokenExpires(expires, 10000);
+    reloadPageWhenTokenExpires(expires);
   }
 
   if (!isAuthenticated) {
