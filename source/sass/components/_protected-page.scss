@@ -1,16 +1,16 @@
 .protected-page.is-authenticating {
-    main {
-        visibility: hidden;
-        opacity: 0;
-    }
-}   
+  main {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
 
 .protected-page.not-authenticated {
-    main {
-        display: none;
-    }
+  main {
+    display: none;
+  }
 }
 
 .protected-page-prompt .protected-page-prompt__actions {
-    max-width: 360px;
+  max-width: 360px;
 }

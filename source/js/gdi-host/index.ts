@@ -1,5 +1,5 @@
-import { getAccessToken } from "./access-token";
+import { getAccessToken } from './access-token';
 
 window.gdiHost = {
-    getAccessToken,
-}
+  getAccessToken,
+};
