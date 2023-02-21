@@ -1,9 +1,13 @@
+import { GetAccessTokenResponse } from '../gdi-host/api';
 const { getAccessToken } = window.gdiHost;
 const {
   noticeCodes: { INACTIVE_SIGNOUT },
 } = window.modMyPages;
 
-export const reloadPageWhenTokenExpires = async (frequencyInMs: number) => {
+export const reloadPageWhenTokenExpires = async (
+  expires: number,
+  frequencyInMs: number,
+) => {
   const delayPromise = (delayInMs: number): Promise<void> =>
     new Promise((resolve) => setTimeout(resolve, delayInMs));
 
@@ -44,8 +48,8 @@ export const reloadPageWhenTokenExpires = async (frequencyInMs: number) => {
           : tryReloadPageRecursively(),
       );
 
-  [await getAccessToken()]
-    .map(({ expires }) => expires > 0)
+  [expires]
+    .map((expires) => expires > 0)
     .filter((isLoggedIn) => isLoggedIn)
     .forEach(tryReloadPageRecursively);
 };

@@ -7,7 +7,8 @@ const {
 export const getAccessToken = (): Promise<GetAccessTokenResponse> =>
   fetch(`${restUrl}mod-my-pages/v1/access-token`, { method: 'POST' })
     .then((r) => r.json())
-    .then(({ token, expires }) => ({
+    .then(({ token, expires, decoded }) => ({
       token: token ?? '',
       expires: expires ?? 0,
+      decoded: decoded ?? {},
     }));
