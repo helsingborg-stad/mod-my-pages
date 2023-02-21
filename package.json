@@ -19,7 +19,8 @@
     "build:dev": "cross-env NODE_ENV=development webpack",
     "build": "cross-env NODE_ENV=production webpack",
     "lint": "eslint . --ext .ts,.tsx,.jsx",
-    "lint:fix": "eslint . --ext .ts,.tsx,.jsx --fix"
+    "lint:fix": "eslint . --ext .ts,.tsx,.jsx --fix",
+    "format": "prettier --write 'source/**/*.{js,jsx,ts,tsx,css,scss,md}' --config ./.prettierrc"
   },
   "browserslist": [
     "> 1%",
