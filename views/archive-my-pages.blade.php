@@ -4,7 +4,7 @@
 @section('content')
 
     @if ($archiveTitle || $archiveLead)
-        <article id="article" class="c-article c-article--readable-width s-article u-clearfix">
+        <article id="article" class="c-article c-article--readable-width s-article u-clearfix js-my-pages-template-string">
             @if ($archiveTitle)
                 @typography([
                     'variant' => 'h1',
@@ -33,7 +33,8 @@
         'partials.archive.archive-filters',
     ])
 
-    <div class="archive s-archive s-archive-template-my-pages  s-{{ sanitize_title($postType) }}-archive">
+    <div
+        class="archive s-archive s-archive-template-my-pages s-{{ sanitize_title($postType) }}-archive js-my-pages-template-string">
 
         {!! $hook->loopStart !!}
 

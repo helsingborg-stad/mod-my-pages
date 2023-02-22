@@ -8,6 +8,7 @@ export const replaceStrings = async (
         search: `{user.${search}}`,
         value,
       }))
+      .filter(({ search }) => element.innerHTML.includes(search))
       .forEach(({ search, value }) => {
         element.innerHTML = element.innerHTML.replace(
           new RegExp(search, 'g'),
