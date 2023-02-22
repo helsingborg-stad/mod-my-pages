@@ -68,7 +68,7 @@ class App extends Application
             'methods' => 'POST',
             'callback' => function () {
                 $tryDecodeToken = function (string $jwt) {
-                    $decoded = false;
+                    $decoded = null;
                     try {
                         $decoded = JWT::decode(
                             $jwt,
@@ -85,7 +85,8 @@ class App extends Application
 
                 return [
                     'token' => $tryDecodeToken($token) ? $token : '',
-                    'expires' => $tryDecodeToken($token)->exp ?? 0
+                    'expires' => $tryDecodeToken($token)->exp ?? 0,
+                    'decoded' => $tryDecodeToken($token)
                 ];
             },
         ));
