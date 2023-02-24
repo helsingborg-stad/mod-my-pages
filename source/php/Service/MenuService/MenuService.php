@@ -27,7 +27,7 @@ class MenuService implements IMenuService
         $toArray = fn ($items) => array_map(fn ($obj) => (array) $obj, $items);
         $getMenuItemsByMenuName = fn ($name) => $toArray(
             ($this->getNavMenuItems)(
-                ($this->getNavMenuLocations)()[$name] ?: 0
+                ($this->getNavMenuLocations)()[$name] ?? 0
             ) ?: []
         );
 
