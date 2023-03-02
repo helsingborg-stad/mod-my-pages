@@ -21,7 +21,7 @@ class Settings
 
     public static function signInRedirectUrl(): string
     {
-        return !empty(get_field('after_sign_in_redirect_url', 'options'))
+        return !empty(get_field('after_sign_in_redirect_url', 'options')) && is_string(get_field('after_sign_in_redirect_url', 'options'))
             ? get_field('after_sign_in_redirect_url', 'options')
             : home_url();
     }
