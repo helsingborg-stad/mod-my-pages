@@ -76,8 +76,8 @@
                 ),
                 1 => array(
                     'key' => 'field_63f6248e9a96c',
-                    'label' => __('Menu Label', 'mod-my-pages'),
-                    'name' => 'menu_label',
+                    'label' => __('Label', 'mod-my-pages'),
+                    'name' => 'label',
                     'type' => 'text',
                     'instructions' => '',
                     'required' => 0,
@@ -212,8 +212,8 @@
                 ),
                 1 => array(
                     'key' => 'field_63f627ce8b4fb',
-                    'label' => __('Menu Label', 'mod-my-pages'),
-                    'name' => 'menu_label',
+                    'label' => __('Label', 'mod-my-pages'),
+                    'name' => 'label',
                     'type' => 'text',
                     'instructions' => '',
                     'required' => 0,

@@ -73,8 +73,8 @@
                 },
                 {
                     "key": "field_63f6248e9a96c",
-                    "label": "Menu Label",
-                    "name": "menu_label",
+                    "label": "Label",
+                    "name": "label",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -209,8 +209,8 @@
                 },
                 {
                     "key": "field_63f627ce8b4fb",
-                    "label": "Menu Label",
-                    "name": "menu_label",
+                    "label": "Label",
+                    "name": "label",
                     "type": "text",
                     "instructions": "",
                     "required": 0,

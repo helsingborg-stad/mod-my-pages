@@ -16,13 +16,13 @@ class SecondaryMenu extends DropdownMenu
 
     protected function label(): string
     {
-        return  $this->acf->getOption('my_pages_secondary_menu')['menu_label'] ?: '{user.name}';
+        return  $this->acf->getOption('my_pages_secondary_menu_label') ?: '{user.name}';
     }
 
     protected function active(): bool
     {
         return $this->query->getPostType() == MyPages::$postType
-            && ($this->acf->getOption('my_pages_secondary_menu')['active'] ?? false);
+            && ($this->acf->getOption('my_pages_secondary_menu_active') ?: false);
     }
 
     protected function hideIcon(): bool
@@ -32,7 +32,7 @@ class SecondaryMenu extends DropdownMenu
 
     protected function hideLabel(): bool
     {
-        return $this->acf->getOption('my_pages_secondary_menu')['hide_label'] ?? false;
+        return $this->acf->getOption('my_pages_secondary_menu_hide_label') ?: false;
     }
 
     protected function loginButton(): array

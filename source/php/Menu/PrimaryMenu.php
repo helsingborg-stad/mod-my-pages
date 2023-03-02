@@ -15,21 +15,21 @@ class PrimaryMenu extends DropdownMenu
 
     protected function afterLoginRedirectUrl(): string
     {
-        return $this->acf->getOption('my_pages_primary_menu')['after_sign_in_redirect_url'] ?? '';
+        return $this->acf->getOption('my_pages_primary_menu_after_sign_in_redirect_url') ?: '';
     }
 
     protected function label(): string
     {
-        return  $this->acf->getOption('my_pages_primary_menu')['menu_label'] ?? __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN);
+        return  $this->acf->getOption('my_pages_primary_menu_label') ?: __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN);
     }
 
     protected function active(): bool
     {
-        return $this->acf->getOption('my_pages_primary_menu')['active'] ?? false;
+        return $this->acf->getOption('my_pages_primary_menu_active') ?: false;
     }
 
     protected function hideLabel(): bool
     {
-        return $this->acf->getOption('my_pages_primary_menu')['hide_label'] ?? false;
+        return $this->acf->getOption('my_pages_primary_menu_hide_label') ?: false;
     }
 }
