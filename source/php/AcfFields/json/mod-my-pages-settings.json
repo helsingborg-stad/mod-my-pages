@@ -38,25 +38,6 @@
             "append": ""
         },
         {
-            "key": "field_63f7793c6613a",
-            "label": "Custom Post Type Slug for My Pages",
-            "name": "custom_post_type_slug_for_my_pages",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "my-pages",
-            "prepend": "",
-            "append": ""
-        },
-        {
             "key": "field_63f62315da0e2",
             "label": "Primary Menu for My Pages",
             "name": "my_pages_primary_menu",
@@ -73,8 +54,8 @@
             "sub_fields": [
                 {
                     "key": "field_63f6245d9a96b",
-                    "label": "Show in header",
-                    "name": "show_in_header",
+                    "label": "Active",
+                    "name": "active",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
@@ -209,8 +190,8 @@
             "sub_fields": [
                 {
                     "key": "field_63f627ce8b4fa",
-                    "label": "Show in help menu",
-                    "name": "show_in_help_menu",
+                    "label": "Active",
+                    "name": "active",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,

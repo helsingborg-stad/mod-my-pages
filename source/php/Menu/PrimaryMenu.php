@@ -20,12 +20,12 @@ class PrimaryMenu extends DropdownMenu
 
     protected function label(): string
     {
-        return  $this->acf->getOption('my_pages_primary_menu')['menu_label'] ?: __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN);
+        return  $this->acf->getOption('my_pages_primary_menu')['menu_label'] ?? __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN);
     }
 
     protected function active(): bool
     {
-        return $this->acf->getOption('my_pages_primary_menu')['show_in_header'] ?? false;
+        return $this->acf->getOption('my_pages_primary_menu')['active'] ?? false;
     }
 
     protected function hideLabel(): bool

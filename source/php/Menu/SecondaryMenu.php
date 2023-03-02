@@ -22,7 +22,7 @@ class SecondaryMenu extends DropdownMenu
     protected function active(): bool
     {
         return $this->query->getPostType() == MyPages::$postType
-            && ($this->acf->getOption('my_pages_secondary_menu')['show_in_help_menu'] ?? false);
+            && ($this->acf->getOption('my_pages_secondary_menu')['active'] ?? false);
     }
 
     protected function hideIcon(): bool

@@ -41,25 +41,6 @@
             'append' => '',
         ),
         2 => array(
-            'key' => 'field_63f7793c6613a',
-            'label' => __('Custom Post Type Slug for My Pages', 'mod-my-pages'),
-            'name' => 'custom_post_type_slug_for_my_pages',
-            'type' => 'text',
-            'instructions' => '',
-            'required' => 0,
-            'conditional_logic' => 0,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'default_value' => '',
-            'maxlength' => '',
-            'placeholder' => __('my-pages', 'mod-my-pages'),
-            'prepend' => '',
-            'append' => '',
-        ),
-        3 => array(
             'key' => 'field_63f62315da0e2',
             'label' => __('Primary Menu for My Pages', 'mod-my-pages'),
             'name' => 'my_pages_primary_menu',
@@ -76,8 +57,8 @@
             'sub_fields' => array(
                 0 => array(
                     'key' => 'field_63f6245d9a96b',
-                    'label' => __('Show in header', 'mod-my-pages'),
-                    'name' => 'show_in_header',
+                    'label' => __('Active', 'mod-my-pages'),
+                    'name' => 'active',
                     'type' => 'true_false',
                     'instructions' => '',
                     'required' => 0,
@@ -195,7 +176,7 @@
                 ),
             ),
         ),
-        4 => array(
+        3 => array(
             'key' => 'field_63f627ce8b4f9',
             'label' => __('Secondary Menu for My Pages', 'mod-my-pages'),
             'name' => 'my_pages_secondary_menu',
@@ -212,8 +193,8 @@
             'sub_fields' => array(
                 0 => array(
                     'key' => 'field_63f627ce8b4fa',
-                    'label' => __('Show in help menu', 'mod-my-pages'),
-                    'name' => 'show_in_help_menu',
+                    'label' => __('Active', 'mod-my-pages'),
+                    'name' => 'active',
                     'type' => 'true_false',
                     'instructions' => '',
                     'required' => 0,
