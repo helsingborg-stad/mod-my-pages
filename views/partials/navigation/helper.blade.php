@@ -1,8 +1,8 @@
-<div class="nav-helper js-my-pages-template-string">
+<div class="nav-helper">
     @includeIf('partials.navigation.breadcrumb')
 
-    @if (!empty($myPagesMenu['dropdown']) && !empty($myPagesMenu['position']) && $myPagesMenu['position'] === 'helper')
-        @includeIf('user.partials.menu')
+    @if (!empty($myPagesSecondaryMenu) && $myPagesSecondaryMenu->active && !empty($myPagesSecondaryMenu->items))
+        @includeIf('user.partials.menu', ['viewModel' => $myPagesSecondaryMenu])
     @else
         @includeIf('partials.navigation.accessibility')
     @endif

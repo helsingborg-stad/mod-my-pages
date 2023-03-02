@@ -74,7 +74,7 @@
                 {
                     "key": "field_63f6245d9a96b",
                     "label": "Show in header",
-                    "name": "my_pages_primary_menu_show_in_header",
+                    "name": "show_in_header",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
@@ -93,7 +93,7 @@
                 {
                     "key": "field_63f6248e9a96c",
                     "label": "Menu Label",
-                    "name": "my_pages_primary_menu_label",
+                    "name": "menu_label",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -120,7 +120,7 @@
                 {
                     "key": "field_63f626d69ed3b",
                     "label": "Hide label",
-                    "name": "my_pages_primary_menu_hide_label",
+                    "name": "hide_label",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
@@ -147,7 +147,7 @@
                 {
                     "key": "field_63f776842419c",
                     "label": "After sign in redirect url",
-                    "name": "my_pages_primary_menu_after_sign_in_redirect_url",
+                    "name": "after_sign_in_redirect_url",
                     "type": "link",
                     "instructions": "Leave empty to redirect to same page",
                     "required": 0,
@@ -170,7 +170,7 @@
                 {
                     "key": "field_63f776ceb6a40",
                     "label": "After sign out redirect url",
-                    "name": "my_pages_primary_menu_after_sign_out_redirect_url",
+                    "name": "after_sign_out_redirect_url",
                     "type": "link",
                     "instructions": "Leave empty to redirect to same page",
                     "required": 0,
@@ -210,7 +210,7 @@
                 {
                     "key": "field_63f627ce8b4fa",
                     "label": "Show in help menu",
-                    "name": "my_pages_secondary_menu_show_in_help-menu",
+                    "name": "show_in_help_menu",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
@@ -229,7 +229,7 @@
                 {
                     "key": "field_63f627ce8b4fb",
                     "label": "Menu Label",
-                    "name": "my_pages_secondary_menu_label",
+                    "name": "menu_label",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -256,7 +256,7 @@
                 {
                     "key": "field_63f627ce8b4fc",
                     "label": "Hide label",
-                    "name": "my_pages_secondary_menu_hide_label",
+                    "name": "hide_label",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
@@ -283,7 +283,7 @@
                 {
                     "key": "field_63f7771db6a42",
                     "label": "After sign out redirect url",
-                    "name": "my_pages_secondary_menu_after_sign_out_redirect_url",
+                    "name": "after_sign_out_redirect_url",
                     "type": "link",
                     "instructions": "Leave empty to redirect to same page",
                     "required": 0,

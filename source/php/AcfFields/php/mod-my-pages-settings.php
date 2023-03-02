@@ -77,7 +77,7 @@
                 0 => array(
                     'key' => 'field_63f6245d9a96b',
                     'label' => __('Show in header', 'mod-my-pages'),
-                    'name' => 'my_pages_primary_menu_show_in_header',
+                    'name' => 'show_in_header',
                     'type' => 'true_false',
                     'instructions' => '',
                     'required' => 0,
@@ -96,7 +96,7 @@
                 1 => array(
                     'key' => 'field_63f6248e9a96c',
                     'label' => __('Menu Label', 'mod-my-pages'),
-                    'name' => 'my_pages_primary_menu_label',
+                    'name' => 'menu_label',
                     'type' => 'text',
                     'instructions' => '',
                     'required' => 0,
@@ -123,7 +123,7 @@
                 2 => array(
                     'key' => 'field_63f626d69ed3b',
                     'label' => __('Hide label', 'mod-my-pages'),
-                    'name' => 'my_pages_primary_menu_hide_label',
+                    'name' => 'hide_label',
                     'type' => 'true_false',
                     'instructions' => '',
                     'required' => 0,
@@ -150,7 +150,7 @@
                 3 => array(
                     'key' => 'field_63f776842419c',
                     'label' => __('After sign in redirect url', 'mod-my-pages'),
-                    'name' => 'my_pages_primary_menu_after_sign_in_redirect_url',
+                    'name' => 'after_sign_in_redirect_url',
                     'type' => 'link',
                     'instructions' => __('Leave empty to redirect to same page', 'mod-my-pages'),
                     'required' => 0,
@@ -173,7 +173,7 @@
                 4 => array(
                     'key' => 'field_63f776ceb6a40',
                     'label' => __('After sign out redirect url', 'mod-my-pages'),
-                    'name' => 'my_pages_primary_menu_after_sign_out_redirect_url',
+                    'name' => 'after_sign_out_redirect_url',
                     'type' => 'link',
                     'instructions' => __('Leave empty to redirect to same page', 'mod-my-pages'),
                     'required' => 0,
@@ -213,7 +213,7 @@
                 0 => array(
                     'key' => 'field_63f627ce8b4fa',
                     'label' => __('Show in help menu', 'mod-my-pages'),
-                    'name' => 'my_pages_secondary_menu_show_in_help-menu',
+                    'name' => 'show_in_help_menu',
                     'type' => 'true_false',
                     'instructions' => '',
                     'required' => 0,
@@ -232,7 +232,7 @@
                 1 => array(
                     'key' => 'field_63f627ce8b4fb',
                     'label' => __('Menu Label', 'mod-my-pages'),
-                    'name' => 'my_pages_secondary_menu_label',
+                    'name' => 'menu_label',
                     'type' => 'text',
                     'instructions' => '',
                     'required' => 0,
@@ -259,7 +259,7 @@
                 2 => array(
                     'key' => 'field_63f627ce8b4fc',
                     'label' => __('Hide label', 'mod-my-pages'),
-                    'name' => 'my_pages_secondary_menu_hide_label',
+                    'name' => 'hide_label',
                     'type' => 'true_false',
                     'instructions' => '',
                     'required' => 0,
@@ -286,7 +286,7 @@
                 3 => array(
                     'key' => 'field_63f7771db6a42',
                     'label' => __('After sign out redirect url', 'mod-my-pages'),
-                    'name' => 'my_pages_secondary_menu_after_sign_out_redirect_url',
+                    'name' => 'after_sign_out_redirect_url',
                     'type' => 'link',
                     'instructions' => __('Leave empty to redirect to same page', 'mod-my-pages'),
                     'required' => 0,

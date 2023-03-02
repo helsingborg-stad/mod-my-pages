@@ -28,6 +28,8 @@ abstract class Application extends PluginManager
         $plugin
             ->register($DI->make(Admin\OptionsPage::class))
             ->register($DI->make(Rest\AccessToken::class))
+            ->register($DI->make(Menu\PrimaryMenu::class))
+            ->register($DI->make(Menu\SecondaryMenu::class))
             ->register($DI->make(PostType\MyPages::class))
             ->register($DI->make(Notice\ModalNotice::class));
     }

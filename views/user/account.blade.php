@@ -1,3 +1,3 @@
-@includeWhen(
-    !empty($myPagesMenu['dropdown']) && !empty($myPagesMenu['position']) && $myPagesMenu['position'] === 'header',
-    'user.partials.menu')
+@includeWhen($myPagesPrimaryMenu->active && !empty($myPagesPrimaryMenu->items), 'user.partials.menu', [
+    'viewModel' => $myPagesPrimaryMenu,
+])
