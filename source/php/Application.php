@@ -27,6 +27,7 @@ abstract class Application extends PluginManager
     {
         $plugin
             ->register($DI->make(Admin\OptionsPage::class))
+            ->register($DI->make(Admin\AcfSelectIcons::class))
             ->register($DI->make(Rest\AccessToken::class))
             ->register($DI->make(Menu\PrimaryMenu::class))
             ->register($DI->make(Menu\SecondaryMenu::class))
