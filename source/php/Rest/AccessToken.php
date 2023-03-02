@@ -43,7 +43,7 @@ class AccessToken implements ActionHookSubscriber
                         try {
                             $decoded = JWT::decode(
                                 $jwt,
-                                new Key($this->acf->getOption('mod_my_pages_api_auth_secret') ?: 'apan_japan', 'HS256')
+                                new Key($this->acf->getOption('mod_my_pages_api_auth_secret') ?: 'random', 'HS256')
                             );
                         } catch (Exception $e) {
                             error_log('REST ---------' . PHP_EOL);

@@ -16,7 +16,7 @@ class Settings
 
     public static function apiAuthSecret(): string
     {
-        return get_field('mod_my_pages_api_auth_secret', 'options') ?? '';
+        return get_field('mod_my_pages_api_auth_secret', 'options') ?: 'random';
     }
 
     public static function signInRedirectUrl(): string
