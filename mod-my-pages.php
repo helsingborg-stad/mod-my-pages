@@ -18,7 +18,6 @@ if (!defined('WPINC')) {
     die;
 }
 
-
 define('MOD_MY_PAGES_PATH', plugin_dir_path(__FILE__));
 define('MOD_MY_PAGES_URL', plugins_url('', __FILE__));
 define('MOD_MY_PAGES_DIST_URL', MOD_MY_PAGES_URL . '/dist/');

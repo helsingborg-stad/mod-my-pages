@@ -17,11 +17,7 @@
   "autoload": {
     "psr-4": {
       "ModMyPages\\": "source/php/"
-    },
-    "files": [
-      "Const.php",
-      "Public.php"
-    ]
+    }
   },
   "minimum-stability": "stable",
   "require": {
