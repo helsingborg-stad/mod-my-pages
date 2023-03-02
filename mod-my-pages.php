@@ -18,20 +18,21 @@ if (!defined('WPINC')) {
     die;
 }
 
+
 define('MOD_MY_PAGES_PATH', plugin_dir_path(__FILE__));
 define('MOD_MY_PAGES_URL', plugins_url('', __FILE__));
 define('MOD_MY_PAGES_DIST_URL', MOD_MY_PAGES_URL . '/dist/');
 define('MOD_MY_PAGES_TEMPLATE_PATH', MOD_MY_PAGES_PATH . 'templates/');
 define('MOD_MY_PAGES_TEXT_DOMAIN', 'mod-my-pages');
 
-load_plugin_textdomain(MOD_MY_PAGES_TEXT_DOMAIN, false, plugin_basename(dirname(__FILE__)) . '/languages');
-
-require_once MOD_MY_PAGES_PATH . 'Public.php';
-
 // Register the autoloader
 require __DIR__ . '/vendor/autoload.php';
 
-// Acf auto import and export
+load_plugin_textdomain(MOD_MY_PAGES_TEXT_DOMAIN, false, plugin_basename(dirname(__FILE__)) . '/languages');
+
+/**
+ * @psalm-suppress UndefinedClass
+ */
 add_action('acf/init', function () {
     $acfExportManager = new \AcfExportManager\AcfExportManager();
     $acfExportManager->setTextdomain('mod-my-pages');
@@ -43,6 +44,11 @@ add_action('acf/init', function () {
     $acfExportManager->import();
 });
 
-// Start application
+/**
+ * Soon to be refactored away in favor of below
+ * @deprecated  
+ */
 ModMyPages\AppFactory::createFromEnv()
     ->run();
+
+ModMyPages\Application::create();

@@ -9,10 +9,4 @@ interface IApplicationRecipe
     public function redirect();
 
     public function setBladeTemplatePaths(array $paths): array;
-
-    public function registerOptionsPage();
-
-    public function registerMenus();
-
-    public function dropdownMenuController(array $data): array;
 }

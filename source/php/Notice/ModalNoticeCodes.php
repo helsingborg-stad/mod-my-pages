@@ -2,7 +2,7 @@
 
 namespace ModMyPages\Notice;
 
-abstract class NoticeCodes
+abstract class ModalNoticeCodes
 {
     const INACTIVE_SIGNOUT = 'inactive-signout';
 }

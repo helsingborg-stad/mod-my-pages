@@ -1,10 +1,15 @@
 <?php
 
-namespace ModMyPages\PostTypes;
+namespace ModMyPages\PostType;
 
 class MyPages
 {
     public static $postType = 'my-pages';
+
+    public function __construct()
+    {
+        $this->registerPostType();
+    }
 
     public function registerPostType()
     {

@@ -2,37 +2,27 @@
 
 namespace ModMyPages;
 
-use Exception;
-use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-use ModMyPages\Helper\Blade;
 use ModMyPages\Helper\CacheBust;
-use ModMyPages\Notice\NoticeCodes;
-use ModMyPages\PostTypes\MyPages;
+use ModMyPages\Notice\ModalNoticeCodes;
+use ModMyPages\PostType\MyPages;
 use ModMyPages\Redirect\Handlers\AuthenticateUser;
 use ModMyPages\Redirect\Handlers\SignOutUser;
 use ModMyPages\Token\AccessToken;
 use ModMyPages\Types\Application;
-use ModMyPages\UI\DropdownMenu;
 
 class App extends Application
 {
     public function run(): Application
     {
         add_action('template_redirect', array($this, 'redirect'), 5);
-        add_action('init', array($this, 'registerMenus'), 5, 2);
-        add_action('acf/init', array($this, 'registerOptionsPage'), 5);
         add_action('wp_enqueue_scripts', array($this, 'scripts'));
         add_action('wp_enqueue_scripts', array($this, 'styles'));
-        add_action('rest_api_init', array($this, 'registerRestRoutes'));
         add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
-        add_filter('Municipio/viewData', array($this, 'dropdownMenuController'));
         add_filter('ModMyPages/UI/DropdownMenu::items', array($this, 'disableInstantPageOnMenuItems'), 10, 1);
-        add_filter('wp_footer', array($this, 'notice'), 10, 1);
         add_filter('body_class', array($this, 'protectPage'), 20, 1);
         add_filter('body_class', array($this, 'pendingAuthenticationClassName'), 20, 1);
         add_filter('Municipio/viewData', array($this, 'protectedPagePromptController'));
-        add_action('init', array(new MyPages(), 'registerPostType'), 9);
 
         return $this;
     }
@@ -62,85 +52,6 @@ class App extends Application
             ->redirect();
     }
 
-    public function registerRestRoutes()
-    {
-        register_rest_route('mod-my-pages/v1', '/access-token', array(
-            'methods' => 'POST',
-            'callback' => function () {
-                $tryDecodeToken = function (string $jwt) {
-                    $decoded = null;
-                    try {
-                        $decoded = JWT::decode(
-                            $jwt,
-                            new Key(($this->apiAuthSecret)(), 'HS256')
-                        );
-                    } catch (Exception $e) {
-                        $this->cookies->set(AccessToken::$cookieName, '');
-                    }
-
-                    return $decoded;
-                };
-
-                $token = $this->cookies->get(AccessToken::$cookieName);
-
-                return [
-                    'token' => $tryDecodeToken($token) ? $token : '',
-                    'expires' => $tryDecodeToken($token)->exp ?? 0,
-                    'decoded' => $tryDecodeToken($token)
-                ];
-            },
-        ));
-    }
-
-    public function notice()
-    {
-        if (
-            !empty($_GET['notice'])
-            && $_GET['notice'] === NoticeCodes::INACTIVE_SIGNOUT
-        ) {
-            echo Blade::render('source/php/Notice/modal-notice.blade.php', [
-                'labels' => [
-                    'modalTitle' => __('You have been automatically logged out.', MOD_MY_PAGES_TEXT_DOMAIN),
-                    'buttonText' => __('Close', MOD_MY_PAGES_TEXT_DOMAIN),
-                ]
-            ]);
-        }
-    }
-
-    public function dropdownMenuController(array $data): array
-    {
-        $menuPositions = [
-            'enabled' => 'header',
-            'disabled' => 'none',
-            'protected-pages' => ($this->getPostType)() === MyPages::$postType ? 'helper' : 'none'
-        ];
-
-        $createMyPagesMenu = fn () => [
-            'dropdown'  => [
-                'text'      => __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN),
-                'items'     => DropdownMenu::create(
-                    ($this->menuService)('my-pages-menu'),
-                    fn () => ($this->loginUrl)()
-                ),
-            ],
-            'position' => $menuPositions[($this->myPagesMenu)()]
-        ];
-
-        $data['myPagesMenu'] = $createMyPagesMenu();
-
-        return $data;
-    }
-
-    public function registerMenus()
-    {
-        register_nav_menu('my-pages-menu', __('My Pages Menu', MOD_MY_PAGES_TEXT_DOMAIN));
-    }
-
-    public function registerOptionsPage()
-    {
-        new Admin\OptionsPage();
-    }
-
     public function scripts()
     {
         wp_enqueue_script(
@@ -156,7 +67,7 @@ class App extends Application
         wp_localize_script('gdi-host', 'modMyPages', [
             'restUrl' => get_rest_url(),
             'noticeCodes' => [
-                'INACTIVE_SIGNOUT' => NoticeCodes::INACTIVE_SIGNOUT
+                'INACTIVE_SIGNOUT' => ModalNoticeCodes::INACTIVE_SIGNOUT
             ]
         ]);
     }
@@ -169,11 +80,11 @@ class App extends Application
         );
     }
 
-    public function setBladeTemplatePaths(array $array): array
+    public function setBladeTemplatePaths(array $paths): array
     {
-        array_unshift($array, MOD_MY_PAGES_PATH . 'views/');
+        array_unshift($paths, MOD_MY_PAGES_PATH . 'views/');
 
-        return $array;
+        return $paths;
     }
 
     public function disableInstantPageOnMenuItems(array $items)
@@ -193,7 +104,6 @@ class App extends Application
     {
         return array_merge($classes, ($this->getPostType)() === MyPages::$postType ? ['protected-page'] : []);
     }
-
 
     public function protectedPagePromptController(array $data): array
     {
