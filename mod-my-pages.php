@@ -40,6 +40,7 @@ add_action('acf/init', function () {
     $acfExportManager->autoExport(array(
         'mod-my-pages-settings'         => 'group_6328267265e02',
         'mod-my-pages-protected-page'   => 'group_632c26d221ea2',
+        'mod-my-pages-module-my-apps'   => 'group_6400c2b35050d',
     ));
     $acfExportManager->import();
 });
