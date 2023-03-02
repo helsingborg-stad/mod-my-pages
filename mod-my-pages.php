@@ -24,6 +24,7 @@ define('MOD_MY_PAGES_URL', plugins_url('', __FILE__));
 define('MOD_MY_PAGES_DIST_URL', MOD_MY_PAGES_URL . '/dist/');
 define('MOD_MY_PAGES_TEMPLATE_PATH', MOD_MY_PAGES_PATH . 'templates/');
 define('MOD_MY_PAGES_TEXT_DOMAIN', 'mod-my-pages');
+define('MOD_MY_PAGES_MODULE_PATH', MOD_MY_PAGES_PATH . 'source/php/Modularity/Modules/');
 
 // Register the autoloader
 require __DIR__ . '/vendor/autoload.php';

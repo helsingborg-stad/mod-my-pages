@@ -18,3 +18,7 @@ if (!defined('MOD_MY_PAGES_TEMPLATE_PATH')) {
 if (!defined('MOD_MY_PAGES_TEXT_DOMAIN')) {
     define('MOD_MY_PAGES_TEXT_DOMAIN', 'mod-my-pages');
 }
+
+if (!defined('MOD_MY_PAGES_MODULE_PATH')) {
+    define('MOD_MY_PAGES_MODULE_PATH', MOD_MY_PAGES_PATH . 'source/php/Modularity/Modules/');
+}
