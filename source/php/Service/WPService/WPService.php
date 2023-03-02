@@ -5,6 +5,12 @@ namespace ModMyPages\Service\WPService;
 interface WPService extends
     WpGetNavMenuItems,
     GetNavMenuLocations,
-    RegisterNavMenu
+    RegisterNavMenu,
+    GetPostType,
+    HomeUrl,
+    IsArchive,
+    IsSingle,
+    RegisterRestRoute,
+    WPNavService
 {
 }

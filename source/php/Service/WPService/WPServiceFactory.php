@@ -15,12 +15,37 @@ class WPServiceFactory
 
             public function getNavMenuLocations(): array
             {
-                return get_nav_menu_locations() ?? [];
+                return get_nav_menu_locations();
             }
 
-            public function registerNavMenu(string $location, string $description)
+            public function registerNavMenu($location, string $description): void
             {
-                return register_nav_menu($location, $description);
+                register_nav_menu($location, $description);
+            }
+
+            public function getPostType(?int $postId = null): ?string
+            {
+                return get_post_type($postId) ?: null;
+            }
+
+            public function homeUrl(string $path = "", string $scheme = null): string
+            {
+                return home_url($path, $scheme);
+            }
+
+            public function isArchive(): bool
+            {
+                return is_archive();
+            }
+
+            public function isSingle(): bool
+            {
+                return is_single();
+            }
+
+            public function registerRestRoute(string $namespace, string $route, array $args): bool
+            {
+                return register_rest_route($namespace, $route, $args);
             }
         };
     }

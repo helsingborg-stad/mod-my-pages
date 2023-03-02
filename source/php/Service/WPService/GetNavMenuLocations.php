@@ -2,13 +2,16 @@
 
 namespace ModMyPages\Service\WPService;
 
+/**
+ * Interface for the WordPress function get_nav_menu_locations().
+ */
 interface GetNavMenuLocations
 {
     /**
-     * get_nav_menu_locations
-     * Registered navigation menu locations and the menus assigned them. If none are registered, an empty array.
+     * Retrieves the registered nav menu locations.
+     * @link https://developer.wordpress.org/reference/functions/get_nav_menu_locations/
      *
-     * @return array
+     * @return array The registered nav menu locations.
      */
     public function getNavMenuLocations(): array;
 }
