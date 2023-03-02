@@ -3,12 +3,12 @@
         <div class="o-container">
             <div class="section-helper-navigation o-grid u-print-display--none">
                 <div class="o-grid-12">
-                    @includeIf('partials.navigation.helper')
+                    @includeIf('partials.navigation.helper', ['myPagesSecondaryMenu' => null])
                 </div>
             </div>
         </div>
 
-        <div class="protected-page-prompt hide-authenticating">
+        <div id="protected-page-prompt" class="protected-page-prompt hide-authenticating">
             <div class="o-container u-margin__bottom--12">
                 <div class="protected-page-prompt__prompt">
                     <header class="c-article">
@@ -23,6 +23,7 @@
                             <div class="o-grid o-grid--no-gutter u-margin__top--4">
                                 <div class="o-grid-12@xs u-margin__bottom--2">
                                     @button([
+                                        'id' => 'protected-page-prompt-login-button',
                                         'text' => $protectedPagePrompt['loginButton']['text'],
                                         'href' => $protectedPagePrompt['loginButton']['url'],
                                         'size' => 'md',
