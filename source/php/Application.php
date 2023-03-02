@@ -38,7 +38,7 @@ abstract class Application extends PluginManager
     }
 
     /**
-     * Abstract method required for concrete implementation that boostraps the plugin with services & dependecies
+     * Boostraps the plugin with services & dependecies
      *
      * @param DIContainer $DI
      * @return void
