@@ -9,6 +9,9 @@ use ModMyPages\Service\LoginUrlService\ILoginUrlService;
 use ModMyPages\Service\MenuService\IMenuService;
 use ModMyPages\Service\TokenService\ITokenService;
 
+/**
+ * @deprecated
+ */
 abstract class Application implements IApplicationRecipe
 {
     public Closure $apiAuthSecret;

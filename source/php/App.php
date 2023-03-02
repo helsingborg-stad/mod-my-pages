@@ -11,6 +11,9 @@ use ModMyPages\Redirect\Handlers\SignOutUser;
 use ModMyPages\Token\AccessToken;
 use ModMyPages\Types\Application;
 
+/**
+ * @deprecated
+ */
 class App extends Application
 {
     public function run(): Application

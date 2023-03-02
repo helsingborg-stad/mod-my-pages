@@ -2,6 +2,9 @@
 
 namespace ModMyPages\Types;
 
+/**
+ * @deprecated
+ */
 interface IApplicationRecipe
 {
     public function run(): Application;
