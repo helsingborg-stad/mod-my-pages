@@ -15,7 +15,7 @@
             @if ($item->display === 'hide')
                 @continue
             @endif
-            <div class="o-grid-12 o-grid-6@sm o-grid-4@md u-display--flex">
+            <div class="o-grid-6 o-grid-6@sm o-grid-4@md u-display--flex">
                 @card([
                     'id' => 'mod-my-apps-' . $ID . '-' . $item->id,
                     'link' => $item->link,
