@@ -35,17 +35,17 @@ class AuthenticateUser implements IRedirectHandler, IRedirectHandlerFactory
         $this->onError = $args['onError'];
     }
 
-    public function redirectUrl(array $query): string
+    public function redirectUrl(array $queryParams): string
     {
         try {
-            $jwt = !empty($query['ts_session_id'])
-                ? ($this->tokenService)($query['ts_session_id'])
+            $jwt = !empty($queryParams['ts_session_id'])
+                ? ($this->tokenService)($queryParams['ts_session_id'])
                 : null;
 
             if (!empty($jwt)) {
                 JWT::decode($jwt, $this->secret);
                 ($this->onSuccess)($jwt);
-                return $query['callbackUrl'] ?? $this->successUrl;
+                return $queryParams['callbackUrl'] ?? $this->successUrl;
             }
         } catch (LogicException $e) {
             // errors having to do with environmental setup or malformed JWT Keys
@@ -55,17 +55,17 @@ class AuthenticateUser implements IRedirectHandler, IRedirectHandlerFactory
             ($this->onError)($e->getMessage());
         }
 
-        return $query['callbackUrl'] ?? $this->errorUrl;
+        return $queryParams['callbackUrl'] ?? $this->errorUrl;
     }
 
-    public function shouldRedirect(array $query): bool
+    public function shouldRedirect(array $queryParams): bool
     {
         return true;
     }
 
     public static function create(array $args = []): IRedirectHandler
     {
-        $logError = function (string $msg) {
+        $logError = function (string $msg): void {
             error_log('Failed to decode JWT: ' . $msg);
             error_log(PHP_EOL);
         };
