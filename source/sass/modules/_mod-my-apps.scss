@@ -1,0 +1,11 @@
+$font-size-title-xs: 16px;
+$font-size-body-xs: 13px;
+
+@media screen and (max-width: 32.4375em) {
+  .c-card--mod-my-apps .c-card__title {
+    font-size: $font-size-title-xs;
+  }
+  .c-card--mod-my-apps .c-card__body {
+    font-size: $font-size-body-xs;
+  }
+}

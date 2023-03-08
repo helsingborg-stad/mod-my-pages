@@ -5,8 +5,8 @@
     'popup' => 'click',
     'attributeList' => ['aria-hidden' => 'true'],
     'classList' => [
+        'c-dropdown--right',
         'c-dropdown--my-pages-menu',
-        'js-my-pages-template-string',
         ...$viewModel->onlyShowForAuthenciated ? ['show-authenticated'] : []
     ]
 ])
@@ -16,7 +16,7 @@
             'icon' => 'expand_more',
             'size' => 'md',
             'style' => 'basic',
-            'classList' => [],
+            'classList' => ['js-my-pages-template-string', 'js-dropdown-button'],
             'attributeList' => ['aria-expanded' => 'false', 'role' => 'button'],
         ])
         @endbutton
@@ -27,7 +27,11 @@
             'size' => 'md',
             'style' => 'basic',
             'reversePositions' => true,
-            'classList' => ['c-button--my-pages'],
+            'classList' => [
+                'c-button--my-pages',
+                'js-my-pages-template-string',
+                'js-dropdown-button',
+            ],
             'attributeList' => ['aria-expanded' => 'false', 'role' => 'button'],
         ])
         @endbutton

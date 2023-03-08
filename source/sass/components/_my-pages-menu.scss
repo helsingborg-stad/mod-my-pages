@@ -1,4 +1,12 @@
-.nav-helper .c-dropdown--my-pages-menu {
+.nav-helper .my-pages-nav-menu-wrapper {
   margin-top: -12px;
   padding-bottom: 12px;
+}
+
+.c-dropdown--my-pages-menu .c-dropdown__list {
+  min-width: 136px;
+}
+
+.c-dropdown--my-pages-menu .c-dropdown__item + .c-dropdown__item {
+  margin-top: 1px;
 }
