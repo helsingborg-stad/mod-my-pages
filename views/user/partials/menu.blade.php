@@ -18,6 +18,7 @@
             'style' => 'basic',
             'classList' => ['js-my-pages-template-string', 'js-dropdown-button'],
             'attributeList' => ['aria-expanded' => 'false', 'role' => 'button'],
+            'classListIcon' => ['c-dropdown__icon'],
         ])
         @endbutton
     @else
