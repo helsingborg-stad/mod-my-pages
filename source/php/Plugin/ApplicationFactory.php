@@ -28,14 +28,18 @@ trait ApplicationFactory
             public function bootstrap(DIContainer $DI)
             {
                 $DI->bind(
-                    (new \ReflectionClass(WPService::class))
-                        ->getInterfaceNames(),
+                    [
+                        WPService::class,
+                        ...(new \ReflectionClass(WPService::class))->getInterfaceNames()
+                    ],
                     WPServiceFactory::create()
                 );
 
                 $DI->bind(
-                    (new \ReflectionClass(ACFService::class))
-                        ->getInterfaceNames(),
+                    [
+                        ACFService::class,
+                        ...(new \ReflectionClass(ACFService::class))->getInterfaceNames()
+                    ],
                     ACFServiceFactory::create()
                 );
 

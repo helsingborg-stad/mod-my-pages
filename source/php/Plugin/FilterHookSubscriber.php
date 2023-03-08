@@ -2,11 +2,14 @@
 
 namespace ModMyPages\Plugin;
 
+/**
+ * @psalm-type FilterHook = list{ string, string }|list{ string, string, ?int, ?int }
+ */
 interface FilterHookSubscriber
 {
     /**
      *
-     * @return list{list{ string, string }|list{ string, string, ?int, ?int }}
+     * @return list{FilterHook}
      */
     public static function addFilters();
 }
