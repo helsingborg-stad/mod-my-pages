@@ -2,7 +2,6 @@ import { setBodyClass } from './body-class';
 import { triggerPressOnDomLoaded } from './trigger-press';
 import { reloadPageWhenTokenExpires } from './reload-page';
 import { replaceStrings } from './replace-strings';
-import dropdown from './dropdown';
 const { getAccessToken } = window.gdiHost;
 
 export interface ModMyPagesInterface {
