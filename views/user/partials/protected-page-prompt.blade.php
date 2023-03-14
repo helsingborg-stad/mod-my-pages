@@ -3,7 +3,7 @@
         <div class="o-container">
             <div class="section-helper-navigation o-grid u-print-display--none">
                 <div class="o-grid-12">
-                    @includeIf('partials.navigation.helper', ['myPagesSecondaryMenu' => null])
+                    @includeIf('partials.navigation.helper-my-pages', ['myPagesSecondaryMenu' => null])
                 </div>
             </div>
         </div>
