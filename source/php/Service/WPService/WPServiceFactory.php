@@ -47,6 +47,16 @@ class WPServiceFactory
             {
                 return register_rest_route($namespace, $route, $args);
             }
+
+            public function wpEnqueueStyle(string $handle, ?string $src = null, ?array $deps = null, ?string $ver = null, ?string $media = null): void
+            {
+                wp_enqueue_style($handle, $src ?? '', $deps ?? [], $ver ?? false, $media ?? 'all');
+            }
+
+            public function wpEnqueueScript(string $handle, ?string $src = null, ?array $deps = null, ?string $ver = null, ?bool $inFooter = null): void
+            {
+                wp_enqueue_script($handle, $src ?? '', $deps ?? [], $ver ?? false, $inFooter ?? false);
+            }
         };
     }
 }

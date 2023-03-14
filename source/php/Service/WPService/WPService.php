@@ -11,6 +11,8 @@ interface WPService extends
     IsArchive,
     IsSingle,
     RegisterRestRoute,
-    WPNavService
+    WPNavService,
+    WpEnqueueStyle,
+    WpEnqueueScript
 {
 }
