@@ -4,7 +4,7 @@ namespace ModMyPages\PostType;
 
 use ModMyPages\Plugin\FilterHookSubscriber;
 
-class PostTypeSlug implements FilterHookSubscriber
+class MyPagesRewriteSlug implements FilterHookSubscriber
 {
     public static function addFilters()
     {
