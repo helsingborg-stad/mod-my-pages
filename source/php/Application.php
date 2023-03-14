@@ -33,6 +33,7 @@ abstract class Application extends PluginManager
             ->register($DI->make(Menu\SecondaryMenu::class))
             ->register($DI->make(PostType\MyPages::class))
             ->register($DI->make(PostType\PostTypeSlug::class))
+            ->register($DI->make(PostType\MyPagesScripts::class))
             ->register($DI->make(Notice\ModalNotice::class))
             ->register($DI->make(Modularity\RegisterModules::class));
     }

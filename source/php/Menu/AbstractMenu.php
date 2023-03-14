@@ -8,6 +8,7 @@ use ModMyPages\Service\ACFService\ACFGetOption;
 use ModMyPages\Service\LoginUrlService\ILoginUrlService;
 use ModMyPages\Service\WPService\GetPostType;
 use ModMyPages\Service\WPService\HomeUrl;
+use ModMyPages\Service\WPService\WpEnqueueScript;
 use ModMyPages\Service\WPService\WPNavService;
 
 abstract class AbstractMenu implements ActionHookSubscriber, FilterHookSubscriber
@@ -31,27 +32,36 @@ abstract class AbstractMenu implements ActionHookSubscriber, FilterHookSubscribe
 
     protected HomeUrl $site;
 
+    protected WpEnqueueScript $script;
+
     public function __construct(
         ACFGetOption $acf,
         WPNavService $wp,
         ILoginUrlService $createLoginUrl,
         GetPostType $query,
-        HomeUrl $site
+        HomeUrl $site,
+        WpEnqueueScript $script
     ) {
         $this->createLoginUrl = $createLoginUrl;
         $this->acf = $acf;
         $this->wp = $wp;
         $this->query = $query;
         $this->site = $site;
+        $this->script = $script;
     }
 
-    public static function addActions(): array
+    public static function addActions()
     {
         return [
-            ['init', 'registerMenus', 5]
+            ['init', 'registerMenus', 5],
+            ['wp_enqueue_scripts', 'scripts', 30],
         ];
     }
 
+
+    public function scripts(): void
+    {
+    }
 
     public static function addFilters(): array
     {

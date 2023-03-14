@@ -2,6 +2,8 @@
 
 namespace ModMyPages\Menu;
 
+use ModMyPages\PostType\MyPages;
+
 class PrimaryMenu extends DropdownMenu
 {
     const MENU_SLUG = 'my-pages-menu-primary';
@@ -11,7 +13,6 @@ class PrimaryMenu extends DropdownMenu
     {
         return __('My Pages Primary Menu (for logged in users)', MOD_MY_PAGES_TEXT_DOMAIN);
     }
-
 
     protected function afterLoginRedirectUrl(): string
     {
@@ -31,5 +32,12 @@ class PrimaryMenu extends DropdownMenu
     protected function hideLabel(): bool
     {
         return $this->acf->getOption('my_pages_primary_menu_hide_label') ?: false;
+    }
+
+    public function scripts(): void
+    {
+        if ($this->active() && $this->query->getPostType() !== MyPages::$postType) {
+            $this->script->wpEnqueueScript('mod-my-pages-js');
+        }
     }
 }

@@ -62,9 +62,10 @@ class App extends Application
             MOD_MY_PAGES_DIST_URL . CacheBust::name('js/gdi-host.js')
         );
 
-        wp_enqueue_script(
+        wp_register_script(
             'mod-my-pages-js',
-            MOD_MY_PAGES_DIST_URL . CacheBust::name('js/mod-my-pages.js')
+            MOD_MY_PAGES_DIST_URL . CacheBust::name('js/mod-my-pages.js'),
+            ['gdi-host']
         );
 
         wp_localize_script('gdi-host', 'modMyPages', [
