@@ -1,6 +1,6 @@
 <?php
 
-namespace ModMyPages;
+namespace ModMyPages\Deprecated;
 
 use Firebase\JWT\Key;
 use ModMyPages\Helper\CacheBust;
@@ -9,7 +9,7 @@ use ModMyPages\PostType\MyPages;
 use ModMyPages\Redirect\Handlers\AuthenticateUser;
 use ModMyPages\Redirect\Handlers\SignOutUser;
 use ModMyPages\Token\AccessToken;
-use ModMyPages\Types\Application;
+use ModMyPages\Deprecated\Types\Application;
 
 /**
  * @deprecated

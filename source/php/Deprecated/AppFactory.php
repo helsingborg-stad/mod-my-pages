@@ -1,16 +1,16 @@
 <?php
 
-namespace ModMyPages;
+namespace ModMyPages\Deprecated;
 
 use ModMyPages\Admin\Settings;
-use ModMyPages\App;
+use ModMyPages\Deprecated\App;
 use ModMyPages\Redirect\UseRedirectFactory;
 use ModMyPages\Service\CookieRepository\CookieRepositoryFactory;
 use ModMyPages\Service\LoginUrlService\LoginUrlServiceFactory;
 use ModMyPages\Service\MenuService\MenuServiceFactory;
 use ModMyPages\Service\SignOutService\SignOutServiceFactory;
 use ModMyPages\Service\TokenService\TokenServiceFactory;
-use ModMyPages\Types\Application;
+use ModMyPages\Deprecated\Types\Application;
 
 class AppFactory
 {

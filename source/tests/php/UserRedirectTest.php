@@ -2,7 +2,7 @@
 
 namespace ModMyPages\Test;
 
-class UseRedirectTest extends PluginTestCase
+class UserRedirectTest extends PluginTestCase
 {
     public function testShouldNotRedirect()
     {

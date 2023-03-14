@@ -1,6 +1,6 @@
 <?php
 
-namespace ModMyPages\Types;
+namespace ModMyPages\Deprecated\Types;
 
 /**
  * @deprecated

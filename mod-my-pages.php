@@ -49,7 +49,7 @@ add_action('acf/init', function () {
  * Soon to be refactored away in favor of below
  * @deprecated  
  */
-ModMyPages\AppFactory::createFromEnv()
+ModMyPages\Deprecated\AppFactory::createFromEnv()
     ->run();
 
 ModMyPages\Application::create();
