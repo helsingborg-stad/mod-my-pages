@@ -3,17 +3,9 @@
 namespace ModMyPages\PostType;
 
 use ModMyPages\Plugin\FilterHookSubscriber;
-use ModMyPages\Service\ACFService\ACFGetOption;
 
 class PostTypeSlug implements FilterHookSubscriber
 {
-    private ACFGetOption $acf;
-
-    public function __construct(ACFGetOption $acf)
-    {
-        $this->acf = $acf;
-    }
-
     public static function addFilters()
     {
         return [
