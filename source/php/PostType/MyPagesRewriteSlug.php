@@ -13,7 +13,7 @@ class MyPagesRewriteSlug implements FilterHookSubscriber
         ];
     }
 
-    public function modifyPostTypes($args, $postType)
+    public function modifyPostTypes(array $args, string $postType): array
     {
         if (defined('MOD_MY_PAGES_DEFAULT_POST_TYPE_NAMES')) {
             return $args;
