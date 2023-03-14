@@ -2,7 +2,6 @@
 
 
 @section('content')
-
     @if ($archiveTitle || $archiveLead)
         <article id="article" class="c-article c-article--readable-width s-article u-clearfix js-my-pages-template-string">
             @if ($archiveTitle)
@@ -47,4 +46,8 @@
 
 @section('before-layout')
     @include('user.partials.protected-page-prompt')
+@stop
+
+@section('helper-navigation')
+    @includeIf('partials.navigation.helper-my-pages')
 @stop
