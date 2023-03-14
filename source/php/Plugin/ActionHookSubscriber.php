@@ -10,7 +10,7 @@ interface ActionHookSubscriber
 {
     /**
      *
-     * @return list{ActionHook}
+     * @return list<ActionHook>
      */
     public static function addActions();
 }

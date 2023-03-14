@@ -9,7 +9,7 @@ interface FilterHookSubscriber
 {
     /**
      *
-     * @return list{FilterHook}
+     * @return list<FilterHook>
      */
     public static function addFilters();
 }
