@@ -11,7 +11,7 @@ class MyPages
         $this->registerPostType();
     }
 
-    public function registerPostType()
+    public function registerPostType(): void
     {
         $args = array(
             'menu_icon'          => 'dashicons-portfolio',
