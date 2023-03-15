@@ -23,7 +23,7 @@ class MyPagesRewriteSlug implements FilterHookSubscriber
             'my-pages' => [
                 'slug' => 'mina-sidor',
                 'singular' => __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN),
-                'plural' => __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN)
+                'plural' => __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN),
             ]
         ];
 
@@ -85,6 +85,10 @@ class MyPagesRewriteSlug implements FilterHookSubscriber
             );
         }
 
+
+        if (is_user_logged_in() && !in_array('administrator', (array) (wp_get_current_user())->roles)) {
+            $args['show_in_menu'] = false;
+        }
 
         return $args;
     }
