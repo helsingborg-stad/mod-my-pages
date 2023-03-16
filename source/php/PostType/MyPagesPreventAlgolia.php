@@ -9,12 +9,12 @@ class MyPagesPreventAlgolia implements ActionHookSubscriber
     public static function addActions()
     {
         return [
-            ['algolia_should_index_searchable_post', 'preventIndexing']
+            ['AlgoliaIndex/IndexablePostTypes', 'preventIndexing']
         ];
     }
 
-    public function preventIndexing(bool $shouldIndex, \WP_Post $post): bool
+    public function preventIndexing(array $postTypes): array
     {
-        return $shouldIndex && $post->post_type !== MyPages::$postType;
+        return array_filter($postTypes, fn ($postType) => $postType !== MyPages::$postType);
     }
 }
