@@ -20,7 +20,7 @@ class HideFromEditors implements FilterHookSubscriber
             return $args;
         }
 
-        if (!in_array('administrator', (array) (wp_get_current_user())->roles)) {
+        if (!in_array('administrator', (wp_get_current_user())->roles)) {
             $args['show_in_menu'] = false;
         }
 
