@@ -16,11 +16,11 @@ class HideFromEditors implements FilterHookSubscriber
 
     public function hideAdminMenu(array $args, string $postType): array
     {
-        if ($postType !== MyPages::POST_TYPE && !is_user_logged_in()) {
+        if ($postType !== MyPages::POST_TYPE || !is_user_logged_in()) {
             return $args;
         }
 
-        if (!in_array('administrator', (array) (wp_get_current_user())->roles)) {
+        if (!in_array('administrator', (wp_get_current_user())->roles)) {
             $args['show_in_menu'] = false;
         }
 
