@@ -1,11 +1,12 @@
 <?php
 
-namespace ModMyPages\PostType;
+namespace ModMyPages\PostType\MyPages;
 
 use ModMyPages\Plugin\ActionHookSubscriber;
+use ModMyPages\PostType\MyPages;
 use ModMyPages\Service\WPService\GetPostType;
 
-class MyPagesPreventRobots implements ActionHookSubscriber
+class PreventRobots implements ActionHookSubscriber
 {
     protected GetPostType $wp;
 
@@ -17,13 +18,13 @@ class MyPagesPreventRobots implements ActionHookSubscriber
     public static function addActions()
     {
         return [
-            ['wp_head', 'preventIndexing']
+            ['wp_head', 'setNoIndexNoFollowMeta']
         ];
     }
 
-    public function preventIndexing(): void
+    public function setNoIndexNoFollowMeta(): void
     {
-        if ($this->wp->getPostType() === MyPages::$postType) {
+        if ($this->wp->getPostType() === MyPages::POST_TYPE) {
             echo '<meta name="robots" content="noindex,nofollow">';
         }
     }

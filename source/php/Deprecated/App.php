@@ -3,13 +3,13 @@
 namespace ModMyPages\Deprecated;
 
 use Firebase\JWT\Key;
+use ModMyPages\Deprecated\Types\Application;
 use ModMyPages\Helper\CacheBust;
 use ModMyPages\Notice\ModalNoticeCodes;
 use ModMyPages\PostType\MyPages;
 use ModMyPages\Redirect\Handlers\AuthenticateUser;
 use ModMyPages\Redirect\Handlers\SignOutUser;
 use ModMyPages\Token\AccessToken;
-use ModMyPages\Deprecated\Types\Application;
 
 /**
  * @deprecated
@@ -106,13 +106,13 @@ class App extends Application
 
     public function protectPage(array $classes)
     {
-        return array_merge($classes, ($this->getPostType)() === MyPages::$postType ? ['protected-page'] : []);
+        return array_merge($classes, ($this->getPostType)() === MyPages::POST_TYPE ? ['protected-page'] : []);
     }
 
     public function protectedPagePromptController(array $data): array
     {
         $data['protectedPagePrompt'] = [
-            'isProtectedPage' => ($this->getPostType)() === MyPages::$postType,
+            'isProtectedPage' => ($this->getPostType)() === MyPages::POST_TYPE,
             'loginButton'     => [
                 'text' => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
                 'url' => ($this->loginUrl)(($this->currentUrl)()),

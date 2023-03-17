@@ -1,10 +1,10 @@
 <?php
 
-namespace ModMyPages\PostType;
+namespace ModMyPages\PostType\MyPages;
 
 use ModMyPages\Plugin\FilterHookSubscriber;
 
-class MyPagesRewriteSlug implements FilterHookSubscriber
+class RewriteSlug implements FilterHookSubscriber
 {
     public static function addFilters()
     {
@@ -83,11 +83,6 @@ class MyPagesRewriteSlug implements FilterHookSubscriber
                 ),
                 'menu_name'           => $postTypesToModify[$postType]['plural'],
             );
-        }
-
-
-        if (is_user_logged_in() && !in_array('administrator', (array) (wp_get_current_user())->roles)) {
-            $args['show_in_menu'] = false;
         }
 
         return $args;

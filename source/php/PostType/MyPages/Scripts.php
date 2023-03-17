@@ -1,12 +1,13 @@
 <?php
 
-namespace ModMyPages\PostType;
+namespace ModMyPages\PostType\MyPages;
 
 use ModMyPages\Plugin\ActionHookSubscriber;
+use ModMyPages\PostType\MyPages;
 use ModMyPages\Service\WPService\GetPostType;
 use ModMyPages\Service\WPService\WpEnqueueScript;
 
-class MyPagesScripts implements ActionHookSubscriber
+class Scripts implements ActionHookSubscriber
 {
     protected GetPostType $wp;
     protected WpEnqueueScript $script;
@@ -26,7 +27,7 @@ class MyPagesScripts implements ActionHookSubscriber
 
     public function scripts(): void
     {
-        if ($this->wp->getPostType() === MyPages::$postType) {
+        if ($this->wp->getPostType() === MyPages::POST_TYPE) {
             $this->script->wpEnqueueScript('mod-my-pages-js');
         }
     }

@@ -21,7 +21,7 @@ class SecondaryMenu extends DropdownMenu
 
     protected function active(): bool
     {
-        return $this->query->getPostType() == MyPages::$postType
+        return $this->query->getPostType() == MyPages::POST_TYPE
             && ($this->acf->getOption('my_pages_secondary_menu_active') ?: false);
     }
 

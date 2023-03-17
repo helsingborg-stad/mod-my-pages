@@ -36,7 +36,7 @@ class PrimaryMenu extends DropdownMenu
 
     public function scripts(): void
     {
-        if ($this->active() && $this->query->getPostType() !== MyPages::$postType) {
+        if ($this->active() && $this->query->getPostType() !== MyPages::POST_TYPE) {
             $this->script->wpEnqueueScript('mod-my-pages-js');
         }
     }

@@ -31,11 +31,12 @@ abstract class Application extends PluginManager
             ->register($DI->make(Rest\AccessToken::class))
             ->register($DI->make(Menu\PrimaryMenu::class))
             ->register($DI->make(Menu\SecondaryMenu::class))
-            ->register($DI->make(PostType\MyPages::class))
-            ->register($DI->make(PostType\MyPagesScripts::class))
-            ->register($DI->make(PostType\MyPagesRewriteSlug::class))
-            ->register($DI->make(PostType\MyPagesPreventRobots::class))
-            ->register($DI->make(PostType\MyPagesPreventAlgolia::class))
+            ->register($DI->make(PostType\MyPages\Register::class))
+            ->register($DI->make(PostType\MyPages\Scripts::class))
+            ->register($DI->make(PostType\MyPages\RewriteSlug::class))
+            ->register($DI->make(PostType\MyPages\HideFromEditors::class))
+            ->register($DI->make(PostType\MyPages\Scripts::class))
+            ->register($DI->make(PostType\MyPages\PreventRobots::class))
             ->register($DI->make(Notice\ModalNotice::class))
             ->register($DI->make(Modularity\RegisterModules::class));
     }
