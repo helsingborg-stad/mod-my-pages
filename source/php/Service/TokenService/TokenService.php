@@ -8,7 +8,7 @@ class TokenService implements ITokenService
 {
     public function __invoke(string $sessionId): string
     {
-        $queryArgs  = ['ts_session_id' => $sessionId];
+        $queryArgs  = ['ts_session_id' => $sessionId, 'profile' => '1h'];
         $requestUrl = add_query_arg($queryArgs, Settings::apiUrl() . '/api/v1/auth/token');
         $request = curl_init($requestUrl);
         curl_setopt($request, CURLOPT_CUSTOMREQUEST, "GET");
