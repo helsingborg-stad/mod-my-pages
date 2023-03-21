@@ -34,7 +34,7 @@ abstract class Application extends PluginManager
             ->register($DI->make(PostType\MyPages\Register::class))
             ->register($DI->make(PostType\MyPages\Scripts::class))
             ->register($DI->make(PostType\MyPages\RewriteSlug::class))
-            ->register($DI->make(PostType\MyPages\HideFromEditors::class))
+            // ->register($DI->make(PostType\MyPages\HideFromEditors::class))
             ->register($DI->make(PostType\MyPages\Scripts::class))
             ->register($DI->make(PostType\MyPages\PreventRobots::class))
             ->register($DI->make(Notice\ModalNotice::class))
