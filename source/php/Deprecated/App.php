@@ -25,7 +25,6 @@ class App extends Application
         add_filter('ModMyPages/UI/DropdownMenu::items', array($this, 'disableInstantPageOnMenuItems'), 10, 1);
         add_filter('body_class', array($this, 'protectPage'), 20, 1);
         add_filter('body_class', array($this, 'pendingAuthenticationClassName'), 20, 1);
-        add_filter('Municipio/viewData', array($this, 'protectedPagePromptController'));
 
         return $this;
     }
@@ -107,23 +106,6 @@ class App extends Application
     public function protectPage(array $classes)
     {
         return array_merge($classes, ($this->getPostType)() === MyPages::POST_TYPE ? ['protected-page'] : []);
-    }
-
-    public function protectedPagePromptController(array $data): array
-    {
-        $data['protectedPagePrompt'] = [
-            'isProtectedPage' => ($this->getPostType)() === MyPages::POST_TYPE,
-            'loginButton'     => [
-                'text' => __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
-                'url' => ($this->loginUrl)(($this->currentUrl)()),
-            ],
-            'homeButton'     => [
-                'text' => __('Back to homepage', MOD_MY_PAGES_TEXT_DOMAIN),
-                'url' => home_url(),
-            ],
-        ];
-
-        return $data;
     }
 
     public function pendingAuthenticationClassName(array $classes)

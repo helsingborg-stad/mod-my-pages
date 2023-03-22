@@ -285,6 +285,101 @@
                     "return_format": "url"
                 }
             ]
+        },
+        {
+            "key": "field_641b1128767d3",
+            "label": "Login Prompt",
+            "name": "login_prompt",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "acfe_seamless_style": 0,
+            "acfe_group_modal": 0,
+            "sub_fields": [
+                {
+                    "key": "field_641b1142767d4",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "Logga in f\u00f6r att se inneh\u00e5llet",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_641b116b767d5",
+                    "label": "Content",
+                    "name": "content",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "delay": 1,
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0
+                },
+                {
+                    "key": "field_641b117e767d6",
+                    "label": "Login button label",
+                    "name": "login_button_label",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "Login",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_641b1194767d7",
+                    "label": "Home button label",
+                    "name": "home_button_label",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "Back to homepage",
+                    "prepend": "",
+                    "append": ""
+                }
+            ]
         }
     ],
     "location": [
@@ -304,6 +399,11 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 0
+    "show_in_rest": 0,
+    "acfe_display_title": "",
+    "acfe_autosync": "",
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": ""
 }]
 
