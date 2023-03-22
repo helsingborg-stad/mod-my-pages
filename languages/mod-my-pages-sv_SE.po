@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mod My Pages\n"
-"POT-Creation-Date: 2023-03-08 15:50+0100\n"
-"PO-Revision-Date: 2023-03-08 15:54+0100\n"
+"POT-Creation-Date: 2023-03-22 16:39+0100\n"
+"PO-Revision-Date: 2023-03-22 16:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -33,6 +33,7 @@ msgid "Lägg till rad"
 msgstr ""
 
 #: source/php/AcfFields/php/mod-my-pages-module-my-apps.php:31
+#: source/php/AcfFields/php/mod-my-pages-settings.php:311
 msgid "Title"
 msgstr "Titel"
 
@@ -53,7 +54,6 @@ msgid "Show"
 msgstr "Visa"
 
 #: source/php/AcfFields/php/mod-my-pages-module-my-apps.php:100
-#: source/php/AcfFields/php/mod-my-pages-protected-page.php:25
 #: source/php/AcfFields/php/mod-my-pages-settings.php:74
 #: source/php/AcfFields/php/mod-my-pages-settings.php:210
 msgid "Disabled"
@@ -8567,20 +8567,6 @@ msgstr ""
 msgid "http://v2.styleguide.helsingborg.se/icons"
 msgstr ""
 
-#: source/php/AcfFields/php/mod-my-pages-protected-page.php:6
-msgid "My Pages Protected Page"
-msgstr "Mina sidor: Skyddad sida"
-
-#: source/php/AcfFields/php/mod-my-pages-protected-page.php:10
-msgid "Protected Page"
-msgstr "Skyddad sida"
-
-#: source/php/AcfFields/php/mod-my-pages-protected-page.php:24
-#: source/php/AcfFields/php/mod-my-pages-settings.php:73
-#: source/php/AcfFields/php/mod-my-pages-settings.php:209
-msgid "Enabled"
-msgstr "Aktiv"
-
 #: source/php/AcfFields/php/mod-my-pages-settings.php:6
 msgid "My Pages Settings"
 msgstr "Inställningar för Mina sidor"
@@ -8602,16 +8588,22 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
+#: source/php/AcfFields/php/mod-my-pages-settings.php:73
+#: source/php/AcfFields/php/mod-my-pages-settings.php:209
+msgid "Enabled"
+msgstr "Aktiv"
+
 #: source/php/AcfFields/php/mod-my-pages-settings.php:79
 #: source/php/AcfFields/php/mod-my-pages-settings.php:215
 msgid "Label"
 msgstr ""
 
 #: source/php/AcfFields/php/mod-my-pages-settings.php:100
-#: source/php/Admin/OptionsPage.php:28 source/php/Menu/PrimaryMenu.php:22
-#: source/php/PostType/MyPages.php:36 source/php/PostType/MyPages.php:37
-#: source/php/PostType/PostTypeSlug.php:33
-#: source/php/PostType/PostTypeSlug.php:34
+#: source/php/Admin/OptionsPage.php:28 source/php/Menu/PrimaryMenu.php:24
+#: source/php/PostType/MyPages/Register.php:46
+#: source/php/PostType/MyPages/Register.php:47
+#: source/php/PostType/MyPages/RewriteSlug.php:25
+#: source/php/PostType/MyPages/RewriteSlug.php:26
 msgid "My Pages"
 msgstr "Mina Sidor"
 
@@ -8643,60 +8635,88 @@ msgstr ""
 msgid "{user.name}"
 msgstr ""
 
+#: source/php/AcfFields/php/mod-my-pages-settings.php:294
+msgid "Login Prompt"
+msgstr "Inloggningsformulär"
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:324
+msgid "Logga in för att se innehållet"
+msgstr ""
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:330
+msgid "Content"
+msgstr "Innehåll"
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:349
+msgid "Login button label"
+msgstr "Etikett för inloggningsknapp"
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:362
+#: source/php/Menu/DropdownMenu.php:63
+#: source/php/PostType/MyPages/LoginPrompt.php:45
+msgid "Login"
+msgstr "Logga in"
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:368
+msgid "Home button label"
+msgstr "Etikett på hemknapp"
+
+#: source/php/AcfFields/php/mod-my-pages-settings.php:381
+#: source/php/PostType/MyPages/LoginPrompt.php:49
+msgid "Back to homepage"
+msgstr "Tillbaka till startsidan"
+
 #: source/php/Admin/OptionsPage.php:27
 msgid "My Pages settings"
 msgstr "Inställningar för Mina sidor"
 
-#: source/php/App.php:116 source/php/Menu/DropdownMenu.php:63
-#: source/php/UI/DropdownMenu.php:37 source/php/UI/DropdownMenu.php:39
-msgid "Login"
-msgstr "Logga in"
-
-#: source/php/App.php:120
-msgid "Back to homepage"
-msgstr "Tillbaka till startsidan"
-
 #: source/php/Helper/PostType.php:52 source/php/Helper/PostType.php:53
-#: source/php/Helper/PostType.php:185 source/php/PostType/PostTypeSlug.php:57
-#: source/php/PostType/PostTypeSlug.php:61
+#: source/php/Helper/PostType.php:185
+#: source/php/PostType/MyPages/RewriteSlug.php:49
+#: source/php/PostType/MyPages/RewriteSlug.php:53
 #, php-format
 msgid "Add new %s"
 msgstr ""
 
 #: source/php/Helper/PostType.php:54 source/php/Helper/PostType.php:183
-#: source/php/PostType/PostTypeSlug.php:65
+#: source/php/PostType/MyPages/RewriteSlug.php:57
 #, php-format
 msgid "Edit %s"
 msgstr ""
 
-#: source/php/Helper/PostType.php:55 source/php/PostType/PostTypeSlug.php:69
+#: source/php/Helper/PostType.php:55
+#: source/php/PostType/MyPages/RewriteSlug.php:61
 #, php-format
 msgid "New %s"
 msgstr ""
 
-#: source/php/Helper/PostType.php:56 source/php/PostType/PostTypeSlug.php:73
+#: source/php/Helper/PostType.php:56
+#: source/php/PostType/MyPages/RewriteSlug.php:65
 #, php-format
 msgid "View %s"
 msgstr ""
 
 #: source/php/Helper/PostType.php:57 source/php/Helper/PostType.php:179
-#: source/php/PostType/PostTypeSlug.php:77
+#: source/php/PostType/MyPages/RewriteSlug.php:69
 #, php-format
 msgid "Search %s"
 msgstr ""
 
-#: source/php/Helper/PostType.php:58 source/php/PostType/PostTypeSlug.php:81
+#: source/php/Helper/PostType.php:58
+#: source/php/PostType/MyPages/RewriteSlug.php:73
 #, php-format
 msgid "No %s found"
 msgstr ""
 
-#: source/php/Helper/PostType.php:59 source/php/PostType/PostTypeSlug.php:85
+#: source/php/Helper/PostType.php:59
+#: source/php/PostType/MyPages/RewriteSlug.php:77
 #, php-format
 msgid "No %s found in trash"
 msgstr ""
 
 #: source/php/Helper/PostType.php:60 source/php/Helper/PostType.php:181
-#: source/php/Helper/PostType.php:182 source/php/PostType/PostTypeSlug.php:89
+#: source/php/Helper/PostType.php:182
+#: source/php/PostType/MyPages/RewriteSlug.php:81
 #, php-format
 msgid "Parent %s:"
 msgstr ""
@@ -8720,7 +8740,7 @@ msgstr ""
 msgid "Logout"
 msgstr "Logga ut"
 
-#: source/php/Menu/PrimaryMenu.php:12
+#: source/php/Menu/PrimaryMenu.php:14
 msgid "My Pages Primary Menu (for logged in users)"
 msgstr "Primär meny för Mina Sidor (för inloggade)"
 
@@ -8745,6 +8765,10 @@ msgstr "Du har loggats ut automatiskt."
 msgid "Close"
 msgstr "Stäng"
 
+#: source/php/PostType/MyPages/LoginPrompt.php:42
+msgid "Log in to view the content"
+msgstr "Logga in för att se innehållet"
+
 #. Plugin Name of the plugin/theme
 msgid "Mod My Pages"
 msgstr ""
@@ -8764,6 +8788,12 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad"
 msgstr ""
+
+#~ msgid "My Pages Protected Page"
+#~ msgstr "Mina sidor: Skyddad sida"
+
+#~ msgid "Protected Page"
+#~ msgstr "Skyddad sida"
 
 #~ msgid "Session Length"
 #~ msgstr "Sessionslängd"
