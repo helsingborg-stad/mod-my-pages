@@ -13,6 +13,9 @@ class MemoryCookieRepository extends CookieRepository implements ICookieReposito
         return !empty(self::$cookies[$key]) ? self::$cookies[$key]['value'] : '';
     }
 
+    /**
+     * @return void
+     */
     public function set(
         string $key,
         string $value,

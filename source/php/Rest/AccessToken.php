@@ -33,7 +33,7 @@ class AccessToken implements ActionHookSubscriber
         ];
     }
 
-    public function init()
+    public function init(): void
     {
         $this->wp->registerRestRoute('mod-my-pages/v1', '/access-token', array(
             'methods' => 'POST',

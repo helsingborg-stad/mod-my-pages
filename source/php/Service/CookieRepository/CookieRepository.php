@@ -11,6 +11,9 @@ class CookieRepository implements ICookieRepository
         return $_COOKIE[$key] ?? '';
     }
 
+    /**
+     * @return void
+     */
     public function set(
         string $key,
         string $value,
@@ -46,7 +49,10 @@ class CookieRepository implements ICookieRepository
         return $this->time() - 3600;
     }
 
-    public function time()
+    /**
+     * @psalm-return int<1, max>
+     */
+    public function time(): int
     {
         return time();
     }

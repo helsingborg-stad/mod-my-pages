@@ -41,7 +41,7 @@ class PostType
     }
 
     /* Method which registers the post type */
-    public function registerPostType()
+    public function registerPostType(): void
     {
         // We set the default labels based on the post type name and plural. We overwrite them with the given labels.
         $labels = array_merge(
@@ -84,6 +84,9 @@ class PostType
         register_post_type($this->postTypeName, $args);
     }
 
+    /**
+     * @return void
+     */
     public function registerAcfMetadataInApi()
     {
         if (empty($this->postTypeArgs['show_in_rest'])) {
@@ -156,7 +159,7 @@ class PostType
     }
 
     /* Method to attach the taxonomy to the post type */
-    public function addTaxonomy($taxonomySlug, $nameSingular, $namePlural, $args = array(), $labels = array())
+    public function addTaxonomy($taxonomySlug, $nameSingular, $namePlural, $args = array(), $labels = array()): void
     {
         if (!empty($nameSingular)) {
             // We need to know the post type name, so the new taxonomy can be attached to it.
@@ -220,7 +223,7 @@ class PostType
         }
     }
 
-    public function enableArchiveModules()
+    public function enableArchiveModules(): void
     {
         add_filter('Modularity/Options/Archives/Modules::EnabledPostTypes', array($this, 'allowArchiveModulesForPostType'));
     }

@@ -21,7 +21,7 @@ class CacheBust
         return $revManifest[$name] ?? '';
     }
 
-    private static function isDebug()
+    private static function isDebug(): bool
     {
         return defined('WP_DEBUG') && WP_DEBUG;
     }

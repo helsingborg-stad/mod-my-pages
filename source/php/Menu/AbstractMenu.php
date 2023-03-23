@@ -96,7 +96,7 @@ abstract class AbstractMenu implements ActionHookSubscriber, FilterHookSubscribe
         return $post;
     }
 
-    public function registerMenus()
+    public function registerMenus(): void
     {
         /**
          * @psalm-suppress CircularReference

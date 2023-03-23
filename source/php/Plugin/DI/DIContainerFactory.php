@@ -10,6 +10,9 @@ class DIContainerFactory
         {
             private $dependencies = array();
 
+            /**
+             * @return void
+             */
             public function bind($name, $dependency)
             {
                 if (is_array($name)) {

@@ -29,6 +29,9 @@ class App extends Application
         return $this;
     }
 
+    /**
+     * @return void
+     */
     public function redirect()
     {
         $this->useRedirect
@@ -54,7 +57,7 @@ class App extends Application
             ->redirect();
     }
 
-    public function scripts()
+    public function scripts(): void
     {
         wp_enqueue_script(
             'gdi-host',
@@ -75,7 +78,7 @@ class App extends Application
         ]);
     }
 
-    public function styles()
+    public function styles(): void
     {
         wp_enqueue_style(
             'mod-my-pages-styles',
@@ -90,7 +93,12 @@ class App extends Application
         return $paths;
     }
 
-    public function disableInstantPageOnMenuItems(array $items)
+    /**
+     * @return array[]
+     *
+     * @psalm-return array<array>
+     */
+    public function disableInstantPageOnMenuItems(array $items): array
     {
         return array_map(
             fn ($item) => array_merge($item, [
@@ -103,12 +111,22 @@ class App extends Application
         );
     }
 
-    public function protectPage(array $classes)
+    /**
+     * @return (mixed|string)[]
+     *
+     * @psalm-return array<'protected-page'|mixed>
+     */
+    public function protectPage(array $classes): array
     {
         return array_merge($classes, ($this->getPostType)() === MyPages::POST_TYPE ? ['protected-page'] : []);
     }
 
-    public function pendingAuthenticationClassName(array $classes)
+    /**
+     * @return (mixed|string)[]
+     *
+     * @psalm-return array{0: 'is-authenticating',...}
+     */
+    public function pendingAuthenticationClassName(array $classes): array
     {
         return array_merge($classes, ['is-authenticating']);
     }

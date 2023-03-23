@@ -26,6 +26,9 @@ class UseRedirect implements IUseRedirect
         return $this;
     }
 
+    /**
+     * @return void
+     */
     public function redirect()
     {
         $hasRedirected = false;
@@ -50,7 +53,7 @@ class UseRedirect implements IUseRedirect
         return $removeLeftSlash($removeRightSlash($removeQueryArgs($path)));
     }
 
-    private function matchRoute(string $route)
+    private function matchRoute(string $route): bool
     {
         return $route === '*' || $this->normalizePath($route) === $this->currentRoute;
     }
