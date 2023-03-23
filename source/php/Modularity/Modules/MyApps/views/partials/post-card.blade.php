@@ -13,14 +13,14 @@
     ],
     'context' => 'mod-my-apps'
 ])
-    <div class="c-card__header u-display--flex u-padding__bottom--1@xs">
+    <div class="c-card__header u-display--flex u-padding__bottom--1@xs  u-padding__bottom--1@sm u-padding__top--3">
         @if (!empty($item->icon))
             @icon([
                 'icon' => $item->icon,
                 'size' => 'md',
                 'color' => 'primary',
                 'classList' => [
-                    'u-margin__right--05@xs',
+                    'u-margin__right--1@xs',
                     'u-margin__right--2@sm',
                     'u-margin__right--2@md',
                     'u-margin__right--2@lg',
@@ -40,7 +40,7 @@
         @endtypography
     </div>
 
-    <div class="c-card__body u-padding__top--0">
+    <div class="c-card__body u-padding__top--0  u-padding__bottom--3">
         @typography([
             'element' => 'p',
             'id' => 'mod-mod-my-apps-' . $item->id,
