@@ -2,6 +2,7 @@ import { setBodyClass } from './body-class';
 import { triggerPressOnDomLoaded } from './trigger-press';
 import { reloadPageWhenTokenExpires } from './reload-page';
 import { replaceStrings } from './replace-strings';
+import { normalizeToken } from './normalizeToken';
 const { getAccessToken } = window.gdiHost;
 
 export interface ModMyPagesInterface {
@@ -16,7 +17,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const isAuthenticated = token.length > 0;
 
   if (isAuthenticated) {
-    replaceStrings('.js-my-pages-template-string', { name: '', ...decoded });
+    replaceStrings(
+      '.js-my-pages-template-string',
+      normalizeToken({ name: '', firstName: '', lastName: '', ...decoded }),
+    );
     reloadPageWhenTokenExpires(expires);
   }
 
