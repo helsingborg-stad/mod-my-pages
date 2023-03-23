@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <psalm
-    errorLevel="6"
+    errorLevel="8"
     resolveFromConfigFile="true"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
@@ -9,6 +9,7 @@
 >
     <projectFiles>
         <directory name="./" />
+
         <ignoreFiles>
             <directory name="vendor" />
         </ignoreFiles>
@@ -16,5 +17,6 @@
     <stubs>
         <file name="vendor/php-stubs/wordpress-stubs/wordpress-stubs.php" />
         <file name="vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php" />
+        <file name="mod-my-pages.php" />
     </stubs>
 </psalm>
