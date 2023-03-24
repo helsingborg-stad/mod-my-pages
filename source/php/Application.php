@@ -18,9 +18,8 @@ abstract class Application extends PluginManager
 
     /**
      * Initialize plugin components with dependecies and registering WP hooks
-     * @return void
      */
-    public function init(DIContainer $DI, PluginManager $plugin)
+    public function init(DIContainer $DI, PluginManager $plugin): void
     {
         $plugin
             ->register($DI->make(Admin\OptionsPage::class))
@@ -40,8 +39,6 @@ abstract class Application extends PluginManager
 
     /**
      * Boostraps the plugin with services & dependecies
-     *
-     * @return void
      */
-    abstract public function bootstrap(DIContainer $DI);
+    abstract public function bootstrap(DIContainer $DI): void;
 }

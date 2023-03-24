@@ -2,11 +2,10 @@
 
 namespace ModMyPages\Menu;
 
-use ModMyPages\Menu\ViewModel\DropdownMenu as DropdownMenuViewModel;
+use ModMyPages\Menu\ViewModel\DropdownMenu;
 use ModMyPages\Menu\ViewModel\DropdownMenuItem;
-use ModMyPages\PostType\MyPages;
 
-abstract class DropdownMenu extends AbstractMenu
+abstract class AbstractDropdownMenu extends AbstractMenu
 {
     /**
      * @psalm-suppress CircularReference
@@ -57,7 +56,7 @@ abstract class DropdownMenu extends AbstractMenu
 
     /**
      *
-     * @return list{DropdownMenuItem}
+     * @return list{DropdownMenuItem}|array<never, never>
      */
     protected function loginButton(): array
     {
@@ -111,7 +110,7 @@ abstract class DropdownMenu extends AbstractMenu
         /**
          * @psalm-suppress CircularReference
          */
-        $viewModel = DropdownMenuViewModel::create(
+        $viewModel = DropdownMenu::create(
             static::MENU_SLUG,
             $this->label(),
             $this->active(),

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <psalm
-    errorLevel="8"
+    errorLevel="6"
     resolveFromConfigFile="true"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
@@ -8,9 +8,9 @@
     findUnusedBaselineEntry="true"
 >
     <projectFiles>
-        <directory name="./" />
-
+        <directory name="./source/php" />
         <ignoreFiles>
+            <directory name="node_modules" />
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
