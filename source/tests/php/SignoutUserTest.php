@@ -7,16 +7,16 @@ use ModMyPages\Token\AccessToken;
 
 class SignoutUserTest extends PluginTestCase
 {
-    public function testShouldRemoveCookie()
+    public function testShouldRemoveCookie(): void
     {
         $redirectSpy = $this->createRedirectSpy();
         $cookieRepository = CookieRepositoryFactory::createFromEnv();
         $cookieRepository->set(AccessToken::$cookieName, $this->createFakeToken());
 
         $this->createFakeApp([
-            'mockPath'              => '/signout',
-            'mockRedirectCallback'  => $redirectSpy,
-            'cookieRepository'      => $cookieRepository,
+            'mockPath' => '/signout',
+            'mockRedirectCallback' => $redirectSpy,
+            'cookieRepository' => $cookieRepository,
         ])
             ->run()
             ->redirect();
@@ -24,13 +24,13 @@ class SignoutUserTest extends PluginTestCase
         $this->assertEquals('', $cookieRepository->get(AccessToken::$cookieName));
     }
 
-    public function testShouldRedirect()
+    public function testShouldRedirect(): void
     {
         $redirectSpy = $this->createRedirectSpy();
 
         $this->createFakeApp([
-            'mockPath'              => '/signout',
-            'mockRedirectCallback'  => $redirectSpy
+            'mockPath' => '/signout',
+            'mockRedirectCallback' => $redirectSpy,
         ])
             ->run()
             ->redirect();

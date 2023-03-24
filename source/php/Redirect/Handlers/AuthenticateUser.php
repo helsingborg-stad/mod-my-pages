@@ -70,14 +70,15 @@ class AuthenticateUser implements IRedirectHandler, IRedirectHandlerFactory
             error_log(PHP_EOL);
         };
 
-        return new AuthenticateUser(array_merge(
-            [
-                'onSuccess' => fn (string $jwt) => null,
-                'onError' => defined('WP_DEBUG') && WP_DEBUG
-                    ? $logError
-                    : fn (string $msg) => $msg,
-            ],
-            $args
-        ));
+        return new AuthenticateUser(
+            array_merge(
+                [
+                    'onSuccess' => fn(string $jwt) => null,
+                    'onError' =>
+                        defined('WP_DEBUG') && WP_DEBUG ? $logError : fn(string $msg) => $msg,
+                ],
+                $args
+            )
+        );
     }
 }

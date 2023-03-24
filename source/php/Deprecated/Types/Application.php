@@ -6,7 +6,6 @@ use Closure;
 use ModMyPages\Redirect\IUseRedirect;
 use ModMyPages\Service\CookieRepository\ICookieRepository;
 use ModMyPages\Service\LoginUrlService\ILoginUrlService;
-use ModMyPages\Service\MenuService\IMenuService;
 use ModMyPages\Service\TokenService\ITokenService;
 
 /**
@@ -23,8 +22,6 @@ abstract class Application implements IApplicationRecipe
     public ITokenService $tokenService;
 
     public IUseRedirect $useRedirect;
-
-    public IMenuService $menuService;
 
     public Closure $signOutRedirectUrl;
 
@@ -45,7 +42,6 @@ abstract class Application implements IApplicationRecipe
         $this->loginUrl = $args['loginUrlService'];
         $this->tokenService = $args['tokenService'];
         $this->useRedirect = $args['useRedirect'];
-        $this->menuService = $args['menuService'];
         $this->signOutRedirectUrl = $args['signOutRedirectUrl'];
         $this->signOutService = $args['signOutService'];
         $this->isProtectedPage = $args['isProtectedPage'];

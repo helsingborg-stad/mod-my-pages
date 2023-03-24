@@ -17,10 +17,13 @@ class PluginManager
         $actions = $object instanceof ActionHookSubscriber ? $object->addActions() : [];
         $filters = $object instanceof FilterHookSubscriber ? $object->addFilters() : [];
 
-        foreach ([
-            'action' => [...$actions],
-            'filter' => [...$filters]
-        ] as $hook => $hooks) {
+        foreach (
+            [
+                'action' => [...$actions],
+                'filter' => [...$filters],
+            ]
+            as $hook => $hooks
+        ) {
             foreach ($hooks as $params) {
                 list($name, $fn, $priority, $args) = [...$params + [null, null, null, null]];
                 $callback = [$object, $fn];

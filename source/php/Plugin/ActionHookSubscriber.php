@@ -2,7 +2,6 @@
 
 namespace ModMyPages\Plugin;
 
-
 /**
  * @psalm-type ActionHook = list{ string, string }|list{ string, string, ?int, ?int }
  */

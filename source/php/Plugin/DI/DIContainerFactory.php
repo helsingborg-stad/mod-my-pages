@@ -6,9 +6,8 @@ class DIContainerFactory
 {
     public static function create(): DIContainer
     {
-        return new class implements DIContainer
-        {
-            private $dependencies = array();
+        return new class implements DIContainer {
+            private array $dependencies = [];
 
             /**
              * @return void
@@ -16,7 +15,7 @@ class DIContainerFactory
             public function bind($name, $dependency)
             {
                 if (is_array($name)) {
-                    array_walk($name, fn ($n) => $this->bind($n, $dependency));
+                    array_walk($name, fn($n) => $this->bind($n, $dependency));
                     return;
                 }
 
@@ -35,7 +34,7 @@ class DIContainerFactory
             public function make($class)
             {
                 $constructor = (new \ReflectionClass($class))->getConstructor();
-                $resolvedParams = array();
+                $resolvedParams = [];
                 if ($constructor) {
                     $params = $constructor->getParameters();
                     foreach ($params as $param) {

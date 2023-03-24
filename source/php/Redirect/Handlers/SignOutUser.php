@@ -12,19 +12,19 @@ class SignOutUser implements IRedirectHandler, IRedirectHandlerFactory
 
     private Closure $onRedirect;
 
-    public function __construct($args)
+    public function __construct(array $args)
     {
         $this->redirectUrl = $args['redirectUrl'];
         $this->onRedirect = $args['onRedirect'];
     }
 
-    public function redirectUrl(array $query): string
+    public function redirectUrl(array $queryParams): string
     {
         ($this->onRedirect)();
-        return $query['callbackUrl'] ?? $this->redirectUrl;
+        return $queryParams['callbackUrl'] ?? $this->redirectUrl;
     }
 
-    public function shouldRedirect(array $query): bool
+    public function shouldRedirect(array $queryParams): bool
     {
         return true;
     }

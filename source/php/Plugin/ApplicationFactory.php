@@ -23,32 +23,25 @@ trait ApplicationFactory
 {
     public static function create(): Application
     {
-        return (new class(DIContainerFactory::create()) extends Application
-        {
+        return new class (DIContainerFactory::create()) extends Application {
             public function bootstrap(DIContainer $DI)
             {
-                $DI->bind(
-                    [
-                        WPService::class,
-                        ...(new \ReflectionClass(WPService::class))->getInterfaceNames()
-                    ],
-                    WPServiceFactory::create()
-                );
+                /**
+                 * @@var $withExtemsom
+                 */
+                $withExtensions = fn(string $className) => [
+                    $className,
+                    ...(new \ReflectionClass($className))->getInterfaceNames(),
+                ];
 
-                $DI->bind(
-                    [
-                        ACFService::class,
-                        ...(new \ReflectionClass(ACFService::class))->getInterfaceNames()
-                    ],
-                    ACFServiceFactory::create()
-                );
-
+                $DI->bind($withExtensions(WPService::class), WPServiceFactory::create());
+                $DI->bind($withExtensions(ACFService::class), ACFServiceFactory::create());
                 $DI->bind(ICookieRepository::class, CookieRepositoryFactory::createFromEnv());
                 $DI->bind(IUseRedirect::class, UseRedirectFactory::createFromEnv());
                 $DI->bind(ILoginUrlService::class, LoginUrlServiceFactory::createFromEnv());
                 $DI->bind(ITokenService::class, TokenServiceFactory::createFromEnv());
                 $DI->bind('\Closure\signOutService', SignOutServiceFactory::createFromEnv());
             }
-        });
+        };
     }
 }

@@ -7,10 +7,13 @@ export const setBodyClass = (isAuthenticated: boolean) => {
     }))
     .forEach(
       ({ classNames, isAuthenticated, classList }) => (
-        classNames.includes('is-authenticating') && classList.remove('is-authenticating'),
+        classNames.includes('is-authenticating') &&
+          classList.remove('is-authenticating'),
         isAuthenticated
-          ? !classNames.includes('is-authenticated') && classList.toggle('is-authenticated')
-          : !classNames.includes('not-authenticated') && classList.toggle('not-authenticated')
+          ? !classNames.includes('is-authenticated') &&
+            classList.toggle('is-authenticated')
+          : !classNames.includes('not-authenticated') &&
+            classList.toggle('not-authenticated')
       ),
     );
 };

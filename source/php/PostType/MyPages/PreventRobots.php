@@ -17,9 +17,7 @@ class PreventRobots implements ActionHookSubscriber
 
     public static function addActions()
     {
-        return [
-            ['wp_head', 'setNoIndexNoFollowMeta']
-        ];
+        return [['wp_head', 'setNoIndexNoFollowMeta']];
     }
 
     public function setNoIndexNoFollowMeta(): void

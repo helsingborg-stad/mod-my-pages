@@ -6,8 +6,7 @@ class ACFServiceFactory
 {
     public static function create(): ACFService
     {
-        return new class implements ACFService
-        {
+        return new class implements ACFService {
             public function getField(string $selector, $postId)
             {
                 return get_field($selector, $postId);

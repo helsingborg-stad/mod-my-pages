@@ -9,9 +9,7 @@ class ModalNotice implements ActionHookSubscriber
 {
     public static function addActions(): array
     {
-        return [
-            ['wp_footer', self::controller(), 10, 1]
-        ];
+        return [['wp_footer', self::controller(), 10, 1]];
     }
 
     public static function controller(): string
@@ -32,9 +30,12 @@ class ModalNotice implements ActionHookSubscriber
     {
         echo Blade::render('source/php/Notice/modal-notice.blade.php', [
             'labels' => [
-                'modalTitle' => __('You have been automatically logged out.', MOD_MY_PAGES_TEXT_DOMAIN),
+                'modalTitle' => __(
+                    'You have been automatically logged out.',
+                    MOD_MY_PAGES_TEXT_DOMAIN
+                ),
                 'buttonText' => __('Close', MOD_MY_PAGES_TEXT_DOMAIN),
-            ]
+            ],
         ]);
     }
 

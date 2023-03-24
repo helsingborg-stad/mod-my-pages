@@ -21,7 +21,8 @@ class PrimaryMenu extends DropdownMenu
 
     protected function label(): string
     {
-        return  $this->acf->getOption('my_pages_primary_menu_label') ?: __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN);
+        return $this->acf->getOption('my_pages_primary_menu_label') ?:
+            __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN);
     }
 
     protected function active(): bool

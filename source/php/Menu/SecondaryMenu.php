@@ -16,13 +16,13 @@ class SecondaryMenu extends DropdownMenu
 
     protected function label(): string
     {
-        return  $this->acf->getOption('my_pages_secondary_menu_label') ?: '{user.name}';
+        return $this->acf->getOption('my_pages_secondary_menu_label') ?: '{user.name}';
     }
 
     protected function active(): bool
     {
-        return $this->query->getPostType() == MyPages::POST_TYPE
-            && ($this->acf->getOption('my_pages_secondary_menu_active') ?: false);
+        return $this->query->getPostType() == MyPages::POST_TYPE &&
+            ($this->acf->getOption('my_pages_secondary_menu_active') ?: false);
     }
 
     protected function hideIcon(): bool

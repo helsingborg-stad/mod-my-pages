@@ -18,5 +18,11 @@ interface WpEnqueueStyle
      * @param string|null $ver Optional. String specifying stylesheet version number, if it has one, which is added to the URL as a query string for cache busting purposes. If set to null, no version is added.
      * @param string|null $media Optional. The media for which this stylesheet has been defined.
      */
-    public function wpEnqueueStyle(string $handle, ?string $src = null, ?array $deps = null, ?string $ver = null, ?string $media = null): void;
+    public function wpEnqueueStyle(
+        string $handle,
+        ?string $src = null,
+        ?array $deps = null,
+        ?string $ver = null,
+        ?string $media = null
+    ): void;
 }

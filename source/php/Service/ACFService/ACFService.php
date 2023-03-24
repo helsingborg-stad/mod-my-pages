@@ -2,9 +2,6 @@
 
 namespace ModMyPages\Service\ACFService;
 
-interface ACFService extends
-    ACFGetField,
-    ACFGetOption,
-    ACFAddOptionsSubPage
+interface ACFService extends ACFGetField, ACFGetOption, ACFAddOptionsSubPage
 {
 }

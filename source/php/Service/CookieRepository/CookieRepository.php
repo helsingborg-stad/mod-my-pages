@@ -21,16 +21,16 @@ class CookieRepository implements ICookieRepository
         string $cookieDomain = '',
         string $cookiePath = ''
     ) {
-
         if (!headers_sent()) {
             if (
                 !setcookie($key, $value, [
-                    'expires'   => empty($value) ? $this->expiredDate() : 0,
-                    'secure'    => true,
-                    'httponly'  => true,
-                    'path'      => '/',
-                ])
-                && defined('WP_DEBUG') && WP_DEBUG
+                    'expires' => empty($value) ? $this->expiredDate() : 0,
+                    'secure' => true,
+                    'httponly' => true,
+                    'path' => '/',
+                ]) &&
+                defined('WP_DEBUG') &&
+                WP_DEBUG
             ) {
                 error_log(print_r(new \WP_Error('Failed to set cookie'), true));
             }

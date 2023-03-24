@@ -30,25 +30,31 @@ class LoginPrompt implements ActionHookSubscriber
 
     public static function addActions()
     {
-        return [
-            ['Municipio/viewData', 'protectedPagePromptController']
-        ];
+        return [['Municipio/viewData', 'protectedPagePromptController']];
     }
 
     public function protectedPagePromptController(array $data): array
     {
         $data['protectedPagePrompt'] = [
             'isProtectedPage' => $this->wp->getPostType() === MyPages::POST_TYPE,
-            'title'     => $this->acf->getOption('login_prompt_title') ?: __('Log in to view the content', MOD_MY_PAGES_TEXT_DOMAIN),
-            'content'     => $this->acf->getOption('login_prompt_content') ?: '',
-            'loginButton'     => [
-                'text' => $this->acf->getOption('login_prompt_login_button_label') ?: __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
-                'url' => $this->loginUrl->buildUrl($this->query->homeUrl($_SERVER['REQUEST_URI'] ?? '')),
+            'title' =>
+                $this->acf->getOption('login_prompt_title') ?:
+                __('Log in to view the content', MOD_MY_PAGES_TEXT_DOMAIN),
+            'content' => $this->acf->getOption('login_prompt_content') ?: '',
+            'loginButton' => [
+                'text' =>
+                    $this->acf->getOption('login_prompt_login_button_label') ?:
+                    __('Login', MOD_MY_PAGES_TEXT_DOMAIN),
+                'url' => $this->loginUrl->buildUrl(
+                    $this->query->homeUrl($_SERVER['REQUEST_URI'] ?? '')
+                ),
             ],
-            'homeButton'     => [
-                'text' => $this->acf->getOption('login_prompt_home_button_label') ?: __('Back to homepage', MOD_MY_PAGES_TEXT_DOMAIN),
+            'homeButton' => [
+                'text' =>
+                    $this->acf->getOption('login_prompt_home_button_label') ?:
+                    __('Back to homepage', MOD_MY_PAGES_TEXT_DOMAIN),
                 'url' => $this->query->homeUrl(),
-            ]
+            ],
         ];
 
         return $data;

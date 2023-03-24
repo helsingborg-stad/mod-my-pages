@@ -10,9 +10,7 @@ class Blade
     {
         $view = str_replace('.blade.php', '', $view);
 
-        $viewPaths = array(
-            MOD_MY_PAGES_PATH
-        );
+        $viewPaths = [MOD_MY_PAGES_PATH];
 
         if (!function_exists('render_blade_view')) {
             throw new BadFunctionCallException(

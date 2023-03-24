@@ -18,5 +18,11 @@ interface WpEnqueueScript
      * @param string|null $ver Optional. String specifying script version number, if it has one, which is added to the URL as a query string for cache busting purposes. If set to null, no version is added.
      * @param bool|null $inFooter Optional. Whether to enqueue the script before </head> or before </body>.
      */
-    public function wpEnqueueScript(string $handle, ?string $src = null, ?array $deps = null, ?string $ver = null, ?bool $inFooter = null): void;
+    public function wpEnqueueScript(
+        string $handle,
+        ?string $src = null,
+        ?array $deps = null,
+        ?string $ver = null,
+        ?bool $inFooter = null
+    ): void;
 }

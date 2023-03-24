@@ -8,7 +8,7 @@ namespace ModMyPages\Modularity\Modules\MyApps;
 class MyApps extends \Modularity\Module
 {
     public $slug = 'mod-my-apps';
-    public $supports = array();
+    public $supports = [];
 
     public function init()
     {
@@ -20,7 +20,7 @@ class MyApps extends \Modularity\Module
     public function model()
     {
         return (object) [
-            'items' => get_field('my_pages_apps', $this->data['ID']) ?: []
+            'items' => get_field('my_pages_apps', $this->data['ID']) ?: [],
         ];
     }
 
@@ -30,16 +30,19 @@ class MyApps extends \Modularity\Module
 
         return [
             'viewModel' => (object) [
-                'items' =>  array_map(fn ($raw) => (object) [
-                    'id' => (string) sanitize_title($raw['title']),
-                    'title' => $raw['title'],
-                    'link' => $raw['link']['url'],
-                    'target' => $raw['link']['target'],
-                    'content' => $raw['description'],
-                    'icon' => $raw['icon'] ?? '',
-                    'display' => $raw['display'],
-                ], $model->items)
-            ]
+                'items' => array_map(
+                    fn($raw) => (object) [
+                        'id' => (string) sanitize_title($raw['title']),
+                        'title' => $raw['title'],
+                        'link' => $raw['link']['url'],
+                        'target' => $raw['link']['target'],
+                        'content' => $raw['description'],
+                        'icon' => $raw['icon'] ?? '',
+                        'display' => $raw['display'],
+                    ],
+                    $model->items
+                ),
+            ],
         ];
     }
 

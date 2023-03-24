@@ -4,13 +4,13 @@ namespace ModMyPages\Test;
 
 class UserRedirectTest extends PluginTestCase
 {
-    public function testShouldNotRedirect()
+    public function testShouldNotRedirect(): void
     {
         $redirectSpy = $this->createRedirectSpy();
 
         $this->createFakeApp([
-            'mockPath'                  => '/',
-            'mockRedirectCallback'      => $redirectSpy,
+            'mockPath' => '/',
+            'mockRedirectCallback' => $redirectSpy,
         ])
             ->run()
             ->redirect();

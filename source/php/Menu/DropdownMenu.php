@@ -46,7 +46,13 @@ abstract class DropdownMenu extends AbstractMenu
      */
     protected function mapItem($post)
     {
-        return DropdownMenuItem::create($post->title, $post->url, array_merge($post->classes, ['show-authenticated']), [], ['data-no-instant' => '']);
+        return DropdownMenuItem::create(
+            $post->title,
+            $post->url,
+            array_merge($post->classes, ['show-authenticated']),
+            [],
+            ['data-no-instant' => '']
+        );
     }
 
     /**
@@ -66,9 +72,9 @@ abstract class DropdownMenu extends AbstractMenu
                 ['id' => static::MENU_SLUG_CAMEL_CASE . '-login'],
                 [
                     'data-no-instant' => '',
-                    'id' => static::MENU_SLUG . '-logout'
+                    'id' => static::MENU_SLUG . '-logout',
                 ]
-            )
+            ),
         ];
     }
 
@@ -89,9 +95,9 @@ abstract class DropdownMenu extends AbstractMenu
                 [],
                 [
                     'data-no-instant' => '',
-                    'id' => static::MENU_SLUG . '-logout'
+                    'id' => static::MENU_SLUG . '-logout',
                 ]
-            )
+            ),
         ];
     }
 
@@ -100,11 +106,7 @@ abstract class DropdownMenu extends AbstractMenu
      */
     public function controller($items): array
     {
-        $menuItems = [
-            ...$this->loginButton(),
-            ...$items,
-            ...$this->logoutButton(),
-        ];
+        $menuItems = [...$this->loginButton(), ...$items, ...$this->logoutButton()];
 
         /**
          * @psalm-suppress CircularReference
@@ -116,7 +118,7 @@ abstract class DropdownMenu extends AbstractMenu
             [
                 'hideLabel' => $this->hideLabel(),
                 'hideIcon' => $this->hideIcon(),
-                'onlyShowForAuthenciated' => $this->onlyShowForAuthenciated()
+                'onlyShowForAuthenciated' => $this->onlyShowForAuthenciated(),
             ],
             ...$menuItems
         );

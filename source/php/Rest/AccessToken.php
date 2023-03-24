@@ -28,43 +28,43 @@ class AccessToken implements ActionHookSubscriber
 
     public static function addActions(): array
     {
-        return [
-            ['rest_api_init', 'init']
-        ];
+        return [['rest_api_init', 'init']];
     }
 
     public function init(): void
     {
-        $this->wp->registerRestRoute('mod-my-pages/v1', '/access-token', array(
+        $this->wp->registerRestRoute('mod-my-pages/v1', '/access-token', [
             'methods' => 'POST',
-            'callback' => function () { {
-                    $tryDecodeToken = function (string $jwt) {
-                        $decoded = null;
-                        try {
-                            $decoded = JWT::decode(
-                                $jwt,
-                                new Key($this->acf->getOption('mod_my_pages_api_auth_secret') ?: 'random', 'HS256')
-                            );
-                        } catch (Exception $e) {
-                            error_log('REST ---------' . PHP_EOL);
-                            error_log('/access-token');
-                            error_log(print_r($e->getMessage(), true));
-                            error_log('END REST ---------' . PHP_EOL);
-                            $this->cookies->set(\ModMyPages\Token\AccessToken::$cookieName, '');
-                        }
+            'callback' => function () {
+                $tryDecodeToken = function (string $jwt): ?object {
+                    $decoded = null;
+                    try {
+                        $decoded = JWT::decode(
+                            $jwt,
+                            new Key(
+                                $this->acf->getOption('mod_my_pages_api_auth_secret') ?: 'random',
+                                'HS256'
+                            )
+                        );
+                    } catch (Exception $e) {
+                        error_log('REST ---------' . PHP_EOL);
+                        error_log('/access-token');
+                        error_log(print_r($e->getMessage(), true));
+                        error_log('END REST ---------' . PHP_EOL);
+                        $this->cookies->set(\ModMyPages\Token\AccessToken::$cookieName, '');
+                    }
 
-                        return $decoded;
-                    };
+                    return $decoded;
+                };
 
-                    $token = $this->cookies->get(\ModMyPages\Token\AccessToken::$cookieName);
+                $token = $this->cookies->get(\ModMyPages\Token\AccessToken::$cookieName);
 
-                    return [
-                        'token' => $tryDecodeToken($token) ? $token : '',
-                        'expires' => $tryDecodeToken($token)->exp ?? 0,
-                        'decoded' => $tryDecodeToken($token)
-                    ];
-                }
-            }
-        ));
+                return [
+                    'token' => $tryDecodeToken($token) ? $token : '',
+                    'expires' => $tryDecodeToken($token)->exp ?? 0,
+                    'decoded' => $tryDecodeToken($token),
+                ];
+            },
+        ]);
     }
 }

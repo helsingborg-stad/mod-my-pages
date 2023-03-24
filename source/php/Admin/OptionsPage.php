@@ -16,9 +16,7 @@ class OptionsPage implements ActionHookSubscriber
 
     public static function addActions(): array
     {
-        return [
-            ['acf/init', 'registerOptionsPage', 5]
-        ];
+        return [['acf/init', 'registerOptionsPage', 5]];
     }
 
     public function registerOptionsPage(): void
@@ -28,7 +26,7 @@ class OptionsPage implements ActionHookSubscriber
             'menu_title' => __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN),
             'menu_slug' => 'my-pages-settings',
             'parent_slug' => 'options-general.php',
-            'capability' => 'manage_options'
+            'capability' => 'manage_options',
         ]);
     }
 }

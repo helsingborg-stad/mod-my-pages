@@ -29,22 +29,18 @@ class PluginTestCase extends TestCase
         Monkey\setUp();
         // A few common passthrough
         // 1. WordPress i18n functions
-        Monkey\Functions\when('__')
-            ->returnArg(1);
-        Monkey\Functions\when('_e')
-            ->returnArg(1);
-        Monkey\Functions\when('_n')
-            ->returnArg(1);
-        Monkey\Functions\when('home_url')
-            ->alias(fn ($v = '') => $this->homeUrl() . $v);
+        Monkey\Functions\when('__')->returnArg(1);
+        Monkey\Functions\when('_e')->returnArg(1);
+        Monkey\Functions\when('_n')->returnArg(1);
+        Monkey\Functions\when('home_url')->alias(fn($v = '') => $this->homeUrl() . $v);
     }
 
-    public function apiUrl()
+    public function apiUrl(): string
     {
         return 'http://api-url.test';
     }
 
-    public function homeUrl()
+    public function homeUrl(): string
     {
         return 'http://home-url.test';
     }
@@ -59,15 +55,13 @@ class PluginTestCase extends TestCase
         return 'test-jwt-secret';
     }
 
-    public function createFakeToken(
-        bool $isExpired = false,
-        bool $hasInvalidSecret = false
-    ): string {
+    public function createFakeToken(bool $isExpired = false, bool $hasInvalidSecret = false): string
+    {
         return JWT::encode(
             [
                 'id' => '201111223333',
                 'name' => 'Example Person',
-                'exp' => $isExpired ? time() - 600 : time() + 1200
+                'exp' => $isExpired ? time() - 600 : time() + 1200,
             ],
             !$hasInvalidSecret ? $this->fakeJwtSecret() : time(),
             'HS256'
@@ -92,30 +86,34 @@ class PluginTestCase extends TestCase
 
     public function createFakeApp(array $args = []): App
     {
-        return AppFactory::createFromEnv(array_merge(
-            [
-                'apiAuthSecret'             => fn () => $args['mockJwtSecret'] ?? $this->fakeJwtSecret(),
-                'getMenuItemsByMenuName'    => fn ($menuName) => $this->createMockmenu($menuName),
-                'useRedirect'               => UseRedirectFactory::createFromEnv([
-                    'mockPath'              => $args['mockPath'] ?? null,
-                    'mockRedirectCallback'  => $args['mockRedirectCallback'] ?? null
-                ]),
-                'loginUrlService'           => LoginUrlServiceFactory::createFromEnv([
-                    'apiUrl' => $args['mockApiUrl'] ?? $this->apiUrl(),
-                    'homeUrl' => $args['mockHomeUrl'] ?? $this->homeUrl(),
-                ]),
-                'tokenService'           => TokenServiceFactory::createFromEnv([
-                    'mockTokenResponse' => $args['mockTokenResponse'] ?? $this->createFakeToken(
-                        $args['mockExpiredToken'] ?? false,
-                        $args['mockInvalidToken'] ?? false
-                    ),
-                ]),
-                'signOutRedirectUrl'    => fn () => $this->homeUrl(),
-                'isProtectedPage' => fn (): bool => false,
-                'currentUrl' => fn (): string => $this->homeUrl(),
-            ],
-            $args
-        ));
+        return AppFactory::createFromEnv(
+            array_merge(
+                [
+                    'apiAuthSecret' => fn() => $args['mockJwtSecret'] ?? $this->fakeJwtSecret(),
+                    'getMenuItemsByMenuName' => fn($menuName) => $this->createMockmenu($menuName),
+                    'useRedirect' => UseRedirectFactory::createFromEnv([
+                        'mockPath' => $args['mockPath'] ?? null,
+                        'mockRedirectCallback' => $args['mockRedirectCallback'] ?? null,
+                    ]),
+                    'loginUrlService' => LoginUrlServiceFactory::createFromEnv([
+                        'apiUrl' => $args['mockApiUrl'] ?? $this->apiUrl(),
+                        'homeUrl' => $args['mockHomeUrl'] ?? $this->homeUrl(),
+                    ]),
+                    'tokenService' => TokenServiceFactory::createFromEnv([
+                        'mockTokenResponse' =>
+                            $args['mockTokenResponse'] ??
+                            $this->createFakeToken(
+                                $args['mockExpiredToken'] ?? false,
+                                $args['mockInvalidToken'] ?? false
+                            ),
+                    ]),
+                    'signOutRedirectUrl' => fn() => $this->homeUrl(),
+                    'isProtectedPage' => fn(): bool => false,
+                    'currentUrl' => fn(): string => $this->homeUrl(),
+                ],
+                $args
+            )
+        );
     }
 
     /**

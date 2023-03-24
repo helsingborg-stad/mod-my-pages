@@ -20,9 +20,7 @@ class Scripts implements ActionHookSubscriber
 
     public static function addActions()
     {
-        return [
-            ['wp_enqueue_scripts', 'scripts', 20]
-        ];
+        return [['wp_enqueue_scripts', 'scripts', 20]];
     }
 
     public function scripts(): void

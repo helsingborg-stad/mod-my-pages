@@ -26,16 +26,16 @@ class MemoryCookieRepository extends CookieRepository implements ICookieReposito
         if (!empty($value)) {
             self::$cookies[$key] = [
                 'value' => $value,
-                'cookieLength' => empty($cookieLength) ? $this->expiredDate() : $this->cookieLength($cookieLength),
+                'cookieLength' => empty($cookieLength)
+                    ? $this->expiredDate()
+                    : $this->cookieLength($cookieLength),
                 'cookieDomain' => $cookieDomain,
-                'cookiePath'   => $cookiePath
+                'cookiePath' => $cookiePath,
             ];
 
             return;
         }
 
-        if (empty($value) && !empty(self::$cookies[$key])) {
-            unset(self::$cookies[$key]);
-        }
+        unset(self::$cookies[$key]);
     }
 }

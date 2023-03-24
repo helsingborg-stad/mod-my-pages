@@ -14,19 +14,25 @@ class LoginUrlService implements ILoginUrlService
         Closure $defaultCallbackUrl,
         array $redirectUrlParams = []
     ) {
-        $buildUrlWithQueryArgs = fn ($url, $params) => $url . '?'  . http_build_query($params);
+        $buildUrlWithQueryArgs = fn($url, $params) => $url . '?' . http_build_query($params);
 
-        $buildRedirectUrl = fn (string $callbackUrl) => $buildUrlWithQueryArgs(
-            ($homeUrl)() . '/auth',
+        $buildRedirectUrl = fn(string $callbackUrl) => $buildUrlWithQueryArgs(
+            $homeUrl() . '/auth',
             array_merge(['callbackUrl' => $callbackUrl], $redirectUrlParams)
         );
 
-        $buildLoginUrl = fn (string $callbackUrl = '') => $buildUrlWithQueryArgs(
-            ($apiUrl)() .  '/api/v1/auth/login',
-            ['redirect_url' => $buildRedirectUrl(!empty($callbackUrl) ? $callbackUrl : ($defaultCallbackUrl)())]
+        $buildLoginUrl = fn(string $callbackUrl = '') => $buildUrlWithQueryArgs(
+            $apiUrl() . '/api/v1/auth/login',
+            [
+                'redirect_url' => $buildRedirectUrl(
+                    !empty($callbackUrl) ? $callbackUrl : $defaultCallbackUrl()
+                ),
+            ]
         );
 
-        $this->createLoginUrl = fn (string $callbackUrl = ''): string => $buildLoginUrl($callbackUrl);
+        $this->createLoginUrl = fn(string $callbackUrl = ''): string => $buildLoginUrl(
+            $callbackUrl
+        );
     }
 
     public function buildUrl(?string $url = ''): string

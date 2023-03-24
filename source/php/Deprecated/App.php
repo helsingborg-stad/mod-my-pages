@@ -18,13 +18,18 @@ class App extends Application
 {
     public function run(): Application
     {
-        add_action('template_redirect', array($this, 'redirect'), 5);
-        add_action('wp_enqueue_scripts', array($this, 'scripts'));
-        add_action('wp_enqueue_scripts', array($this, 'styles'));
-        add_filter('Municipio/blade/view_paths', array($this, 'setBladeTemplatePaths'), 5);
-        add_filter('ModMyPages/UI/DropdownMenu::items', array($this, 'disableInstantPageOnMenuItems'), 10, 1);
-        add_filter('body_class', array($this, 'protectPage'), 20, 1);
-        add_filter('body_class', array($this, 'pendingAuthenticationClassName'), 20, 1);
+        add_action('template_redirect', [$this, 'redirect'], 5);
+        add_action('wp_enqueue_scripts', [$this, 'scripts']);
+        add_action('wp_enqueue_scripts', [$this, 'styles']);
+        add_filter('Municipio/blade/view_paths', [$this, 'setBladeTemplatePaths'], 5);
+        add_filter(
+            'ModMyPages/UI/DropdownMenu::items',
+            [$this, 'disableInstantPageOnMenuItems'],
+            10,
+            1
+        );
+        add_filter('body_class', [$this, 'protectPage'], 20, 1);
+        add_filter('body_class', [$this, 'pendingAuthenticationClassName'], 20, 1);
 
         return $this;
     }
@@ -35,34 +40,37 @@ class App extends Application
     public function redirect()
     {
         $this->useRedirect
-            ->use('/auth', AuthenticateUser::create([
-                'successUrl'    => home_url('/my-pages'),
-                'errorUrl'      => home_url('/404'),
-                'tokenService'  => $this->tokenService,
-                'jwtSecretKey'  => new Key(($this->apiAuthSecret)(), 'HS256'),
-                'onSuccess'     => function ($jwt) {
-                    $this->cookies->set(AccessToken::$cookieName, $jwt);
-                },
-            ]))
-            ->use('/signout', SignOutUser::create([
-                'redirectUrl' => ($this->signOutRedirectUrl)(),
-                'onRedirect' => function () {
-                    $token = $this->cookies->get(AccessToken::$cookieName);
-                    if (!empty($token)) {
-                        ($this->signOutService)($token);
-                        $this->cookies->set(AccessToken::$cookieName, '');
-                    }
-                },
-            ]))
+            ->use(
+                '/auth',
+                AuthenticateUser::create([
+                    'successUrl' => home_url('/my-pages'),
+                    'errorUrl' => home_url('/404'),
+                    'tokenService' => $this->tokenService,
+                    'jwtSecretKey' => new Key(($this->apiAuthSecret)(), 'HS256'),
+                    'onSuccess' => function ($jwt) {
+                        $this->cookies->set(AccessToken::$cookieName, $jwt);
+                    },
+                ])
+            )
+            ->use(
+                '/signout',
+                SignOutUser::create([
+                    'redirectUrl' => ($this->signOutRedirectUrl)(),
+                    'onRedirect' => function () {
+                        $token = $this->cookies->get(AccessToken::$cookieName);
+                        if (!empty($token)) {
+                            ($this->signOutService)($token);
+                            $this->cookies->set(AccessToken::$cookieName, '');
+                        }
+                    },
+                ])
+            )
             ->redirect();
     }
 
     public function scripts(): void
     {
-        wp_enqueue_script(
-            'gdi-host',
-            MOD_MY_PAGES_DIST_URL . CacheBust::name('js/gdi-host.js')
-        );
+        wp_enqueue_script('gdi-host', MOD_MY_PAGES_DIST_URL . CacheBust::name('js/gdi-host.js'));
 
         wp_register_script(
             'mod-my-pages-js',
@@ -73,8 +81,8 @@ class App extends Application
         wp_localize_script('gdi-host', 'modMyPages', [
             'restUrl' => get_rest_url(),
             'noticeCodes' => [
-                'INACTIVE_SIGNOUT' => ModalNoticeCodes::INACTIVE_SIGNOUT
-            ]
+                'INACTIVE_SIGNOUT' => ModalNoticeCodes::INACTIVE_SIGNOUT,
+            ],
         ]);
     }
 
@@ -101,11 +109,10 @@ class App extends Application
     public function disableInstantPageOnMenuItems(array $items): array
     {
         return array_map(
-            fn ($item) => array_merge($item, [
-                'linkAttributeList' => array_merge(
-                    $item['linkAttributeList'] ?? [],
-                    ['data-no-instant' => '']
-                )
+            fn($item) => array_merge($item, [
+                'linkAttributeList' => array_merge($item['linkAttributeList'] ?? [], [
+                    'data-no-instant' => '',
+                ]),
             ]),
             $items
         );
@@ -118,7 +125,10 @@ class App extends Application
      */
     public function protectPage(array $classes): array
     {
-        return array_merge($classes, ($this->getPostType)() === MyPages::POST_TYPE ? ['protected-page'] : []);
+        return array_merge(
+            $classes,
+            ($this->getPostType)() === MyPages::POST_TYPE ? ['protected-page'] : []
+        );
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace ModMyPages\Modularity;
 
-
 use ModMyPages\Modularity\Modules\MyApps\MyApps;
 use ModMyPages\Plugin\ActionHookSubscriber;
 use ModMyPages\Plugin\FilterHookSubscriber;
@@ -17,21 +16,17 @@ class RegisterModules implements ActionHookSubscriber, FilterHookSubscriber
     {
         // Register modules here
         return [
-            'mod-my-apps' => MyApps::class
+            'mod-my-apps' => MyApps::class,
         ];
     }
 
     public static function addActions()
     {
-        return [
-            ['plugins_loaded', 'registerModules', 1]
-        ];
+        return [['plugins_loaded', 'registerModules', 1]];
     }
     public static function addFilters()
     {
-        return [
-            ['/Modularity/externalViewPath', 'registerViewPaths', 1, 3]
-        ];
+        return [['/Modularity/externalViewPath', 'registerViewPaths', 1, 3]];
     }
 
     /**
@@ -49,10 +44,7 @@ class RegisterModules implements ActionHookSubscriber, FilterHookSubscriber
         foreach (self::modules() as $class) {
             $name = $this->getClassNameWithoutNamespace($class);
             if (function_exists('modularity_register_module')) {
-                modularity_register_module(
-                    MOD_MY_PAGES_MODULE_PATH . "/" . $name,
-                    $name
-                );
+                modularity_register_module(MOD_MY_PAGES_MODULE_PATH . '/' . $name, $name);
             }
         }
     }
@@ -66,7 +58,7 @@ class RegisterModules implements ActionHookSubscriber, FilterHookSubscriber
     {
         foreach (self::modules() as $slug => $class) {
             $name = $this->getClassNameWithoutNamespace($class);
-            $paths[$slug] = MOD_MY_PAGES_MODULE_PATH . $name . "/" . "views";
+            $paths[$slug] = MOD_MY_PAGES_MODULE_PATH . $name . '/' . 'views';
         }
         return $paths;
     }

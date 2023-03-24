@@ -9,13 +9,16 @@ class SignOutService
 {
     public static function signOut(string $token): void
     {
-        $requestUrl = add_query_arg(['token' => $token], Settings::apiUrl() . '/api/v1/auth/logout');
+        $requestUrl = add_query_arg(
+            ['token' => $token],
+            Settings::apiUrl() . '/api/v1/auth/logout'
+        );
         $request = curl_init($requestUrl);
-        curl_setopt($request, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($request, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($request, CURLOPT_HTTPHEADER, [
             'Accept: application/json',
-            'Content-Type: application/json'
+            'Content-Type: application/json',
         ]);
 
         try {

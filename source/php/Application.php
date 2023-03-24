@@ -2,7 +2,6 @@
 
 namespace ModMyPages;
 
-
 use ModMyPages\Plugin\ApplicationFactory;
 use ModMyPages\Plugin\DI\DIContainer;
 use ModMyPages\Plugin\PluginManager;
@@ -19,8 +18,6 @@ abstract class Application extends PluginManager
 
     /**
      * Initialize plugin components with dependecies and registering WP hooks
-     * @param DIContainer $DI
-     * @param PluginManager $plugin
      * @return void
      */
     public function init(DIContainer $DI, PluginManager $plugin)
@@ -44,7 +41,6 @@ abstract class Application extends PluginManager
     /**
      * Boostraps the plugin with services & dependecies
      *
-     * @param DIContainer $DI
      * @return void
      */
     abstract public function bootstrap(DIContainer $DI);

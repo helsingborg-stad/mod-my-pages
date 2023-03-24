@@ -15,7 +15,12 @@ abstract class AbstractMenu implements ActionHookSubscriber, FilterHookSubscribe
 {
     abstract protected static function description(): string;
 
-    abstract public function controller($items): array;
+    /**
+     * @param (\WP_Post|mixed)[] $items
+     *
+     * @psalm-param array<\WP_Post|mixed> $items
+     */
+    abstract public function controller(array $items): array;
 
     /**
      * @psalm-suppress CircularReference
@@ -52,12 +57,8 @@ abstract class AbstractMenu implements ActionHookSubscriber, FilterHookSubscribe
 
     public static function addActions()
     {
-        return [
-            ['init', 'registerMenus', 5],
-            ['wp_enqueue_scripts', 'scripts', 30],
-        ];
+        return [['init', 'registerMenus', 5], ['wp_enqueue_scripts', 'scripts', 30]];
     }
-
 
     public function scripts(): void
     {
@@ -65,17 +66,12 @@ abstract class AbstractMenu implements ActionHookSubscriber, FilterHookSubscribe
 
     public static function addFilters(): array
     {
-        return [
-            ['Municipio/viewData', 'viewController']
-        ];
+        return [['Municipio/viewData', 'viewController']];
     }
-
 
     private function getMenuItemsByLocation(string $location): array
     {
-        return $this->wp->wpGetNavMenuItems(
-            $this->wp->getNavMenuLocations()[$location] ?? 0
-        ) ?: [];
+        return $this->wp->wpGetNavMenuItems($this->wp->getNavMenuLocations()[$location] ?? 0) ?: [];
     }
 
     protected function items(): array
@@ -101,19 +97,11 @@ abstract class AbstractMenu implements ActionHookSubscriber, FilterHookSubscribe
         /**
          * @psalm-suppress CircularReference
          */
-        $this->wp->registerNavMenu(
-            static::MENU_SLUG,
-            static::description()
-        );
+        $this->wp->registerNavMenu(static::MENU_SLUG, static::description());
     }
 
     public function viewController(array $data): array
     {
-        return array_merge(
-            $this->controller(
-                array_map([$this, 'mapItem'], $this->items())
-            ),
-            $data
-        );
+        return array_merge($this->controller(array_map([$this, 'mapItem'], $this->items())), $data);
     }
 }

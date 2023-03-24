@@ -10,7 +10,7 @@ class UseRedirectFactory
     {
         return new UseRedirect(
             self::createServerPathCallback($args['mockPath'] ?? '/'),
-            self::createRedirectCallback($args['mockRedirectCallback'] ?? null),
+            self::createRedirectCallback($args['mockRedirectCallback'] ?? null)
         );
     }
 
@@ -23,7 +23,7 @@ class UseRedirectFactory
                 : str_replace($homeUrlPath['path'], '', $_SERVER['REQUEST_URI']);
         };
 
-        $mockCallback = fn (): string => $mockPath;
+        $mockCallback = fn(): string => $mockPath;
 
         return !defined('PHPUNIT_RUNNING') ? $serverPathCallback : $mockCallback;
     }
@@ -32,7 +32,7 @@ class UseRedirectFactory
     {
         $wpRedirectCallback = function (string $redirectUrl): void {
             wp_redirect($redirectUrl);
-            exit;
+            exit();
         };
 
         $nullCallback = function (string $redirectUrl) use ($mockCallback): void {
