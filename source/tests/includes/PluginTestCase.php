@@ -63,7 +63,7 @@ class PluginTestCase extends TestCase
                 'name' => 'Example Person',
                 'exp' => $isExpired ? time() - 600 : time() + 1200,
             ],
-            !$hasInvalidSecret ? $this->fakeJwtSecret() : time(),
+            !$hasInvalidSecret ? $this->fakeJwtSecret() : strval(time()),
             'HS256'
         );
     }
