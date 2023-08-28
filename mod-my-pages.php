@@ -26,7 +26,9 @@ define('MOD_MY_PAGES_TEXT_DOMAIN', 'mod-my-pages');
 define('MOD_MY_PAGES_MODULE_PATH', MOD_MY_PAGES_PATH . 'source/php/Modularity/Modules/');
 
 // Register the autoloader
-require __DIR__ . '/vendor/autoload.php';
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require __DIR__ . '/vendor/autoload.php';
+}
 
 load_plugin_textdomain(MOD_MY_PAGES_TEXT_DOMAIN, false, plugin_basename(dirname(__FILE__)) . '/languages');
 
