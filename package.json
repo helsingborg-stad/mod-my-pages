@@ -18,8 +18,8 @@
     "watch": "cross-env NODE_ENV=development webpack --watch",
     "build:dev": "cross-env NODE_ENV=development webpack",
     "build": "cross-env NODE_ENV=production webpack",
-    "lint": "yarn lint:php",
-    "fix": "yarn lint:php:fix",
+    "lint": "npm run lint:php",
+    "fix": "npm run lint:php:fix",
     "lint:types": "tsc --noemit",
     "lint:php": "./vendor/bin/psalm --config='./psalm.xml' --no-diff",
     "lint:php:fix": "./vendor/bin/psalm --config='./psalm.xml' --alter --issues=MissingReturnType,MissingClosureReturnType,InvalidFalsableReturnType,MissingParamType",
@@ -83,6 +83,5 @@
     "plugins": [
       "@babel/plugin-proposal-class-properties"
     ]
-  },
-  "dependencies": {}
+  }
 }
