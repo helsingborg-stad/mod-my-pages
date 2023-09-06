@@ -15,27 +15,32 @@ if (php_sapi_name() !== 'cli') {
 $buildCommands = [];
 
 //Add composer build, if flag --no-composer is undefined.
-//Dump autloader. 
+//Dump autloader.
 //Only if composer.json exists.
-if(file_exists('composer.json')) {
-    if(is_array($argv) && !in_array('--no-composer', $argv)) {
-        $buildCommands[] = 'composer install --prefer-dist --no-progress --no-dev'; 
+if (file_exists('composer.json')) {
+    if (is_array($argv) && !in_array('--no-composer', $argv)) {
+        $buildCommands[] = 'composer install --prefer-dist --no-progress --no-dev';
     }
     $buildCommands[] = 'composer dump-autoload';
 }
 
 //Run npm if package.json is found
-if(file_exists('package.json') && file_exists('package-lock.json')) {
+if (file_exists('package.json') && file_exists('package-lock.json')) {
     $buildCommands[] = 'npm ci --no-progress --no-audit';
-} elseif(file_exists('package.json') && !file_exists('package-lock.json')) {
+} elseif (file_exists('package.json') && !file_exists('package-lock.json')) {
     $buildCommands[] = 'npm install --no-progress --no-audit';
 }
 
 //Run build if package-lock.json is found
-if(file_exists('package-lock.json') && !file_exists('gulp.js')) {
+if (file_exists('package-lock.json') && !file_exists('gulp.js')) {
     $buildCommands[] = 'npx --yes browserslist@latest --update-db';
     $buildCommands[] = 'npm run build';
-} elseif(file_exists('package-lock.json') && file_exists('gulp.js') && is_array($argv) && in_array('--allow-gulp', $argv)) {
+} elseif (
+    file_exists('package-lock.json') &&
+    file_exists('gulp.js') &&
+    is_array($argv) &&
+    in_array('--allow-gulp', $argv)
+) {
     $buildCommands[] = 'gulp';
 }
 
@@ -61,7 +66,7 @@ $removables = [
     './source/js/',
     'LICENSE',
     'babel.config.js',
-    'yarn.lock'
+    'yarn.lock',
 ];
 
 $dirName = basename(dirname(__FILE__));
@@ -81,7 +86,7 @@ foreach ($buildCommands as $buildCommand) {
 }
 
 // Remove files and directories if '--cleanup' argument is supplied to save local developers from disasters.
-if(is_array($argv) && in_array('--cleanup', $argv)) {
+if (is_array($argv) && in_array('--cleanup', $argv)) {
     foreach ($removables as $removable) {
         if (file_exists($removable)) {
             print "Removing $removable from $dirName\n";
@@ -106,7 +111,7 @@ function executeCommand($command)
 
     $proc = popen($fullCommand, 'r');
 
-    $liveOutput     = '';
+    $liveOutput = '';
     $completeOutput = '';
 
     while (!feof($proc)) {

@@ -4,7 +4,7 @@ namespace ModMyPages\Menu;
 
 use ModMyPages\PostType\MyPages;
 
-class PrimaryMenu extends DropdownMenu
+class PrimaryMenu extends AbstractDropdownMenu
 {
     const MENU_SLUG = 'my-pages-menu-primary';
     const MENU_SLUG_CAMEL_CASE = 'myPagesPrimaryMenu';

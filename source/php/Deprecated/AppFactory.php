@@ -32,8 +32,10 @@ class AppFactory
                         global $wp;
                         return home_url($wp->request) ?? '';
                     },
-                    'getPostType' => fn(int $postId = \null): string => get_post_type($postId) ??
-                        '',
+                    /**
+                     * @return false|string
+                     */
+                    'getPostType' => fn(int $postId = \null) => get_post_type($postId) ?? '',
                 ],
                 $args
             )

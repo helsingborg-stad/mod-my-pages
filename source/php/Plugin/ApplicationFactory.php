@@ -24,15 +24,18 @@ trait ApplicationFactory
     public static function create(): Application
     {
         return new class (DIContainerFactory::create()) extends Application {
-            public function bootstrap(DIContainer $DI)
+            public function bootstrap(DIContainer $DI): void
             {
-                /**
-                 * @@var $withExtemsom
-                 */
-                $withExtensions = fn(string $className) => [
-                    $className,
-                    ...(new \ReflectionClass($className))->getInterfaceNames(),
-                ];
+                $withExtensions =
+                    /**
+                     * @return string[]
+                     *
+                     * @psalm-return list{string,...}
+                     */
+                    fn(string $className): array => [
+                        $className,
+                        ...(new \ReflectionClass($className))->getInterfaceNames(),
+                    ];
 
                 $DI->bind($withExtensions(WPService::class), WPServiceFactory::create());
                 $DI->bind($withExtensions(ACFService::class), ACFServiceFactory::create());
