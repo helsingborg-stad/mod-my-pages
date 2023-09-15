@@ -70,7 +70,7 @@ class App extends Application
 
     public function scripts(): void
     {
-        wp_enqueue_script('gdi-host', MOD_MY_PAGES_DIST_URL . CacheBust::name('js/gdi-host.js'));
+        wp_register_script('gdi-host', MOD_MY_PAGES_DIST_URL . CacheBust::name('js/gdi-host.js'));
 
         wp_register_script(
             'mod-my-pages-js',
