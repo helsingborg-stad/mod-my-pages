@@ -4,7 +4,7 @@
  * Plugin Name:       Mod My Pages
  * Plugin URI:        https://github.com/helsingborg-stad/mod-my-pages
  * Description:       Modularity Wordpress Plugin
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author:            Nikolas Ramstedt
  * Author URI:        https://github.com/helsingborg-stad
  * License:           MIT
