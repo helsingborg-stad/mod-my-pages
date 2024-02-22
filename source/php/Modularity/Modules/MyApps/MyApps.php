@@ -15,7 +15,7 @@ class MyApps extends \Modularity\Module
         $this->nameSingular = __('My Apps', MOD_MY_PAGES_TEXT_DOMAIN);
         $this->namePlural = __('My Apps', MOD_MY_PAGES_TEXT_DOMAIN);
         $this->description = __('Module for listing My Apps', MOD_MY_PAGES_TEXT_DOMAIN);
-        $this->ttl = false;
+        $this->cacheTtl = false;
     }
 
     public function model()
