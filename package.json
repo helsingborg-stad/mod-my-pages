@@ -1,6 +1,6 @@
 {
     "name": "@helsingborg-stad/mod-my-pages",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Modularity Wordpress Plugin",
     "main": "",
     "repository": {
@@ -31,7 +31,9 @@
         "> 1%",
         "not dead"
     ],
-    "files": ["dist/"],
+    "files": [
+        "dist/"
+    ],
     "devDependencies": {
         "@babel/core": "^7.18.10",
         "@babel/plugin-proposal-class-properties": "^7.18.6",
