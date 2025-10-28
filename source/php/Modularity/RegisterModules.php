@@ -22,7 +22,7 @@ class RegisterModules implements ActionHookSubscriber, FilterHookSubscriber
 
     public static function addActions()
     {
-        return [['plugins_loaded', 'registerModules', 1]];
+        return [['init', 'registerModules', 1]];
     }
     public static function addFilters()
     {
