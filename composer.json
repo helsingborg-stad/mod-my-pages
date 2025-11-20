@@ -31,6 +31,5 @@
         "vimeo/psalm": "^5.7",
         "szepeviktor/phpstan-wordpress": "^1.1",
         "php-stubs/acf-pro-stubs": "^6.0"
-    },
-    "version": "2.0.0"
+    }
 }
