@@ -3,6 +3,7 @@
 namespace ModMyPages\PostType\MyPages;
 
 use ModMyPages\Plugin\FilterHookSubscriber;
+use ModMyPages\PostType\MyPages;
 
 class RewriteSlug implements FilterHookSubscriber
 {
@@ -17,6 +18,12 @@ class RewriteSlug implements FilterHookSubscriber
             return $args;
         }
 
+        // Bail before translating, since this filter also runs for post types
+        // registered before init, when the text domain cannot be loaded yet.
+        if ($postType !== MyPages::POST_TYPE) {
+            return $args;
+        }
+
         $postTypesToModify = [
             'my-pages' => [
                 'slug' => 'mina-sidor',
@@ -24,10 +31,6 @@ class RewriteSlug implements FilterHookSubscriber
                 'plural' => __('My Pages', MOD_MY_PAGES_TEXT_DOMAIN),
             ],
         ];
-
-        if (!in_array($postType, array_keys($postTypesToModify))) {
-            return $args;
-        }
 
         if (!empty($postTypesToModify[$postType]['slug'])) {
             $args['rewrite'] = [
