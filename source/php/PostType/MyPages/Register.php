@@ -2,13 +2,18 @@
 
 namespace ModMyPages\PostType\MyPages;
 
+use ModMyPages\Plugin\ActionHookSubscriber;
 use ModMyPages\PostType\MyPages as PostTypeMyPages;
 
-class Register
+class Register implements ActionHookSubscriber
 {
-    public function __construct()
+    /**
+     * Register the post type on init (before priority 10), so that its
+     * labels are translated after the text domain can be loaded.
+     */
+    public static function addActions()
     {
-        $this->registerPostType();
+        return [['init', 'registerPostType', 5]];
     }
 
     public function registerPostType(): void

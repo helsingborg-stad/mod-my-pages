@@ -52,7 +52,7 @@ class PluginTestCase extends TestCase
 
     public function fakeJwtSecret(): string
     {
-        return 'test-jwt-secret';
+        return 'test-jwt-secret-test-jwt-secret-test-jwt-secret';
     }
 
     public function createFakeToken(bool $isExpired = false, bool $hasInvalidSecret = false): string
@@ -63,7 +63,7 @@ class PluginTestCase extends TestCase
                 'name' => 'Example Person',
                 'exp' => $isExpired ? time() - 600 : time() + 1200,
             ],
-            !$hasInvalidSecret ? $this->fakeJwtSecret() : strval(time()),
+            !$hasInvalidSecret ? $this->fakeJwtSecret() : $this->fakeJwtSecret() . '-invalid',
             'HS256'
         );
     }
